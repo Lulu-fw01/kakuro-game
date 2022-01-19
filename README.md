@@ -14,3 +14,6 @@ ____
 ### Кодстайл
 Много всего [тут](https://dart.dev/guides/language/effective-dart/style)
 
+### Всякое полезное по Dart и flutter
+- https://metanit.com/dart/tutorial/7.3.php
+- https://metanit.com/dart/flutter/1.2.php
