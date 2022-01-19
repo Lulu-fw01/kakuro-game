@@ -6,5 +6,9 @@
 - Visual Studio Code
 - ItelliJ IDEA
 
-## Техническое задание
+### Техническое задание
 Пока только в [документе](https://docs.google.com/document/d/1dvaVQgYIxi1thCteofWAhR64ZGbs_4ZM/edit#)
+
+### Кодстайл
+Много всего [тут](https://dart.dev/guides/language/effective-dart/style)
+
