@@ -9,7 +9,7 @@
 
 ____
 ### Техническое задание
-Пока только в [документе](https://docs.google.com/document/d/1dvaVQgYIxi1thCteofWAhR64ZGbs_4ZM/edit#)
+Пока только в [документе](https://eduhseru-my.sharepoint.com/:w:/g/personal/varozhenko_edu_hse_ru/EYC5S1Lil2xCu7hy8Vo2Bt8BRbfyh1rSfR48W6mUtS84gw?e=IKWbF3)
 
 ### Кодстайл
 Много всего [тут](https://dart.dev/guides/language/effective-dart/style)
