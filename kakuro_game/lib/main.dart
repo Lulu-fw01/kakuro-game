@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:kakuro_game/screens/menu_screen.dart';
+import 'package:kakuro_game/screens/menu_screen/menu_screen.dart';
 
 void main() {
   runApp(const MenuScreen());
