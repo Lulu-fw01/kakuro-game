@@ -13,28 +13,16 @@ class AppProperties {
   static Color? _backgroundColor = Colors.blue[700];
 
   /// Buttons color.
-  static Color? getButtonColor() => _buttonColor;
+  static Color? get buttonColor => _buttonColor;
 
   /// Background color of the app.
-  static Color? getBackgroundColor() => _backgroundColor;
-
-
-
-
-  static bool _timer = false;
+  static Color? get backgroundColor => _backgroundColor;
 
   /// Timer state.
   /// 
-  /// Returns true if timer on,
-  /// false if off.
-  static bool isTimerOn() => _timer;
-
-  /// Set timer state.
-  /// 
   /// True if on, flase if off.
-  static void setTimer(bool state) {
-    _timer = state;
-  } 
+  static bool timerState = false;
+   
 
   static void setProperties() {
     _buttonColor = Colors.black;
