@@ -17,3 +17,8 @@ ____
 ### Всякое полезное по Dart и flutter
 - https://metanit.com/dart/tutorial/7.3.php
 - https://metanit.com/dart/flutter/1.2.php
+
+
+### Run process
+
+### Build process
