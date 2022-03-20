@@ -12,7 +12,7 @@ class MenuScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       home: Scaffold(
-        // Bsckground color of the screen.
+        // Background color of the screen.
         backgroundColor: AppProperties.backgroundColor,
         // Place buttons in the center of screen.
         body: Center(
@@ -37,7 +37,9 @@ class MenuScreen extends StatelessWidget {
                     "Play",
                     style: _sizeTextBlack,
                   ),
-                  onPressed: () {  },
+                  onPressed: () {
+                    Navigator.pushNamed(context, AppProperties.gameRoute);
+                    },
                 )
               ),
               Padding(

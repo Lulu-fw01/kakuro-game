@@ -1,8 +1,18 @@
 import 'package:flutter/material.dart';
+import 'package:kakuro_game/models/app_properties/app_properties.dart';
+import 'package:kakuro_game/screens/game_screen/game_screen.dart';
 import 'package:kakuro_game/screens/menu_screen/menu_screen.dart';
 
 void main() {
-  runApp(const MenuScreen());
+  runApp(
+    MaterialApp(
+      initialRoute: AppProperties.homeRoute,
+      routes: {
+        AppProperties.homeRoute: (BuildContext context) => MenuScreen(),
+        AppProperties.gameRoute: (BuildContext context) => GameScreen(),
+      },
+    )
+  );
 }
 
 class MyApp extends StatelessWidget {
