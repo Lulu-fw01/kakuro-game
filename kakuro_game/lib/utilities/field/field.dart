@@ -1,12 +1,13 @@
 
 import 'package:flutter/material.dart';
+import 'package:kakuro_game/utilities/field/cell/empty_cell.dart';
 
 class Field {
   
-  List<List<int>>? _field;
+  List<List<EmptyCell>>? _field;
 
    Field(List<List<int>> input) {
-     _field = input;
+     
    }
 
   // TODO Realize method which converts int matrix into list of rows.
