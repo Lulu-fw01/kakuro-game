@@ -1,10 +1,9 @@
 
 import 'package:flutter/material.dart';
-import 'package:kakuro_game/utilities/field/cell/empty_cell.dart';
 
 class Field {
   
-  List<List<EmptyCell>>? _field;
+  List<List<int>>? _field;
 
    Field(List<List<int>> input) {
      

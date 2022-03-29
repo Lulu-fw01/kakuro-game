@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:kakuro_game/models/app_properties/app_properties.dart';
+import 'package:kakuro_game/widgets/field/cell/empty_cell.dart';
+import 'package:kakuro_game/widgets/field/cell/input_cell.dart';
+import 'package:kakuro_game/widgets/field/cell/value_cell.dart';
 
 
 
@@ -21,6 +24,7 @@ class GameScreen extends StatelessWidget {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             // TODO add method which returns list of rows filled with sized rows.
+            children: [EmptyCell(), InputCell(), EmptyCell(), const ValueCell(horizontalValue: 4, verticalValue: 5)],
             //children: ,
           ),
         ),
