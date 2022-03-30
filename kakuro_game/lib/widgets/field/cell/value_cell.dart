@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+
+/// Widget with information for user about vertical and horizontal amounts
 class ValueCell extends StatelessWidget {
   const ValueCell({Key? key, this.horizontalValue, this.verticalValue})
       : super(key: key);
@@ -13,7 +15,7 @@ class ValueCell extends StatelessWidget {
   String getText() {
     var horizontal = horizontalValue == null ? ' ' : horizontalValue.toString();
     var vertical = verticalValue == null ? ' ' : verticalValue.toString();
-    return horizontal + "/" + vertical;
+    return vertical + '\\' + horizontal;
   }
 
   @override
@@ -34,7 +36,7 @@ class ValueCell extends StatelessWidget {
           ),
           child: Text(
             getText(),
-            style: const TextStyle(fontSize: 13, color: Colors.white),
+            style: const TextStyle(fontSize: 12, color: Colors.white),
           )),
     );
   }
