@@ -2,14 +2,14 @@ import 'package:flutter/material.dart';
 
 
 /// Cell where user can add value.
-class InputCell extends StatefulWidget {
-  const InputCell({Key? key}) : super(key: key);
+class InputCellWidget extends StatefulWidget {
+  const InputCellWidget({Key? key}) : super(key: key);
 
   @override
   _InputCellState createState() => _InputCellState();
 }
 
-class _InputCellState extends State<InputCell> {
+class _InputCellState extends State<InputCellWidget> {
 
   int _value = 0;
 

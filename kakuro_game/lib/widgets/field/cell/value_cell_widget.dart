@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 
 
 /// Widget with information for user about vertical and horizontal amounts
-class ValueCell extends StatelessWidget {
-  const ValueCell({Key? key, this.horizontalValue, this.verticalValue})
+class ValueCellWidget extends StatelessWidget {
+  const ValueCellWidget({Key? key, this.horizontalValue, this.verticalValue})
       : super(key: key);
 
   /// Sum of digits horizontally.

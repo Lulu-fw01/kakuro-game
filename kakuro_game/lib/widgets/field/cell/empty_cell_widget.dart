@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 
 /// Empty widget if there are not input widget or value widget
-class EmptyCell extends StatelessWidget {
-  const EmptyCell({ Key? key }) : super(key: key);
+class EmptyCellWidget extends StatelessWidget {
+  const EmptyCellWidget({ Key? key }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
