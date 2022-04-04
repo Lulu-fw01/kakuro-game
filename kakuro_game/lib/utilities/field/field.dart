@@ -1,6 +1,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:kakuro_game/utilities/field/cells/empty_cell.dart';
+import 'package:kakuro_game/utilities/field/cells/info_cell.dart';
 import 'package:kakuro_game/widgets/field/cell/empty_cell_widget.dart';
 import 'package:kakuro_game/widgets/field/cell/input_cell_widget.dart';
 import 'package:kakuro_game/widgets/field/cell/info_cell_widget.dart';
@@ -11,14 +12,30 @@ class Field {
    late final int _width;
    late final int _height;
 
+   /// Width of field.
+   int get width => _width;
+
+   /// Height of field.
+   int get height => _height;
+
    Field(int width, int height) {
      _width = width;
      _height = height;
-     _cells = List.generate(_height, (index) => List.filled(_width, EmptyCell()), growable: false);
+     _cells = List.generate(_height, (index) => List.filled(_width, null), growable: false);
+
+     // First column always has info cells.
+     for (int i = 0; i < _height; i++) { 
+       _cells[i][0] = InfoCell();
+     }
+
+     // First row always has info cells.
+     for (int j = 0; j < _width; j++) {
+       _cells[0][j] = InfoCell();
+     }
    }
   
-   /// Cells of the field.
-   List<List<EmptyCell>>? _cells;
+  /// Cells of the field.
+  late List<List<EmptyCell?>> _cells;
 
   List<Row> getRows() {
     List<Row> rows = List<Row>.filled(5, Row());
