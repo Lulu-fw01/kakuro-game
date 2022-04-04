@@ -9,7 +9,7 @@ class GameScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    var f = Field();
+    var f = Field(5, 5);
 
     return MaterialApp(
         home: Scaffold(

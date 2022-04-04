@@ -1,3 +1,4 @@
+
 import 'package:flutter/material.dart';
 import 'package:kakuro_game/utilities/field/cells/empty_cell.dart';
 import 'package:kakuro_game/widgets/field/cell/empty_cell_widget.dart';
@@ -6,18 +7,18 @@ import 'package:kakuro_game/widgets/field/cell/info_cell_widget.dart';
 
 /// Class that describes kakuro field.
 class Field {
-  
-   Field();
+
+   late final int _width;
+   late final int _height;
+
+   Field(int width, int height) {
+     _width = width;
+     _height = height;
+     _cells = List.generate(_height, (index) => List.filled(_width, EmptyCell()), growable: false);
+   }
   
    /// Cells of the field.
    List<List<EmptyCell>>? _cells;
-
-   /// Method for field generation.
-   void generate(int width, int height, [int difficulty = 2]) {
-     _cells = List.generate(height, (index) => List.filled(width, EmptyCell()), growable: false);
-
-
-   }
 
   List<Row> getRows() {
     List<Row> rows = List<Row>.filled(5, Row());
