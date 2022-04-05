@@ -32,7 +32,13 @@ class GameScreen extends StatelessWidget {
         ),
       ),
       bottomNavigationBar: BottomNavigationBar(
-        backgroundColor: ,),
+        backgroundColor: thirdColor,
+        iconSize: 24,
+        items: const <BottomNavigationBarItem>[
+          BottomNavigationBarItem(
+            icon: Icon(Icons.home))
+        ],
+        ),
     ));
   }
 }
