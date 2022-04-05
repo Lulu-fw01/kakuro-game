@@ -6,9 +6,16 @@
 #define BOARDGENERATIONFIRSTTRY_GENERATOR_H
 
 
+#include "EmptyCell.h"
+#include <vector>
+
 class Generator {
 public:
-    void generate(int height, int width);
+    Generator();
+
+    static std::vector<std::vector<EmptyCell *>> generate(int height, int width);
+
+    void generateAndPrint();
 };
 
 

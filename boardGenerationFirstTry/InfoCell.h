@@ -8,13 +8,13 @@
 
 #include "EmptyCell.h"
 
-class InfoCell : EmptyCell {
+class InfoCell : public EmptyCell {
 public:
     int horizontalSum;
     int verticalSum;
     InfoCell();
     InfoCell(int hSum, int vSum);
-
+    std::string getCellStr() const override ;
 };
 
 

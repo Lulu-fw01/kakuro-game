@@ -11,3 +11,7 @@ InputCell::InputCell() {
 InputCell::InputCell(int value) {
     this->value = value;
 }
+
+std::string InputCell::getCellStr() const {
+    return std::to_string(value);
+}

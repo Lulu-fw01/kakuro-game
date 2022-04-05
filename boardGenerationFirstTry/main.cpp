@@ -1,8 +1,11 @@
 #include <iostream>
 #include <string>
 
+#include "Generator.h"
+
 
 int main() {
-    std::cout << "Hello, World!" << std::endl;
+    Generator gen;
+    gen.generateAndPrint();
     return 0;
 }

@@ -13,3 +13,7 @@ InfoCell::InfoCell(int hSum, int vSum) {
     horizontalSum = hSum;
     verticalSum = vSum;
 }
+
+std::string InfoCell::getCellStr() const {
+    return std::to_string(verticalSum) + "\\" + std::to_string(horizontalSum);
+}

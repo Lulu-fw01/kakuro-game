@@ -13,6 +13,7 @@ public:
     int value;
     InputCell();
     explicit InputCell(int value);
+    std::string getCellStr() const override;
 };
 
 
