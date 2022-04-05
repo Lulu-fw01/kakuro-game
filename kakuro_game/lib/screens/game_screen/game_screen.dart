@@ -35,9 +35,12 @@ class GameScreen extends StatelessWidget {
         backgroundColor: thirdColor,
         iconSize: 24,
         items: const <BottomNavigationBarItem>[
-          BottomNavigationBarItem(
-            icon: Icon(Icons.home))
+          BottomNavigationBarItem(icon: Icon(Icons.home, color: buttonColor), label: "Main menu"),
+          BottomNavigationBarItem(icon: Icon(Icons.timer, color: buttonColor), label: "Timer"),
+          BottomNavigationBarItem(icon: Icon(Icons.help, color: buttonColor), label: "Help" ),
         ],
+        showSelectedLabels: false,
+        showUnselectedLabels: false,
         ),
     ));
   }

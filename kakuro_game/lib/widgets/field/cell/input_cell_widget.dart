@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:kakuro_game/assets/consts.dart';
 
 
 /// Cell where user can add value.
@@ -37,7 +38,7 @@ class _InputCellState extends State<InputCellWidget> {
             backgroundColor:
                 MaterialStateProperty.all<Color?>(Colors.blue[800]),
             side: MaterialStateProperty.all<BorderSide>(const BorderSide(
-              color: Colors.white,
+              color: thirdColor,
               width: 1,
               style: BorderStyle.solid,
             )),
