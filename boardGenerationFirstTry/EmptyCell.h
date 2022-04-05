@@ -1,0 +1,14 @@
+//
+// Created by luka on 05.04.2022.
+//
+
+#ifndef BOARDGENERATIONFIRSTTRY_EMPTYCELL_H
+#define BOARDGENERATIONFIRSTTRY_EMPTYCELL_H
+
+
+class EmptyCell {
+
+};
+
+
+#endif //BOARDGENERATIONFIRSTTRY_EMPTYCELL_H
