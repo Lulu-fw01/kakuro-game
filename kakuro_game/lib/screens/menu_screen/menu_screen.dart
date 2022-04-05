@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:kakuro_game/models/app_properties/app_properties.dart';
+import 'package:kakuro_game/assets/consts.dart';
 
 
 /// Main menu screen of kakuro-game.
@@ -13,7 +13,7 @@ class MenuScreen extends StatelessWidget {
     return MaterialApp(
       home: Scaffold(
         // Background color of the screen.
-        backgroundColor: AppProperties.backgroundColor,
+        backgroundColor: backgroundColor,
         // Place buttons in the center of screen.
         body: Center(
           // Arrange buttons in a collumn.
@@ -27,7 +27,7 @@ class MenuScreen extends StatelessWidget {
                 padding: const EdgeInsets.only(top: 25.0),
                 child: MaterialButton(
                   // Button color.
-                  color: AppProperties.buttonColor,
+                  color: buttonColor,
                   // Button height.
                   height: 50.0,
                   // button minimal width.
@@ -38,7 +38,7 @@ class MenuScreen extends StatelessWidget {
                     style: _sizeTextBlack,
                   ),
                   onPressed: () {
-                    Navigator.pushNamed(context, AppProperties.gameRoute);
+                    Navigator.pushNamed(context, gameRoute);
                     },
                 )
               ),
@@ -46,7 +46,7 @@ class MenuScreen extends StatelessWidget {
                 // Indent from the "Play" button.
                 padding: const EdgeInsets.only(top: 25.0),
                 child: MaterialButton(
-                  color: AppProperties.buttonColor,
+                  color: buttonColor,
                   height: 50.0,
                   minWidth: 150.0,
                   child: Text(
@@ -59,7 +59,7 @@ class MenuScreen extends StatelessWidget {
               Padding(
                 padding: const EdgeInsets.only(top: 25.0),
                 child: MaterialButton(
-                  color: AppProperties.buttonColor,
+                  color: buttonColor,
                   height: 50.0,
                   minWidth: 150.0,
                   child: Text(

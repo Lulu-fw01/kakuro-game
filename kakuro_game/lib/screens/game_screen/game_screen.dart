@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:kakuro_game/models/app_properties/app_properties.dart';
+import 'package:kakuro_game/assets/consts.dart';
 import 'package:kakuro_game/utilities/field/field.dart';
 
 
@@ -14,11 +14,11 @@ class GameScreen extends StatelessWidget {
     return MaterialApp(
         home: Scaffold(
       appBar: AppBar(
-        backgroundColor: AppProperties.appBarColor,
+        backgroundColor: appBarColor,
         title: const Text("Kakuro!"),
       ),
       // Background color of the screen.
-      backgroundColor: AppProperties.backgroundColor,
+      backgroundColor: backgroundColor,
       // Place buttons in the center of screen.
       body: Center(
         child: InteractiveViewer(
@@ -31,6 +31,8 @@ class GameScreen extends StatelessWidget {
           ),
         ),
       ),
+      bottomNavigationBar: BottomNavigationBar(
+        backgroundColor: ,),
     ));
   }
 }

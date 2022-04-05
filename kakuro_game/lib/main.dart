@@ -1,15 +1,16 @@
 import 'package:flutter/material.dart';
-import 'package:kakuro_game/models/app_properties/app_properties.dart';
 import 'package:kakuro_game/screens/game_screen/game_screen.dart';
 import 'package:kakuro_game/screens/menu_screen/menu_screen.dart';
+
+import 'assets/consts.dart';
 
 void main() {
   runApp(
     MaterialApp(
-      initialRoute: AppProperties.homeRoute,
+      initialRoute: homeRoute,
       routes: {
-        AppProperties.homeRoute: (BuildContext context) => MenuScreen(),
-        AppProperties.gameRoute: (BuildContext context) => GameScreen(),
+        homeRoute: (BuildContext context) => MenuScreen(),
+        gameRoute: (BuildContext context) => GameScreen(),
       },
     )
   );
