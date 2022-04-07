@@ -11,12 +11,12 @@ import 'package:kakuro_game/assets/consts.dart';
           child: Text(
             time,
             style: const TextStyle(
-                fontWeight: FontWeight.bold, color: buttonColor, fontSize: 50),
+                fontWeight: FontWeight.bold, color: buttonColor, fontSize: 14),
           ),
         ),
         const SizedBox(
-          height: 24,
+          height: 12,
         ),
-        Text(header, style: const TextStyle(color: Colors.black45)),
+        Text(header, style: const TextStyle(color: Colors.black45, fontSize: 8)),
       ],
     );
