@@ -4,7 +4,7 @@ import 'package:kakuro_game/utilities/field/field.dart';
 import 'package:kakuro_game/widgets/time/stopwatch.dart';
 
 
-
+/// Screen with game field.
 class GameScreen extends StatelessWidget {
   const GameScreen({Key? key}) : super(key: key);
 
@@ -12,12 +12,7 @@ class GameScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     var f = Field(5, 5);
 
-    return 
-       Scaffold(
-      appBar: AppBar(
-        backgroundColor: appBarColor,
-        title: const Text("Kakuro!"),
-      ),
+    return Scaffold(
       // Background color of the screen.
       backgroundColor: backgroundColor,
       // Place buttons in the center of screen.
@@ -28,7 +23,10 @@ class GameScreen extends StatelessWidget {
             flex: 2,
             child: Padding(
               padding: EdgeInsets.all(6.0),
-              child: Stopwatch(),
+              child: Visibility(
+                visible: true,
+                child: Stopwatch(),
+              )
             ),
           ),
           Expanded(
@@ -48,17 +46,28 @@ class GameScreen extends StatelessWidget {
                   ))))
         ],
       ),
-      bottomNavigationBar: BottomNavigationBar(
-        backgroundColor: thirdColor,
-        iconSize: 24,
-        items: const <BottomNavigationBarItem>[
-          BottomNavigationBarItem(icon: Icon(Icons.home, color: buttonColor), label: "Main menu"),
-          BottomNavigationBarItem(icon: Icon(Icons.timer, color: buttonColor), label: "Timer"),
-          BottomNavigationBarItem(icon: Icon(Icons.help, color: buttonColor), label: "Help" ),
-        ],
-        showSelectedLabels: false,
-        showUnselectedLabels: false,
+      persistentFooterButtons: [
+        IconButton(
+          icon: const Icon(
+            Icons.timer,
+            color: buttonColor,
+          ),
+          onPressed: () => {},
         ),
+        IconButton(
+          icon: const Icon(
+            Icons.help,
+            color: buttonColor,
+          ),
+          onPressed: () => {},
+        ),
+        IconButton(
+            icon: const Icon(
+              Icons.menu,
+              color: buttonColor,
+            ),
+            onPressed: () => {/*showModalBottomSheet(context: context, builder: builder)*/})
+      ],
     );
   }
 }

@@ -5,13 +5,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:kakuro_game/widgets/time/time_card.dart';
 
-// TODO rewrite timer to stopwatch
-
+/// Stopwatch widget.
 class Stopwatch extends StatefulWidget {
-  final bool isOn;
 
-  const Stopwatch({Key? key, this.isOn = true}) : super(key: key);
-
+  const Stopwatch({Key? key}) : super(key: key);
 
   @override
   State<StatefulWidget> createState() => _StopwatchState();
@@ -19,52 +16,40 @@ class Stopwatch extends StatefulWidget {
 }
 
 class _StopwatchState extends State<Stopwatch> {
-
-  static const countdownDuration = Duration(minutes: 10);
   Duration duration = const Duration();
 
   Timer? timer;
   bool countDown = true;
 
-  void startTimer() {
+  @override
+  void initState() {
+    super.initState();
     timer = Timer.periodic(const Duration(seconds: 1), (_) => addTime());
   }
 
-  void reset(){
-    if (countDown){
-      setState(() =>
-        duration = countdownDuration);
-    } else{
-      setState(() =>
-        duration = const Duration());
-    }
-  }
-
   void addTime() {
-    final addSeconds = countDown ? -1 : 1;
     setState(() {
-      final seconds = duration.inSeconds + addSeconds;
-      if (seconds < 0) {
-        timer?.cancel();
-      } else {
-        duration = Duration(seconds: seconds);
-      }
+      final seconds = duration.inSeconds + 1;  
+      duration = Duration(seconds: seconds);
     });
   }
 
-  void stopTimer({bool resets = true}){
-    if (resets){
-      reset();
-    }
+  @override
+  void dispose() {
+    timer?.cancel();
+    super.dispose();
+  }
+
+  void stopTimer(){
     setState(() => timer?.cancel());
   }
 
   @override
   Widget build(BuildContext context) {
-    String twoDigits(int n) => n.toString().padLeft(2,'0');
-    final hours =twoDigits(duration.inHours);
-    final minutes =twoDigits(duration.inMinutes.remainder(60));
-    final seconds =twoDigits(duration.inSeconds.remainder(60));
+    String twoDigits(int n) => n.toString().padLeft(2, '0');
+    final hours = twoDigits(duration.inHours);
+    final minutes = twoDigits(duration.inMinutes.remainder(60));
+    final seconds = twoDigits(duration.inSeconds.remainder(60));
 
     return Row(mainAxisAlignment: MainAxisAlignment.center, children: [
       timeCard(time: hours, header: "HOURS"),
@@ -78,5 +63,4 @@ class _StopwatchState extends State<Stopwatch> {
       timeCard(time: seconds, header: 'SECONDS'),
     ]);
   }
-  
 }

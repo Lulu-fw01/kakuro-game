@@ -3,13 +3,15 @@
 import 'package:flutter/material.dart';
 
 // TODO rename it.
-const thirdColor = Color(0xFF3DCCB4);
+const buttonColor = Color(0xFF3DCCB4);
 
-const buttonColor = Color(0xFFF48FB1);
+const textColor = Color(0xFF482750);
 
 const backgroundColor = Color(0xFF1976D2);
 
-const appBarColor = Color(0xFF1565c0);
+const fourthColor = Color(0xFF3F7BA7);
+
+const fifthColor = Color(0xFFE4684C);
 
 
 

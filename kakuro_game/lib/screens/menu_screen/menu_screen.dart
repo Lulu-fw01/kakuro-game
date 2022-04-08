@@ -4,7 +4,7 @@ import 'package:kakuro_game/assets/consts.dart';
 
 /// Main menu screen of kakuro-game.
 class MenuScreen extends StatelessWidget {
-  final _sizeTextBlack = const TextStyle(fontSize: 20.0, color: Colors.black);
+  final _sizeTextBlack = const TextStyle(fontSize: 20.0, color: textColor);
 
   const MenuScreen({Key? key}) : super(key: key);
 

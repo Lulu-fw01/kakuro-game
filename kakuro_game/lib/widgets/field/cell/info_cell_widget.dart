@@ -30,7 +30,7 @@ class InfoCellWidget extends StatelessWidget {
             backgroundColor:
                 MaterialStateProperty.all<Color?>(Colors.blue[800]),
             side: MaterialStateProperty.all<BorderSide>(const BorderSide(
-              color: thirdColor,
+              color: buttonColor,
               width: 1,
               style: BorderStyle.solid,
             )),
