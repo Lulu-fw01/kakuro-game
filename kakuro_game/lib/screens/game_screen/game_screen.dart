@@ -70,19 +70,19 @@ class GameScreen extends StatelessWidget {
         children: [
           OptionButton(
             onPressed: () => _showAction(context, 0),
-            icon: const Icon(Icons.home, color: textColor,),
+            icon: const Icon(Icons.home, color: buttonContentColor,),
           ),
           OptionButton(
             onPressed: () => _showAction(context, 1),
-            icon: const Icon(Icons.timer, color: textColor,),
+            icon: const Icon(Icons.timer, color: buttonContentColor,),
           ),
           OptionButton(
             onPressed: () => _showAction(context, 2),
-            icon: const Icon(Icons.done, color: textColor,),
+            icon: const Icon(Icons.done, color: buttonContentColor,),
           ),
           OptionButton(
             onPressed: () => _showAction(context, 2),
-            icon: const Icon(Icons.done_all, color: textColor,),
+            icon: const Icon(Icons.done_all, color: buttonContentColor,),
           ),
         ],
       ),

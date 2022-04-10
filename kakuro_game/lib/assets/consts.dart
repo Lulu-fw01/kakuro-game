@@ -5,7 +5,7 @@ import 'package:flutter/material.dart';
 // TODO rename it.
 const buttonColor = Color(0xFF3DCCB4);
 
-const textColor = Color(0xFF482750);
+const buttonContentColor = Color(0xFF482750);
 
 const backgroundColor = Color(0xFF1976D2);
 

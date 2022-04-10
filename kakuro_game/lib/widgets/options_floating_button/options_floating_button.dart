@@ -156,7 +156,7 @@ class _OptionsFabState extends State<OptionsFab>
           child: FloatingActionButton(
             backgroundColor: fourthColor,
             onPressed: _toggle,
-            child: const Icon(Icons.menu, color: textColor,),
+            child: const Icon(Icons.menu, color: buttonContentColor,),
           ),
         ),
       ),
