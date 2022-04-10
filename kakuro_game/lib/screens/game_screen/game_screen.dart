@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:kakuro_game/assets/consts.dart';
 import 'package:kakuro_game/utilities/field/field.dart';
+import 'package:kakuro_game/widgets/options_floating_button/option_button.dart';
+import 'package:kakuro_game/widgets/options_floating_button/options_floating_button.dart';
 import 'package:kakuro_game/widgets/time/stopwatch.dart';
 
 
@@ -11,6 +13,23 @@ class GameScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     var f = Field(5, 5);
+
+    void _showAction(BuildContext context, int index) {
+    showDialog<void>(
+      context: context,
+      builder: (context) {
+        return AlertDialog(
+          content: Text("aaaa"),
+          actions: [
+            TextButton(
+              onPressed: () => Navigator.of(context).pop(),
+              child: const Text('CLOSE'),
+            ),
+          ],
+        );
+      },
+    );
+  }
 
     return Scaffold(
       // Background color of the screen.
@@ -46,28 +65,27 @@ class GameScreen extends StatelessWidget {
                   ))))
         ],
       ),
-      persistentFooterButtons: [
-        IconButton(
-          icon: const Icon(
-            Icons.timer,
-            color: buttonColor,
+      floatingActionButton: OptionsFab(
+        distance: 112.0,
+        children: [
+          OptionButton(
+            onPressed: () => _showAction(context, 0),
+            icon: const Icon(Icons.home, color: textColor,),
           ),
-          onPressed: () => {},
-        ),
-        IconButton(
-          icon: const Icon(
-            Icons.help,
-            color: buttonColor,
+          OptionButton(
+            onPressed: () => _showAction(context, 1),
+            icon: const Icon(Icons.timer, color: textColor,),
           ),
-          onPressed: () => {},
-        ),
-        IconButton(
-            icon: const Icon(
-              Icons.menu,
-              color: buttonColor,
-            ),
-            onPressed: () => {/*showModalBottomSheet(context: context, builder: builder)*/})
-      ],
+          OptionButton(
+            onPressed: () => _showAction(context, 2),
+            icon: const Icon(Icons.done, color: textColor,),
+          ),
+          OptionButton(
+            onPressed: () => _showAction(context, 2),
+            icon: const Icon(Icons.done_all, color: textColor,),
+          ),
+        ],
+      ),
     );
   }
 }

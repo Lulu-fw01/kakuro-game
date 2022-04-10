@@ -9,7 +9,7 @@ const textColor = Color(0xFF482750);
 
 const backgroundColor = Color(0xFF1976D2);
 
-const fourthColor = Color(0xFF3F7BA7);
+const fourthColor = Color(0xFFF49CBE);
 
 const fifthColor = Color(0xFFE4684C);
 
