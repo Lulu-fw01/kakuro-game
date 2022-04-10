@@ -8,28 +8,29 @@ import 'package:kakuro_game/widgets/time/stopwatch.dart';
 
 /// Screen with game field.
 class GameScreen extends StatelessWidget {
+  //Field field;
+
   const GameScreen({Key? key}) : super(key: key);
+
+  void _toMenuScreen(BuildContext context) {
+    Navigator.pushNamed(context, homeRoute);
+  }
+
+  void _changeTimerVisible(BuildContext context) {
+
+  }
+
+  void _showHint(BuildContext context) {
+
+  }
+
+  void _showAnswer(BuildContext context) {
+
+  }
 
   @override
   Widget build(BuildContext context) {
     var f = Field(5, 5);
-
-    void _showAction(BuildContext context, int index) {
-    showDialog<void>(
-      context: context,
-      builder: (context) {
-        return AlertDialog(
-          content: Text("aaaa"),
-          actions: [
-            TextButton(
-              onPressed: () => Navigator.of(context).pop(),
-              child: const Text('CLOSE'),
-            ),
-          ],
-        );
-      },
-    );
-  }
 
     return Scaffold(
       // Background color of the screen.
@@ -69,19 +70,19 @@ class GameScreen extends StatelessWidget {
         distance: 112.0,
         children: [
           OptionButton(
-            onPressed: () => _showAction(context, 0),
+            onPressed: () => _toMenuScreen(context),
             icon: const Icon(Icons.home, color: buttonContentColor,),
           ),
           OptionButton(
-            onPressed: () => _showAction(context, 1),
+            onPressed: () => _changeTimerVisible(context),
             icon: const Icon(Icons.timer, color: buttonContentColor,),
           ),
           OptionButton(
-            onPressed: () => _showAction(context, 2),
+            onPressed: () => _showHint(context),
             icon: const Icon(Icons.done, color: buttonContentColor,),
           ),
           OptionButton(
-            onPressed: () => _showAction(context, 2),
+            onPressed: () => _showAnswer(context),
             icon: const Icon(Icons.done_all, color: buttonContentColor,),
           ),
         ],

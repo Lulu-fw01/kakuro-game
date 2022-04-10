@@ -10,13 +10,12 @@ class MenuScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      home: Scaffold(
+    return Scaffold(
         // Background color of the screen.
         backgroundColor: backgroundColor,
         // Place buttons in the center of screen.
         body: Center(
-          // Arrange buttons in a collumn.
+          // Arrange buttons in a column.
           child: Column(
             // Button alignment vertically and centered.
             mainAxisAlignment: MainAxisAlignment.center,
@@ -72,7 +71,6 @@ class MenuScreen extends StatelessWidget {
             ],
           ),
         )
-      )
-    );
+      );
   }
 }
