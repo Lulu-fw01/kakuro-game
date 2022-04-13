@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:kakuro_game/providers/stopwatch_notifier.dart';
+import 'package:provider/provider.dart';
 import 'package:kakuro_game/assets/consts.dart';
 import 'package:kakuro_game/utilities/field/field.dart';
 import 'package:kakuro_game/widgets/options_floating_button/option_button.dart';
@@ -16,8 +18,8 @@ class GameScreen extends StatelessWidget {
     Navigator.pushNamed(context, homeRoute);
   }
 
-  void _changeTimerVisible(BuildContext context) {
-
+  void _changeTimerVisible(StopwatchNotifier notifier) {
+    notifier.changeVisible();
   }
 
   void _showHint(BuildContext context) {
@@ -32,6 +34,8 @@ class GameScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     var f = Field(5, 5);
 
+    final notifier = Provider.of<StopwatchNotifier>(context);
+
     return Scaffold(
       // Background color of the screen.
       backgroundColor: backgroundColor,
@@ -42,12 +46,11 @@ class GameScreen extends StatelessWidget {
           const Expanded(
             flex: 2,
             child: Padding(
-              padding: EdgeInsets.all(6.0),
-              child: Visibility(
-                visible: true,
-                child: Stopwatch(),
-              )
-            ),
+                padding: EdgeInsets.all(6.0),
+                child: Visibility(
+                  visible: true,
+                  child: Stopwatch(),
+                )),
           ),
           Expanded(
               flex: 8,
@@ -71,22 +74,35 @@ class GameScreen extends StatelessWidget {
         children: [
           OptionButton(
             onPressed: () => _toMenuScreen(context),
-            icon: const Icon(Icons.home, color: buttonContentColor,),
+            icon: const Icon(
+              Icons.home,
+              color: buttonContentColor,
+            ),
           ),
           OptionButton(
-            onPressed: () => _changeTimerVisible(context),
-            icon: const Icon(Icons.timer, color: buttonContentColor,),
+            onPressed: () => _changeTimerVisible(notifier),
+            icon: const Icon(
+              Icons.timer,
+              color: buttonContentColor,
+            ),
           ),
           OptionButton(
             onPressed: () => _showHint(context),
-            icon: const Icon(Icons.done, color: buttonContentColor,),
+            icon: const Icon(
+              Icons.done,
+              color: buttonContentColor,
+            ),
           ),
           OptionButton(
             onPressed: () => _showAnswer(context),
-            icon: const Icon(Icons.done_all, color: buttonContentColor,),
+            icon: const Icon(
+              Icons.done_all,
+              color: buttonContentColor,
+            ),
           ),
         ],
       ),
-    );
+    ); 
+    
   }
 }

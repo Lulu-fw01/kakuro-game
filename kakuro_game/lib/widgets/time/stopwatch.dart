@@ -3,7 +3,9 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
+import 'package:kakuro_game/providers/stopwatch_notifier.dart';
 import 'package:kakuro_game/widgets/time/time_card.dart';
+import 'package:provider/provider.dart';
 
 /// Stopwatch widget.
 class Stopwatch extends StatefulWidget {
@@ -20,6 +22,8 @@ class _StopwatchState extends State<Stopwatch> {
 
   Timer? timer;
   bool countDown = true;
+  /// Visible property.
+  bool visible = true;
 
   @override
   void initState() {
@@ -51,16 +55,19 @@ class _StopwatchState extends State<Stopwatch> {
     final minutes = twoDigits(duration.inMinutes.remainder(60));
     final seconds = twoDigits(duration.inSeconds.remainder(60));
 
-    return Row(mainAxisAlignment: MainAxisAlignment.center, children: [
-      timeCard(time: hours, header: "HOURS"),
-      const SizedBox(
-        width: 4,
-      ),
-      timeCard(time: minutes, header: 'MINUTES'),
-      const SizedBox(
-        width: 4,
-      ),
-      timeCard(time: seconds, header: 'SECONDS'),
-    ]);
+    return Consumer<StopwatchNotifier>(
+        builder: (context, notifier, _) => Visibility(
+            visible: notifier.stopwatchVisible,
+            child: Row(mainAxisAlignment: MainAxisAlignment.center, children: [
+              timeCard(time: hours),
+              const SizedBox(
+                width: 4,
+              ),
+              timeCard(time: minutes),
+              const SizedBox(
+                width: 4,
+              ),
+              timeCard(time: seconds),
+            ])));
   }
 }

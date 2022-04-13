@@ -1,19 +1,21 @@
 import 'package:flutter/material.dart';
 import 'package:kakuro_game/screens/game_screen/game_screen.dart';
 import 'package:kakuro_game/screens/menu_screen/menu_screen.dart';
+import 'package:provider/provider.dart';
 
 import 'assets/consts.dart';
+import 'providers/stopwatch_notifier.dart';
 
 void main() {
-  runApp(
-    MaterialApp(
-      initialRoute: homeRoute,
-      routes: {
-        homeRoute: (BuildContext context) => MenuScreen(),
-        gameRoute: (BuildContext context) => GameScreen(),
-      },
-    )
-  );
+  runApp(ChangeNotifierProvider(
+      create: (context) => StopwatchNotifier(),
+      child: MaterialApp(
+        initialRoute: homeRoute,
+        routes: {
+          homeRoute: (BuildContext context) => const MenuScreen(),
+          gameRoute: (BuildContext context) => const GameScreen(),
+        },
+      )));
 }
 
 class MyApp extends StatelessWidget {
