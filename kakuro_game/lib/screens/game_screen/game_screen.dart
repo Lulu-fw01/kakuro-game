@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:kakuro_game/providers/stopwatch_notifier.dart';
+import 'package:kakuro_game/widgets/options_floating_button/option_button/stopwatch_button.dart';
 import 'package:provider/provider.dart';
 import 'package:kakuro_game/assets/consts.dart';
 import 'package:kakuro_game/utilities/field/field.dart';
-import 'package:kakuro_game/widgets/options_floating_button/option_button.dart';
+import 'package:kakuro_game/widgets/options_floating_button/option_button/option_button.dart';
 import 'package:kakuro_game/widgets/options_floating_button/options_floating_button.dart';
 import 'package:kakuro_game/widgets/time/stopwatch.dart';
 
@@ -18,7 +19,7 @@ class GameScreen extends StatelessWidget {
     Navigator.pushNamed(context, homeRoute);
   }
 
-  void _changeTimerVisible(StopwatchNotifier notifier) {
+  void _changeStopwatchVisible(StopwatchNotifier notifier) {
     notifier.changeVisible();
   }
 
@@ -79,10 +80,14 @@ class GameScreen extends StatelessWidget {
               color: buttonContentColor,
             ),
           ),
-          OptionButton(
-            onPressed: () => _changeTimerVisible(notifier),
-            icon: const Icon(
+          StopwatchButton(
+            onPressed: () => _changeStopwatchVisible(notifier),
+            onIcon: const Icon(
               Icons.timer,
+              color: buttonContentColor,
+            ),
+            offIcon: const Icon(
+              Icons.timer_off,
               color: buttonContentColor,
             ),
           ),
