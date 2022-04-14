@@ -3,6 +3,10 @@ import 'package:kakuro_game/assets/consts.dart';
 import 'package:kakuro_game/providers/stopwatch_notifier.dart';
 import 'package:provider/provider.dart';
 
+/// Stopwatch button that appears when 
+/// [OptionsFloatingButton] was clicked.
+/// 
+/// This button should change stopwatch state.
 class StopwatchButton extends StatelessWidget {
   const StopwatchButton(
       {Key? key,
@@ -32,40 +36,3 @@ class StopwatchButton extends StatelessWidget {
     );
   }
 }
-
-/*class StopwatchButton extends StatefulWidget {
-  const StopwatchButton(
-      {Key? key,
-      required this.onPressed,
-      required this.onIcon,
-      required this.offIcon})
-      : super(key: key);
-
-
-  final VoidCallback? onPressed;
-  final Widget onIcon;
-  final Widget offIcon;
-  
-  @override
-  State<StatefulWidget> createState() => _StopwatchButtonState();
-  
-}
-
-class _StopwatchButtonState extends State<StopwatchButton> {
-
-  @override
-  Widget build(BuildContext context) {
-    return Material(
-      shape: const CircleBorder(),
-      clipBehavior: Clip.antiAlias,
-      color: buttonColor,
-      elevation: 4.0,
-      child: IconButton(
-        onPressed: widget.onPressed,
-        icon: icon,
-      ),
-    );
-  }
-  
-}
-*/

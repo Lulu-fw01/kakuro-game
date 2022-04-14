@@ -6,8 +6,7 @@ import 'package:kakuro_game/assets/consts.dart';
 import 'package:kakuro_game/utilities/field/field.dart';
 import 'package:kakuro_game/widgets/options_floating_button/option_button/option_button.dart';
 import 'package:kakuro_game/widgets/options_floating_button/options_floating_button.dart';
-import 'package:kakuro_game/widgets/time/stopwatch.dart';
-
+import 'package:kakuro_game/widgets/time/game_stopwatch.dart';
 
 /// Screen with game field.
 class GameScreen extends StatelessWidget {
@@ -20,21 +19,19 @@ class GameScreen extends StatelessWidget {
   }
 
   void _changeStopwatchVisible(StopwatchNotifier notifier) {
+    // Change visible of stopwatch.
     notifier.changeVisible();
   }
 
-  void _showHint(BuildContext context) {
+  void _showHint(BuildContext context) {}
 
-  }
-
-  void _showAnswer(BuildContext context) {
-
-  }
+  void _showAnswer(BuildContext context) {}
 
   @override
   Widget build(BuildContext context) {
     var f = Field(5, 5);
 
+    // Get notifier about stopwatch visible.
     final notifier = Provider.of<StopwatchNotifier>(context);
 
     return Scaffold(
@@ -47,11 +44,9 @@ class GameScreen extends StatelessWidget {
           const Expanded(
             flex: 2,
             child: Padding(
-                padding: EdgeInsets.all(6.0),
-                child: Visibility(
-                  visible: true,
-                  child: Stopwatch(),
-                )),
+              padding: EdgeInsets.all(6.0),
+              child: GameStopwatch(),
+            ),
           ),
           Expanded(
               flex: 8,
@@ -107,7 +102,6 @@ class GameScreen extends StatelessWidget {
           ),
         ],
       ),
-    ); 
-    
+    );
   }
 }

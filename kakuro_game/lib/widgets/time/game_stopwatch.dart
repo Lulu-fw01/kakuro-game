@@ -8,16 +8,16 @@ import 'package:kakuro_game/widgets/time/time_card.dart';
 import 'package:provider/provider.dart';
 
 /// Stopwatch widget.
-class Stopwatch extends StatefulWidget {
+class GameStopwatch extends StatefulWidget {
 
-  const Stopwatch({Key? key}) : super(key: key);
+  const GameStopwatch({Key? key}) : super(key: key);
 
   @override
-  State<StatefulWidget> createState() => _StopwatchState();
+  State<StatefulWidget> createState() => _GameStopwatchState();
   
 }
 
-class _StopwatchState extends State<Stopwatch> {
+class _GameStopwatchState extends State<GameStopwatch> {
   Duration duration = const Duration();
 
   Timer? timer;
