@@ -8,7 +8,7 @@
 #include "Generator.h"
 #include "EmptyCell.h"
 #include "InfoCell.h"
-
+#include "InputCell.h"
 
 std::vector<std::vector<EmptyCell *>> Generator::generate(int height, int width) {
     // TODO add difficulty.
@@ -30,6 +30,7 @@ std::vector<std::vector<EmptyCell *>> Generator::generate(int height, int width)
             next = getNext();
             if (hSet.find(next) == hSet.end()) {
                 hSet.insert(next);
+                board[i][j] = new InputCell;
             } else {
                 board[i][j] = new InfoCell;
                 hSet.clear();
@@ -69,6 +70,32 @@ Generator::Generator() {
 
 int Generator::getNext() {
     return getRandomNum(3, 9);
+}
+
+/**
+ * Check if info cell can be placed here.
+ * */
+bool Generator::isValid(const std::vector<std::vector<EmptyCell *>> &field, int row, int column) {
+    if (row == field.size() - 2 || column == field[0].size() - 2) {
+        return false;
+    }
+
+    int lefter = column - 2;
+    int higher = row - 2;
+
+    if (lefter >= 0 ) {
+        auto lefterType = typeid(field[row][lefter]).name();
+        if (lefterType == typeid(InfoCell).name()) {
+            return false;
+        }
+    }
+    if (higher >= 0) {
+        auto higherType = typeid(field[higher][column]).name();
+        if (higherType == typeid(InfoCell).name()) {
+            return false;
+        }
+    }
+    return true;
 }
 
 

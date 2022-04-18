@@ -8,9 +8,9 @@
 
 #include "EmptyCell.h"
 
-class InputCell : EmptyCell {
+class InputCell : public EmptyCell {
 public:
-    int value;
+    int value = 0;
     InputCell();
     explicit InputCell(int value);
     std::string getCellStr() const override;
