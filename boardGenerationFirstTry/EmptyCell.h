@@ -10,6 +10,12 @@
 class EmptyCell {
 public:
     virtual std::string getCellStr() const;
+    enum Type {
+        TYPE_EMPTY,
+        TYPE_INFO,
+        TYPE_INPUT
+    };
+    virtual Type getType() const;
 };
 
 

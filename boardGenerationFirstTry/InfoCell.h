@@ -15,6 +15,7 @@ public:
     InfoCell();
     InfoCell(int hSum, int vSum);
     std::string getCellStr() const override ;
+    Type getType() const override;
 };
 
 

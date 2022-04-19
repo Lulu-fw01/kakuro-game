@@ -13,5 +13,9 @@ InputCell::InputCell(int value) {
 }
 
 std::string InputCell::getCellStr() const {
-    return std::to_string(value);
+    return '[' + std::to_string(value) + ']';
+}
+
+EmptyCell::Type InputCell::getType() const {
+    return Type::TYPE_INPUT;
 }

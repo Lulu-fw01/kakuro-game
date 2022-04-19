@@ -24,6 +24,7 @@ std::vector<std::vector<EmptyCell *>> Generator::generate(int height, int width)
 
     // TODO position validating.
     int next;
+    bool infoMissed = false;
     for (int i = 1; i < height; i++) {
         std::set<int> hSet;
         for (int j = 1; j < width; j++) {
@@ -32,11 +33,17 @@ std::vector<std::vector<EmptyCell *>> Generator::generate(int height, int width)
                 hSet.insert(next);
                 board[i][j] = new InputCell;
             } else {
-                board[i][j] = new InfoCell;
-                hSet.clear();
+                if (isValid(board, i, j)) {
+                    board[i][j] = new InfoCell;
+                    hSet.clear();
+                } else {
+                    infoMissed = true;
+                    board[i][j] = new InputCell;
+                }
             }
         }
     }
+
     return board;
 }
 
@@ -81,17 +88,15 @@ bool Generator::isValid(const std::vector<std::vector<EmptyCell *>> &field, int 
     }
 
     int lefter = column - 2;
-    int higher = row - 2;
-
     if (lefter >= 0 ) {
-        auto lefterType = typeid(field[row][lefter]).name();
-        if (lefterType == typeid(InfoCell).name()) {
+        if (field[row][lefter]->getType() == EmptyCell::Type::TYPE_INFO) {
             return false;
         }
     }
+
+    int higher = row - 2;
     if (higher >= 0) {
-        auto higherType = typeid(field[higher][column]).name();
-        if (higherType == typeid(InfoCell).name()) {
+        if (field[higher][column]->getType() == EmptyCell::Type::TYPE_INFO) {
             return false;
         }
     }

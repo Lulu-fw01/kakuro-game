@@ -17,3 +17,7 @@ InfoCell::InfoCell(int hSum, int vSum) {
 std::string InfoCell::getCellStr() const {
     return std::to_string(verticalSum) + "\\" + std::to_string(horizontalSum);
 }
+
+EmptyCell::Type InfoCell::getType() const {
+    return Type::TYPE_INFO;
+}

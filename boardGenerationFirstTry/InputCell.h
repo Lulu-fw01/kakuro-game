@@ -14,6 +14,7 @@ public:
     InputCell();
     explicit InputCell(int value);
     std::string getCellStr() const override;
+    Type getType() const override;
 };
 
 
