@@ -8,11 +8,12 @@
 
 #include <vector>
 #include "EmptyCell.h"
+#include <memory>
 
 class Board {
 public:
     Board(int height, int width);
-    std::vector<std::vector<EmptyCell **>> getCells();
+    std::vector<std::vector<std::shared_ptr<EmptyCell>>> getCells();
     int getHeight() const;
     int getWidth() const;
     bool isValid(int row, int column) const;
@@ -22,7 +23,7 @@ public:
 
 private:
     // TODO use shared pointer.
-    std::vector<std::vector<EmptyCell **>> m_cells;
+    std::vector<std::vector<std::shared_ptr<EmptyCell>>> m_cells;
     int m_height;
     int m_width;
 };

@@ -7,9 +7,11 @@
 #include <iostream>
 #include "Generator.h"
 #include "EmptyCell.h"
-#include "InfoCell.h"
-#include "InputCell.h"
 
+/**
+ * @brief generate new kakuro board.
+ *
+ * */
 Board Generator::generate(int height, int width, int difficulty) {
     std::srand(static_cast<unsigned int>(time(nullptr)));
     // TODO add difficulty.
@@ -20,19 +22,9 @@ Board Generator::generate(int height, int width, int difficulty) {
     return board;
 }
 
-void printBoard(const std::vector<std::vector<EmptyCell *>> &board) {
-    for (const auto &i: board) {
-        for (auto j: i) {
-            if (j->getType() == EmptyCell::Type::TYPE_INFO) {
-                std::cout << "\033[31m"<< j->getCellStr() <<"\033[0m ";
-            } else {
-                std::cout << j->getCellStr() << " ";
-            }
-        }
-        std::cout << std::endl;
-    }
-}
-
+/**
+ * @brief Temporary method for generating and printing board.
+ * */
 void Generator::generateAndPrint() {
     auto board = generate(10, 10, 1);
 
@@ -48,7 +40,14 @@ int Generator::getNext() {
     return getRandomNum(3, 9);
 }
 
+/**
+ * @brief method for creating pattern on the board.
+ * Pattern it is board filled <p> with EmptyCells, InfoCells and InputCells but without values.
+ *
+ * @param board kakuro board.
+ * */
 void Generator::createPattern(Board &board) {
+    board.setCell(0, 0, EmptyCell::Type::TYPE_EMPTY);
 
     // Fill first row with Info cells.
     for (int i = 1; i < board.getHeight(); ++i) {
@@ -63,6 +62,11 @@ void Generator::createPattern(Board &board) {
     addInfoCells(board);
 }
 
+/**
+ * @brief this function randomly adds InfoCells on kakuro board.
+ *
+ * @param board kakuro board.
+ * */
 void Generator::addInfoCells(Board &board) {
     int next;
     int infoMissedCount = 0;
@@ -100,5 +104,13 @@ void Generator::addInfoCells(Board &board) {
         }
     }
 }
+
+/**
+ * This function change useless InfoCells with EmptyCells.
+ * */
+void Generator::addEmptyCells(Board &board) {
+
+}
+
 
 

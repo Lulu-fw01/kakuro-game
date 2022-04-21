@@ -7,33 +7,38 @@
 #include "InfoCell.h"
 #include "InputCell.h"
 
+/**
+ * @brief Constructor.
+ *
+ * @param height height of the field (number of rows).
+ * @param width width of the field (number of columns).
+ * */
 Board::Board(int height, int width) {
     m_height = height;
     m_width = width;
-    m_cells = std::vector<std::vector<EmptyCell **>>(height, std::vector<EmptyCell **>(width,
-                                                                                       reinterpret_cast<EmptyCell **>(new EmptyCell)));
+    m_cells = std::vector<std::vector<std::shared_ptr<EmptyCell> >> (height, std::vector<std::shared_ptr<EmptyCell>>(width, std::shared_ptr<EmptyCell>()));
 }
 
-std::vector<std::vector<EmptyCell **>> Board::getCells() {
+std::vector<std::vector<std::shared_ptr<EmptyCell>>> Board::getCells() {
     return m_cells;
 }
 
 /**
- * Height of the board.
+ * @brief Height of the board.
  * */
 int Board::getHeight() const {
     return m_height;
 }
 
 /**
- * Width of the board
+ * @brief Width of the board
  * */
 int Board::getWidth() const {
     return m_width;
 }
 
 /**
- * Check if info cell can be placed here.
+ * @brief Check if info cell can be placed here.
  * */
 bool Board::isValid(int row, int column) const {
     if (row == m_height - 2 || column == m_width - 2) {
@@ -43,8 +48,8 @@ bool Board::isValid(int row, int column) const {
     int lefter = column - 2;
     if (lefter >= 0) {
         int prevL = column - 1;
-        if ((*m_cells[row][lefter])->getType() == EmptyCell::Type::TYPE_INFO &&
-                (*m_cells[row][prevL])->getType() == EmptyCell::Type::TYPE_INPUT) {
+        if (m_cells[row][lefter]->getType() == EmptyCell::Type::TYPE_INFO &&
+                m_cells[row][prevL]->getType() == EmptyCell::Type::TYPE_INPUT) {
             return false;
         }
     }
@@ -52,40 +57,47 @@ bool Board::isValid(int row, int column) const {
     int higher = row - 2;
     if (higher >= 0) {
         int prevH = row - 1;
-        if ((*m_cells[higher][column])->getType() == EmptyCell::Type::TYPE_INFO &&
-                (*m_cells[prevH][column])->getType() == EmptyCell::Type::TYPE_INPUT) {
+        if (m_cells[higher][column]->getType() == EmptyCell::Type::TYPE_INFO &&
+                m_cells[prevH][column]->getType() == EmptyCell::Type::TYPE_INPUT) {
             return false;
         }
     }
     return true;
 }
 
+/**
+ * @brief Set cell type.
+ *
+ * @param row row number.
+ * @param column number.
+ * @param type type of the cell.
+ * */
 void Board::setCell(int row, int column, EmptyCell::Type type) {
-    EmptyCell* ptr;
+    std::shared_ptr<EmptyCell> ptr;
     switch (type) {
         case EmptyCell::Type::TYPE_EMPTY:
-            ptr = new EmptyCell;
+            ptr = std::make_shared<EmptyCell>();
             break;
         case EmptyCell::TYPE_INFO:
-            ptr = new InfoCell;
+            ptr = std::make_shared<InfoCell>();
             break;
         case EmptyCell::TYPE_INPUT:
-            ptr = new InputCell;
+            ptr = std::make_shared<InputCell>();
             break;
     }
-    m_cells[row][column] = &ptr;
+    m_cells[row][column] = ptr;
 }
 
 /**
- * Print board in console.
+ * @brief Print board in console.
  * */
 void Board::print(const Board &board) {
     for (const auto &i: board.m_cells) {
-        for (auto j: i) {
-            if ((*j)->getType() == EmptyCell::Type::TYPE_INFO) {
-                std::cout << "\033[31m"<< (*j)->getCellStr() <<"\033[0m ";
+        for (const auto& j: i) {
+            if (j->getType() == EmptyCell::Type::TYPE_INFO) {
+                std::cout << "\033[31m"<< j->getCellStr() <<"\033[0m ";
             } else {
-                std::cout << (*j)->getCellStr() << " ";
+                std::cout << j->getCellStr() << " ";
             }
         }
         std::cout << std::endl;
