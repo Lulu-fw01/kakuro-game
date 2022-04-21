@@ -13,4 +13,4 @@ add_executable(
         EmptyCell.cpp EmptyCell.h
         InfoCell.cpp InfoCell.h
         InputCell.cpp InputCell.h
-        Generator.cpp Generator.h)
+        Generator.cpp Generator.h Board.cpp Board.h)
