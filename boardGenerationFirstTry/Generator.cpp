@@ -10,39 +10,12 @@
 #include "InfoCell.h"
 #include "InputCell.h"
 
-std::vector<std::vector<EmptyCell *>> Generator::generate(int height, int width) {
+Board Generator::generate(int height, int width, int difficulty) {
+    std::srand(static_cast<unsigned int>(time(nullptr)));
     // TODO add difficulty.
-    std::vector<std::vector<EmptyCell *>> board(height, std::vector<EmptyCell *>(width, new EmptyCell));
-
-    for (int i = 1; i < height; ++i) {
-        board[i][0] = new InfoCell();
-    }
-
-    for (int j = 1; j < width; ++j) {
-        board[0][j] = new InfoCell();
-    }
-
-    // TODO position validating.
-    int next;
-    bool infoMissed = false;
-    for (int i = 1; i < height; i++) {
-        std::set<int> hSet;
-        for (int j = 1; j < width; j++) {
-            next = getNext();
-            if (hSet.find(next) == hSet.end()) {
-                hSet.insert(next);
-                board[i][j] = new InputCell;
-            } else {
-                if (isValid(board, i, j)) {
-                    board[i][j] = new InfoCell;
-                    hSet.clear();
-                } else {
-                    infoMissed = true;
-                    board[i][j] = new InputCell;
-                }
-            }
-        }
-    }
+    // Create empty board.
+    Board board(height, width);
+    createPattern(board);
 
     return board;
 }
@@ -50,57 +23,82 @@ std::vector<std::vector<EmptyCell *>> Generator::generate(int height, int width)
 void printBoard(const std::vector<std::vector<EmptyCell *>> &board) {
     for (const auto &i: board) {
         for (auto j: i) {
-            std::cout << (*j).getCellStr() << " ";
+            if (j->getType() == EmptyCell::Type::TYPE_INFO) {
+                std::cout << "\033[31m"<< j->getCellStr() <<"\033[0m ";
+            } else {
+                std::cout << j->getCellStr() << " ";
+            }
         }
         std::cout << std::endl;
     }
 }
 
 void Generator::generateAndPrint() {
-    auto board = generate(10, 10);
+    auto board = generate(10, 10, 1);
 
-    printBoard(board);
-    /*for (const auto & i : board) {
-        for (int j = 0; j < i.size(); ++j) {
-            delete i[j];
-        }
-    }*/
+    Board::print(board);
 }
 
 int Generator::getRandomNum(int min, int max) {
     return min + rand() % (max - min + 1);
 }
 
-Generator::Generator() {
-    std::srand(static_cast<unsigned int>(time(nullptr)));
-}
-
 int Generator::getNext() {
+    // TODO add difficulty.
     return getRandomNum(3, 9);
 }
 
-/**
- * Check if info cell can be placed here.
- * */
-bool Generator::isValid(const std::vector<std::vector<EmptyCell *>> &field, int row, int column) {
-    if (row == field.size() - 2 || column == field[0].size() - 2) {
-        return false;
+void Generator::createPattern(Board &board) {
+
+    // Fill first row with Info cells.
+    for (int i = 1; i < board.getHeight(); ++i) {
+        board.setCell(i, 0, EmptyCell::Type::TYPE_INFO);
     }
 
-    int lefter = column - 2;
-    if (lefter >= 0 ) {
-        if (field[row][lefter]->getType() == EmptyCell::Type::TYPE_INFO) {
-            return false;
-        }
+    // Fill first column with Info cells.
+    for (int j = 1; j < board.getWidth(); ++j) {
+        board.setCell(0, j, EmptyCell::Type::TYPE_INFO);
     }
 
-    int higher = row - 2;
-    if (higher >= 0) {
-        if (field[higher][column]->getType() == EmptyCell::Type::TYPE_INFO) {
-            return false;
+    addInfoCells(board);
+}
+
+void Generator::addInfoCells(Board &board) {
+    int next;
+    int infoMissedCount = 0;
+    bool infoNext;
+    std::set<int> hSet;
+    for (int i = 1; i < board.getHeight(); i++) {
+        for (int j = 1; j < board.getWidth(); j++) {
+            infoNext = false;
+            if (infoMissedCount > 0) {
+                if (board.isValid(i, j)) {
+                    infoNext = true;
+                    infoMissedCount--;
+                }
+            }
+            next = getNext();
+            if (hSet.find(next) == hSet.end()) {
+                hSet.insert(next);
+            } else {
+                if (board.isValid(i, j)) {
+                    if (infoNext) {
+                        infoMissedCount++;
+                    }
+                    infoNext = true;
+                } else {
+                    infoMissedCount++;
+                }
+                hSet.clear();
+            }
+
+            if (infoNext) {
+                board.setCell(i, j, EmptyCell::Type::TYPE_INFO);
+            } else {
+                board.setCell(i, j, EmptyCell::Type::TYPE_INPUT);
+            }
         }
     }
-    return true;
 }
 
 

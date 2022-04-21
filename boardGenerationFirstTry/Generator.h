@@ -7,20 +7,22 @@
 
 
 #include "EmptyCell.h"
+#include "Board.h"
 #include <vector>
 
 class Generator {
 public:
-    Generator();
 
-    static std::vector<std::vector<EmptyCell *>> generate(int height, int width);
+    static Board generate(int height, int width, int difficulty);
 
     static void generateAndPrint();
 
 private:
     static int getRandomNum(int min, int max);
     static int getNext();
-    static bool isValid(const std::vector<std::vector<EmptyCell *>> &field, int raw, int column);
+    static void createPattern(Board& board);
+    static void addInfoCells(Board& board);
+    static void addEmptyCells(Board& board);
 };
 
 

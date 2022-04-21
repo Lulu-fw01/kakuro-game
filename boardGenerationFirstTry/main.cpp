@@ -5,7 +5,6 @@
 
 
 int main() {
-    Generator gen;
-    gen.generateAndPrint();
+    Generator::generateAndPrint();
     return 0;
 }

@@ -9,6 +9,7 @@
 
 class EmptyCell {
 public:
+    EmptyCell();
     virtual std::string getCellStr() const;
     enum Type {
         TYPE_EMPTY,

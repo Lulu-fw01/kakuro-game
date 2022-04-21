@@ -12,15 +12,17 @@
 class Board {
 public:
     Board(int height, int width);
-    std::vector<std::vector<EmptyCell *>> getCells();
+    std::vector<std::vector<EmptyCell **>> getCells();
     int getHeight() const;
     int getWidth() const;
     bool isValid(int row, int column) const;
-    void setCell(int raw, int column, EmptyCell* cell);
+    void setCell(int raw, int column, EmptyCell::Type type);
     static void print(const Board &board);
+    ~Board();
 
 private:
-    std::vector<std::vector<EmptyCell *>> m_cells;
+    // TODO use shared pointer.
+    std::vector<std::vector<EmptyCell **>> m_cells;
     int m_height;
     int m_width;
 };
