@@ -2,9 +2,6 @@
 // Created by luka on 05.04.2022.
 //
 
-#include <vector>
-#include <set>
-#include <iostream>
 #include "Generator.h"
 #include "EmptyCell.h"
 
@@ -60,6 +57,77 @@ void Generator::createPattern(Board &board) {
     }
 
     addInfoCells(board);
+    addEmptyCells(board);
+}
+
+void Generator::fillPenultimateRow(Board& board, int &infoMissedCount, std::set<int>& hSet) {
+    bool infoNext;
+    int next;
+    int row = board.getHeight() - 2;
+    bool valid;
+    for (int j = 1; j < board.getWidth(); j++) {
+        infoNext = false;
+        valid = board.isValidUpLeftDown(j);
+        if (infoMissedCount > 0) {
+            if (valid) {
+                infoNext = true;
+                infoMissedCount--;
+            }
+        }
+        next = getNext();
+        if (hSet.find(next) == hSet.end()) {
+            hSet.insert(next);
+        } else {
+            if (valid) {
+                if (infoNext) {
+                    infoMissedCount++;
+                }
+                infoNext = true;
+            } else {
+                infoMissedCount++;
+            }
+            hSet.clear();
+        }
+
+        if (infoNext) {
+            board.setCell(row, j, EmptyCell::Type::TYPE_INFO);
+        }
+    }
+}
+
+void Generator::fillPenultimateColumn(Board &board, int &infoMissedCount, std::set<int> &hSet) {
+    bool infoNext;
+    int next;
+    int column = board.getWidth() - 2;
+    bool valid;
+    for (int j = 1; j < board.getHeight(); j++) {
+        infoNext = false;
+        valid = board.isValidUpLeftRight(j);
+        if (infoMissedCount > 0) {
+            if (valid) {
+                infoNext = true;
+                infoMissedCount--;
+            }
+        }
+        next = getNext();
+        if (hSet.find(next) == hSet.end()) {
+            hSet.insert(next);
+        } else {
+            if (valid) {
+                if (infoNext) {
+                    infoMissedCount++;
+                }
+                infoNext = true;
+            } else {
+                infoMissedCount++;
+            }
+            hSet.clear();
+        }
+
+        if (infoNext) {
+            board.setCell(j, column, EmptyCell::Type::TYPE_INFO);
+        }
+    }
 }
 
 /**
@@ -72,11 +140,13 @@ void Generator::addInfoCells(Board &board) {
     int infoMissedCount = 0;
     bool infoNext;
     std::set<int> hSet;
+    bool valid;
     for (int i = 1; i < board.getHeight(); i++) {
         for (int j = 1; j < board.getWidth(); j++) {
             infoNext = false;
+            valid = board.isValidUpLeft(i, j);
             if (infoMissedCount > 0) {
-                if (board.isValid(i, j)) {
+                if (valid) {
                     infoNext = true;
                     infoMissedCount--;
                 }
@@ -85,7 +155,7 @@ void Generator::addInfoCells(Board &board) {
             if (hSet.find(next) == hSet.end()) {
                 hSet.insert(next);
             } else {
-                if (board.isValid(i, j)) {
+                if (valid) {
                     if (infoNext) {
                         infoMissedCount++;
                     }
@@ -96,12 +166,17 @@ void Generator::addInfoCells(Board &board) {
                 hSet.clear();
             }
 
-            if (infoNext) {
-                board.setCell(i, j, EmptyCell::Type::TYPE_INFO);
-            } else {
-                board.setCell(i, j, EmptyCell::Type::TYPE_INPUT);
-            }
+            board.setCell(i, j, infoNext ? EmptyCell::Type::TYPE_INFO : EmptyCell::Type::TYPE_INPUT);
         }
+    }
+
+    int r = getRandomNum(0, 9);
+    if (r % 2 == 0) {
+        fillPenultimateRow(board, infoMissedCount, hSet);
+        fillPenultimateColumn(board, infoMissedCount, hSet);
+    } else {
+        fillPenultimateColumn(board, infoMissedCount, hSet);
+        fillPenultimateRow(board, infoMissedCount, hSet);
     }
 }
 
@@ -109,7 +184,10 @@ void Generator::addInfoCells(Board &board) {
  * This function change useless InfoCells with EmptyCells.
  * */
 void Generator::addEmptyCells(Board &board) {
-
+    for (int i = 0; i < board.getHeight(); i++) {
+        for (int j = 0; j < board.getWidth(); j++) {
+        }
+    }
 }
 
 

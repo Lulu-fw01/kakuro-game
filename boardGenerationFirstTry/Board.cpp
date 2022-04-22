@@ -37,19 +37,12 @@ int Board::getWidth() const {
     return m_width;
 }
 
-/**
- * @brief Check if info cell can be placed here.
- * */
-bool Board::isValid(int row, int column) const {
-    if (row == m_height - 2 || column == m_width - 2) {
-        return false;
-    }
-
+bool Board::checkUpLeft(int row, int column) const {
     int lefter = column - 2;
     if (lefter >= 0) {
         int prevL = column - 1;
         if (m_cells[row][lefter]->getType() == EmptyCell::Type::TYPE_INFO &&
-                m_cells[row][prevL]->getType() == EmptyCell::Type::TYPE_INPUT) {
+            m_cells[row][prevL]->getType() == EmptyCell::Type::TYPE_INPUT) {
             return false;
         }
     }
@@ -58,7 +51,7 @@ bool Board::isValid(int row, int column) const {
     if (higher >= 0) {
         int prevH = row - 1;
         if (m_cells[higher][column]->getType() == EmptyCell::Type::TYPE_INFO &&
-                m_cells[prevH][column]->getType() == EmptyCell::Type::TYPE_INPUT) {
+            m_cells[prevH][column]->getType() == EmptyCell::Type::TYPE_INPUT) {
             return false;
         }
     }
@@ -66,10 +59,49 @@ bool Board::isValid(int row, int column) const {
 }
 
 /**
+ * @brief Check if info cell can be placed here.
+ * It checks cells lefter and higher than cell[row, column]
+ *
+ * @attention for every cell in penultimate Row orColumn answer will be false.
+ *
+ * @param row row number.
+ * @param column column number.
+ * */
+bool Board::isValidUpLeft(int row, int column) const {
+    if (row == m_height - 2 || column == m_width - 2) {
+        return false;
+    }
+
+    return checkUpLeft(row, column);
+}
+
+/**
+ * @brief Check if info cell can be placed here.
+ *
+ * @attention Method for checking cells in penultimate Row.
+ *
+ * @param column column number.
+ * */
+bool Board::isValidUpLeftDown(int column) const {
+    return (getCellType(m_height - 1, column) == EmptyCell::Type::TYPE_INFO) && checkUpLeft(m_height - 2, column);
+}
+
+/**
+ * @brief Check if info cell can be placed here.
+ * It checks cells lefter and higher than cell[row, column].
+ * @attention Method for checking cells in penultimate Column.
+ *
+ * @param row row number.
+ * */
+bool Board::isValidUpLeftRight(int row) const {
+    return (getCellType(row, m_width - 1) == EmptyCell::Type::TYPE_INFO) && checkUpLeft(row, m_width - 2);
+}
+
+/**
  * @brief Set cell type.
  *
  * @param row row number.
- * @param column number.
+ * @param column column number.
  * @param type type of the cell.
  * */
 void Board::setCell(int row, int column, EmptyCell::Type type) {
@@ -111,4 +143,14 @@ Board::~Board() {
             delete i[j];
         }
     }*/
+}
+
+/**
+ * @brief Type of cell in board.
+ *
+ * @param row row number.
+ * @param column column number.
+ * */
+EmptyCell::Type Board::getCellType(int row, int column) const {
+    return m_cells[row][column]->getType();
 }

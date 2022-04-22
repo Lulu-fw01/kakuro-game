@@ -6,9 +6,11 @@
 #define BOARDGENERATIONFIRSTTRY_GENERATOR_H
 
 
+#include <vector>
+#include <set>
+
 #include "EmptyCell.h"
 #include "Board.h"
-#include <vector>
 
 class Generator {
 public:
@@ -19,10 +21,18 @@ public:
 
 private:
     static int getRandomNum(int min, int max);
+
     static int getNext();
-    static void createPattern(Board& board);
-    static void addInfoCells(Board& board);
-    static void addEmptyCells(Board& board);
+
+    static void createPattern(Board &board);
+
+    static void addInfoCells(Board &board);
+
+    static void addEmptyCells(Board &board);
+
+    static void fillPenultimateRow(Board &board, int &infoMissedCount, std::set<int> &hSet);
+
+    static void fillPenultimateColumn(Board &board, int &infoMissedCount, std::set<int> &hSet);
 };
 
 
