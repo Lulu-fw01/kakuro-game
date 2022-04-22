@@ -134,6 +134,7 @@ void Board::print(const Board &board) {
         }
         std::cout << std::endl;
     }
+    std::cout << std::endl;
 
 }
 

@@ -60,7 +60,7 @@ void Generator::createPattern(Board &board) {
     addEmptyCells(board);
 }
 
-void Generator::fillPenultimateRow(Board& board, int &infoMissedCount, std::set<int>& hSet) {
+void Generator::fillPenultimateRow(Board &board, int &infoMissedCount, std::set<int> &hSet) {
     bool infoNext;
     int next;
     int row = board.getHeight() - 2;
@@ -184,10 +184,40 @@ void Generator::addInfoCells(Board &board) {
  * This function change useless InfoCells with EmptyCells.
  * */
 void Generator::addEmptyCells(Board &board) {
+    int down, right;
     for (int i = 0; i < board.getHeight(); i++) {
         for (int j = 0; j < board.getWidth(); j++) {
+            down = i + 1;
+            right = j + 1;
+            if (i == board.getHeight() - 1 && j == board.getWidth() - 1) {
+                if (board.getCellType(i, j) == EmptyCell::Type::TYPE_INFO) {
+                    board.setCell(i, j, EmptyCell::Type::TYPE_EMPTY);
+                }
+                continue;
+            }
+            if (i == board.getHeight() - 1) {
+                if (board.getCellType(i, j) == EmptyCell::Type::TYPE_INFO &&
+                    board.getCellType(i, right) != EmptyCell::Type::TYPE_INPUT) {
+                    board.setCell(i, j, EmptyCell::Type::TYPE_EMPTY);
+                }
+                continue;
+            }
+            if (j == board.getWidth() - 1) {
+                if (board.getCellType(i, j) == EmptyCell::Type::TYPE_INFO &&
+                    board.getCellType(down, j) != EmptyCell::Type::TYPE_INPUT) {
+                    board.setCell(i, j, EmptyCell::Type::TYPE_EMPTY);
+                }
+                continue;
+            }
+            if (board.getCellType(i, j) == EmptyCell::Type::TYPE_INFO &&
+                board.getCellType(down, j) != EmptyCell::Type::TYPE_INPUT &&
+                board.getCellType(i, right) != EmptyCell::Type::TYPE_INPUT) {
+                board.setCell(i, j, EmptyCell::Type::TYPE_EMPTY);
+            }
         }
     }
+
+
 }
 
 
