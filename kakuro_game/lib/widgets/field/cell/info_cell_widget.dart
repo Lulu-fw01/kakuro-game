@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:kakuro_game/assets/consts.dart';
 
 
 /// Widget with information for user about vertical and horizontal amounts
@@ -29,14 +30,14 @@ class InfoCellWidget extends StatelessWidget {
             backgroundColor:
                 MaterialStateProperty.all<Color?>(Colors.blue[800]),
             side: MaterialStateProperty.all<BorderSide>(const BorderSide(
-              color: Colors.white,
+              color: buttonColor,
               width: 1,
               style: BorderStyle.solid,
             )),
           ),
           child: Text(
             getText(),
-            style: const TextStyle(fontSize: 12, color: Colors.white),
+            style: const TextStyle(fontSize: 12, color: buttonColor),
           )),
     );
   }
