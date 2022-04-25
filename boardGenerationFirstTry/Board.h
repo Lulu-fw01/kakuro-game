@@ -38,7 +38,6 @@ public:
     ~Board();
 
 private:
-    // TODO use shared pointer.
     std::vector<std::vector<std::shared_ptr<EmptyCell>>> m_cells;
     int m_height;
     int m_width;
