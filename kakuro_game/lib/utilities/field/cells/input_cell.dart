@@ -1,6 +1,7 @@
 
 import 'package:flutter/widgets.dart';
 import 'package:kakuro_game/utilities/field/cells/empty_cell.dart';
+import 'package:kakuro_game/widgets/field/cell/input_cell_widget.dart';
 
 /// Class that describes cell, where user can change value.
 class InputCell extends EmptyCell {
@@ -23,7 +24,6 @@ class InputCell extends EmptyCell {
 
   @override
   Widget getWidget() {
-    // TODO add correct widget to return.
-    return Container();
+    return const InputCellWidget();
   }
 }

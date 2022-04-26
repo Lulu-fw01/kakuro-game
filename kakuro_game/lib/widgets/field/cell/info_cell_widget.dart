@@ -4,18 +4,18 @@ import 'package:kakuro_game/assets/consts.dart';
 
 /// Widget with information for user about vertical and horizontal amounts
 class InfoCellWidget extends StatelessWidget {
-  const InfoCellWidget({Key? key, this.horizontalValue, this.verticalValue})
+  const InfoCellWidget({Key? key, required this.horizontalValue, required this.verticalValue})
       : super(key: key);
 
   /// Sum of digits horizontally.
-  final int? horizontalValue;
+  final int horizontalValue;
 
   /// Sum of digits vertically.
-  final int? verticalValue;
+  final int verticalValue;
 
   String getText() {
-    var horizontal = horizontalValue == null ? ' ' : horizontalValue.toString();
-    var vertical = verticalValue == null ? ' ' : verticalValue.toString();
+    var horizontal = horizontalValue == 0 ? ' ' : horizontalValue.toString();
+    var vertical = verticalValue == 0 ? ' ' : verticalValue.toString();
     return vertical + '\\' + horizontal;
   }
 

@@ -42,20 +42,6 @@ class MenuScreen extends StatelessWidget {
                 )
               ),
               Padding(
-                // Indent from the "Play" button.
-                padding: const EdgeInsets.only(top: 25.0),
-                child: MaterialButton(
-                  color: buttonColor,
-                  height: 50.0,
-                  minWidth: 150.0,
-                  child: Text(
-                    "Settings",
-                    style: _sizeTextBlack,
-                  ),
-                  onPressed: () {  },
-                )
-              ),
-              Padding(
                 padding: const EdgeInsets.only(top: 25.0),
                 child: MaterialButton(
                   color: buttonColor,
