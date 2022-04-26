@@ -52,16 +52,28 @@ class GameScreen extends StatelessWidget {
               flex: 8,
               child: Container(
                   alignment: Alignment.center,
-                  width: double.infinity,
-                  child: Center(
-                      child: InteractiveViewer(
-                    minScale: 0.1,
-                    maxScale: 2,
-                    // Arrange rows of buttons in a column.
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: f.getRows(),
-                    ),
+                  width: MediaQuery.of(context).size.width,
+                  child: Center(child: LayoutBuilder(
+                    builder: (context, constraints) {
+                      return SizedBox(
+                        width: constraints.maxWidth,
+                        height: constraints.maxHeight,
+                        child: ClipRect(
+                            child: InteractiveViewer(
+                          //boundaryMargin: const EdgeInsets.all(double.infinity),
+                          //constrained: false,
+                          minScale: 0.7,
+                          maxScale: 2,
+                          // Arrange rows of buttons in a column.
+                          child: Center(child: 
+                          Wrap(
+                            direction: Axis.vertical,
+                            spacing: 1.5,
+                            children: f.getRows(),
+                          )),
+                        )),
+                      );
+                    },
                   ))))
         ],
       ),

@@ -9,6 +9,8 @@ import 'package:kakuro_game/widgets/field/cell/info_cell_widget.dart';
 /// Class that describes kakuro field.
 class Field {
 
+  final double _cellsSpace = 1.5;
+
    late final int _width;
    late final int _height;
 
@@ -37,30 +39,36 @@ class Field {
   /// Cells of the field.
   late List<List<EmptyCell?>> _cells;
 
-  List<Row> getRows() {
-    List<Row> rows = List<Row>.filled(5, Row());
+  List<Widget> getRows() {
+    List<Wrap> cells = List<Wrap>.filled(5, Wrap());
     
-    var row0 = Row(children: const [EmptyCellWidget(), EmptyCellWidget(), InfoCellWidget(verticalValue: 16), InfoCellWidget(verticalValue: 23), EmptyCellWidget()],
-    mainAxisAlignment: MainAxisAlignment.center);
-    rows[0] = row0;
+    var row0 = Wrap(children: const [EmptyCellWidget(), EmptyCellWidget(), InfoCellWidget(verticalValue: 16), InfoCellWidget(verticalValue: 23), EmptyCellWidget()],
+    spacing: _cellsSpace,);
+    cells[0] = row0;
 
-    var row1 = Row(children: const [EmptyCellWidget(), InfoCellWidget(verticalValue: 4, horizontalValue: 4), InputCellWidget(), InputCellWidget(), InfoCellWidget(verticalValue: 9)],
-    mainAxisAlignment: MainAxisAlignment.center);
-    rows[1] = row1;
+    var row1 = Wrap(children: const [EmptyCellWidget(), InfoCellWidget(verticalValue: 4, horizontalValue: 4), InputCellWidget(), InputCellWidget(), InfoCellWidget(verticalValue: 9)],
+    spacing: _cellsSpace);
+    cells[1] = row1;
 
-    var row2 = Row(children: const [InfoCellWidget(horizontalValue: 27), InputCellWidget(), InputCellWidget(), InputCellWidget(), InputCellWidget()],
-    mainAxisAlignment: MainAxisAlignment.center);
-    rows[2] = row2;
+    var row2 = Wrap(children: const [InfoCellWidget(horizontalValue: 27), InputCellWidget(), InputCellWidget(), InputCellWidget(), InputCellWidget()],
+    spacing: _cellsSpace);
+    cells[2] = row2;
 
-    var row3 = Row(children: const [InfoCellWidget(horizontalValue: 10), InputCellWidget(), InputCellWidget(), InputCellWidget(), InputCellWidget()],
-    mainAxisAlignment: MainAxisAlignment.center);
-    rows[3] = row3;
+    var row3 = Wrap(children: const [InfoCellWidget(horizontalValue: 10), InputCellWidget(), InputCellWidget(), InputCellWidget(), InputCellWidget()],
+    spacing: _cellsSpace);
+    cells[3] = row3;
 
-    var row4 = Row(children: const [EmptyCellWidget(), InfoCellWidget(horizontalValue: 11), InputCellWidget(), InputCellWidget(), EmptyCellWidget()],
-    mainAxisAlignment: MainAxisAlignment.center);
-    rows[4] = row4;
+    var row4 = Wrap(children: const [EmptyCellWidget(), InfoCellWidget(horizontalValue: 11), InputCellWidget(), InputCellWidget(), EmptyCellWidget()],
+    spacing: _cellsSpace);
+    cells[4] = row4;
 
-    return rows;
+    /*var cells = [EmptyCellWidget(), EmptyCellWidget(), InfoCellWidget(verticalValue: 16), InfoCellWidget(verticalValue: 23), EmptyCellWidget(),
+    EmptyCellWidget(), InfoCellWidget(verticalValue: 4, horizontalValue: 4), InputCellWidget(), InputCellWidget(), InfoCellWidget(verticalValue: 9),
+    InfoCellWidget(horizontalValue: 27), InputCellWidget(), InputCellWidget(), InputCellWidget(), InputCellWidget(),
+    InfoCellWidget(horizontalValue: 10), InputCellWidget(), InputCellWidget(), InputCellWidget(), InputCellWidget(),
+    ];*/
+    
+    return cells;
   }
 
 }
