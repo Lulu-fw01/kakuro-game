@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:kakuro_game/models/options_icons.dart';
 import 'package:kakuro_game/providers/stopwatch_notifier.dart';
 import 'package:kakuro_game/widgets/options_floating_button/option_button/stopwatch_button.dart';
 import 'package:provider/provider.dart';
@@ -101,14 +102,14 @@ class GameScreen extends StatelessWidget {
           OptionButton(
             onPressed: () => _showHint(context),
             icon: const Icon(
-              Icons.done,
+              OptionsIcons.lamp,
               color: buttonContentColor,
             ),
           ),
           OptionButton(
             onPressed: () => _showAnswer(context),
             icon: const Icon(
-              Icons.done_all,
+              OptionsIcons.award,
               color: buttonContentColor,
             ),
           ),
