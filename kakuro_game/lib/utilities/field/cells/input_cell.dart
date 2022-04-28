@@ -11,16 +11,9 @@ class InputCell extends EmptyCell {
   ///Actual value in this cell.
   int get actualValue => _actualValue;
 
-  /// Add 1 to value in this cell.
-  /// (Maybe it is temporary method).
-  void add() {
-    _actualValue++;
-    if (_actualValue >= 10) {
-      _actualValue = 1;
-    }
-  }
+  final int answerValue;
 
-  InputCell();
+  InputCell({required this.answerValue});
 
   @override
   Widget getWidget() {

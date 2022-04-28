@@ -2,6 +2,7 @@
 import 'package:flutter/material.dart';
 import 'package:kakuro_game/utilities/field/cells/empty_cell.dart';
 import 'package:kakuro_game/utilities/field/cells/info_cell.dart';
+import 'package:kakuro_game/utilities/field/cells/input_cell.dart';
 import 'package:kakuro_game/widgets/field/cell/empty_cell_widget.dart';
 import 'package:kakuro_game/widgets/field/cell/input_cell_widget.dart';
 import 'package:kakuro_game/widgets/field/cell/info_cell_widget.dart';
@@ -78,6 +79,27 @@ class Field {
     // emp inf#4|5 inp#6
 
     return newField;
+  }
+
+  static EmptyCell cellFromString(String strCell) {
+    if (strCell == 'emp') {
+      return EmptyCell();
+    }
+    var splitStr = strCell.split('#');
+    String type = splitStr[0];
+    String body = splitStr[1];
+    switch (type) {
+      case 'inf':
+        var downRight = body.split('\\');
+        int vVal = int.parse(downRight[0]);
+        int hVal = int.parse(downRight[1]);
+        return InfoCell(horizontalValue: hVal, verticalValue: vVal);
+      case 'inp':
+        int answer = int.parse(body);
+        return InputCell(answerValue: answer);
+      default:
+        return EmptyCell();
+    }
   }
 
 }
