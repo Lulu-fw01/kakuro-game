@@ -22,7 +22,7 @@ class Generator {
 
   /// Method for field generation.
    void generate() {
-     _wField = Field(_width, _height, 5);
+     _wField = Field(_width, _height);
 
      
    }

@@ -10,7 +10,7 @@ import 'package:kakuro_game/widgets/field/cell/info_cell_widget.dart';
 /// Class that describes kakuro field.
 class Field {
 
-  final double _cellsSpace = 1.5;
+   final double _cellsSpace = 1.5;
 
    late final int _width;
    late final int _height;
@@ -21,15 +21,17 @@ class Field {
    /// Height of field.
    int get height => _height;
 
-   Field(int width, int height, int difficulty) {
+   Field(int height, int width) {
      _width = width;
      _height = height;
      _cells = List.generate(_height, (index) => List.filled(_width, EmptyCell()), growable: false);
-
    }
   
   /// Cells of the field.
   late List<List<EmptyCell>> _cells;
+
+  List<List<EmptyCell>> get cells => _cells;
+
 
   List<Widget> getRows() {
 
@@ -73,14 +75,38 @@ class Field {
   }
 
   /// Method for generating kakuro board.
-  static Field fieldFromString(int _width, int _height, int difficulty) {
-    var newField = Field(_width, _height, difficulty);
+  static Field getRandomField(int height, int width, int difficulty) {
 
-    // emp inf#4|5 inp#6
+    String stringField = ('emp emp inf#0\\16 inf#23\\0 emp ' 
+                         'emp inf#4\\4 inp#0 inp#0 inf#9\\0 '
+                         'inf#0\\27 inp#0 inp#0 inp#0 inp#0 '
+                         'inf#0\\10 inp#0 inp#0 inp#0 inp#0 ' 
+                         'emp inf#0\\11 inp#0 inp#0 emp');
+
+    return getFieldFromString(stringField, height, width);
+  }
+
+  static Field getFieldFromString(String stringField, int height, int width) {
+    var newField = Field(height, width);
+
+    var strCells = stringField.split(' ');
+    int cellNum = 0;
+    for (int i = 0; i < height; ++i) {
+      for (int j = 0; j < width; ++j) {
+        newField._cells[i][j] = cellFromString(strCells[cellNum]);
+        cellNum++;
+      }
+    }
 
     return newField;
   }
 
+  /// This Function parse cell in [String] format into [EmptyCell], [InfoCell] or [InputCell].
+  /// 
+  /// String formats:
+  ///   - 'emp' for empty cell.
+  ///   - 'inf#<down>\<right>' for info cell, example: inf#45\11.
+  ///   - 'inp#<val>' for input cell, example: inp#9.   
   static EmptyCell cellFromString(String strCell) {
     if (strCell == 'emp') {
       return EmptyCell();

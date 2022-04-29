@@ -31,7 +31,7 @@ class GameScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    var f = Field(5, 5, 5);
+    var f = Field(5, 5);
 
     // Get notifier about stopwatch visible.
     final notifier = Provider.of<StopwatchNotifier>(context);
