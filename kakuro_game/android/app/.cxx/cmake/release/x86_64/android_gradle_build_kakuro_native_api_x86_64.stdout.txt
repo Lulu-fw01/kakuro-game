@@ -1,0 +1,3 @@
+ninja: Entering directory `/home/luka/git/kakuro-game/kakuro_game/android/app/.cxx/cmake/release/x86_64'
+[1/2] Building CXX object CMakeFiles/kakuro_native_api.dir/kakuroApi.cpp.o
+[2/2] Linking CXX shared library /home/luka/git/kakuro-game/kakuro_game/build/app/intermediates/cmake/release/obj/x86_64/libkakuro_native_api.so

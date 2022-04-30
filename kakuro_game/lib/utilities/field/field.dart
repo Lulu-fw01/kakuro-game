@@ -1,11 +1,9 @@
 
 import 'package:flutter/material.dart';
+import 'package:kakuro_game/providers/ffi_bridge/ffi_bridge.dart';
 import 'package:kakuro_game/utilities/field/cells/empty_cell.dart';
 import 'package:kakuro_game/utilities/field/cells/info_cell.dart';
 import 'package:kakuro_game/utilities/field/cells/input_cell.dart';
-import 'package:kakuro_game/widgets/field/cell/empty_cell_widget.dart';
-import 'package:kakuro_game/widgets/field/cell/input_cell_widget.dart';
-import 'package:kakuro_game/widgets/field/cell/info_cell_widget.dart';
 
 /// Class that describes kakuro field.
 class Field {
@@ -35,15 +33,14 @@ class Field {
 
   List<Widget> getRows() {
 
-    // TODO test it.
-    /*List<Wrap> cells = List<Wrap>.filled(height, Wrap());
+    List<Wrap> cells = List<Wrap>.filled(height, Wrap());
 
     for (int i = 0; i < height; ++i) {
       cells[i] = Wrap(children: _cells[i].map((e) => e.getWidget()).toList(),);
-    }*/
+    }
 
 
-    List<Wrap> cells = List<Wrap>.filled(5, Wrap());
+    /*List<Wrap> cells = List<Wrap>.filled(5, Wrap());
     
     var row0 = Wrap(children: const [EmptyCellWidget(), EmptyCellWidget(), InfoCellWidget(horizontalValue: 0, verticalValue: 16), InfoCellWidget(horizontalValue: 0, verticalValue: 23), EmptyCellWidget()],
     spacing: _cellsSpace,);
@@ -63,13 +60,7 @@ class Field {
 
     var row4 = Wrap(children: const [EmptyCellWidget(), InfoCellWidget(horizontalValue: 11, verticalValue: 0,), InputCellWidget(), InputCellWidget(), EmptyCellWidget()],
     spacing: _cellsSpace);
-    cells[4] = row4;
-
-    /*var cells = [EmptyCellWidget(), EmptyCellWidget(), InfoCellWidget(verticalValue: 16), InfoCellWidget(verticalValue: 23), EmptyCellWidget(),
-    EmptyCellWidget(), InfoCellWidget(verticalValue: 4, horizontalValue: 4), InputCellWidget(), InputCellWidget(), InfoCellWidget(verticalValue: 9),
-    InfoCellWidget(horizontalValue: 27), InputCellWidget(), InputCellWidget(), InputCellWidget(), InputCellWidget(),
-    InfoCellWidget(horizontalValue: 10), InputCellWidget(), InputCellWidget(), InputCellWidget(), InputCellWidget(),
-    ];*/
+    cells[4] = row4;*/
     
     return cells;
   }
@@ -77,11 +68,14 @@ class Field {
   /// Method for generating kakuro board.
   static Field getRandomField(int height, int width, int difficulty) {
 
-    String stringField = ('emp emp inf#0\\16 inf#23\\0 emp ' 
+    /*String stringField = ('emp emp inf#0\\16 inf#23\\0 emp ' 
                          'emp inf#4\\4 inp#0 inp#0 inf#9\\0 '
                          'inf#0\\27 inp#0 inp#0 inp#0 inp#0 '
                          'inf#0\\10 inp#0 inp#0 inp#0 inp#0 ' 
-                         'emp inf#0\\11 inp#0 inp#0 emp');
+                         'emp inf#0\\11 inp#0 inp#0 emp');*/
+
+
+    String stringField = FFIBridge.generateKakuroBoard(height, width, difficulty);
 
     return getFieldFromString(stringField, height, width);
   }
@@ -105,8 +99,8 @@ class Field {
   /// 
   /// String formats:
   ///   - 'emp' for empty cell.
-  ///   - 'inf#<down>\<right>' for info cell, example: inf#45\11.
-  ///   - 'inp#<val>' for input cell, example: inp#9.   
+  ///   - 'inf#down\right' for info cell, example: inf#45\11.
+  ///   - 'inp#val' for input cell, example: inp#9.   
   static EmptyCell cellFromString(String strCell) {
     if (strCell == 'emp') {
       return EmptyCell();

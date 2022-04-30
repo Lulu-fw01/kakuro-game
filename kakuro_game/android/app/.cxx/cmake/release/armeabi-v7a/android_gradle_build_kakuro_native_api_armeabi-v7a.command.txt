@@ -1,0 +1,7 @@
+Executable : /home/luka/Android/Sdk/cmake/3.10.2.4988404/bin/ninja
+arguments : 
+-C
+/home/luka/git/kakuro-game/kakuro_game/android/app/.cxx/cmake/release/armeabi-v7a
+kakuro_native_api
+jvmArgs : 
+
