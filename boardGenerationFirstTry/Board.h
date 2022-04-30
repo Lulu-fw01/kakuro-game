@@ -1,7 +1,5 @@
-
-
-#ifndef KAKUROTEST_BOARD_H
-#define KAKUROTEST_BOARD_H
+#ifndef BOARDGENERATIONFIRSTTRY_BOARD_H
+#define BOARDGENERATIONFIRSTTRY_BOARD_H
 
 #include <vector>
 #include <memory>
@@ -44,4 +42,4 @@ private:
     bool checkUpLeft(int row, int column) const;
 };
 
-#endif //KAKUROTEST_BOARD_H
+#endif //BOARDGENERATIONFIRSTTRY_BOARD_H

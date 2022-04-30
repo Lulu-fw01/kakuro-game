@@ -1,7 +1,5 @@
-
-
-#ifndef KAKUROTEST_GENERATOR_H
-#define KAKUROTEST_GENERATOR_H
+#ifndef BOARDGENERATIONFIRSTTRY_GENERATOR_H
+#define BOARDGENERATIONFIRSTTRY_GENERATOR_H
 
 #include <vector>
 #include <set>
@@ -39,4 +37,4 @@ private:
     static std::vector<std::vector<Block>> findBlocks(Board &board);
 };
 
-#endif //KAKUROTEST_GENERATOR_H
+#endif //BOARDGENERATIONFIRSTTRY_GENERATOR_H

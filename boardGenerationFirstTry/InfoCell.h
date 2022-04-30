@@ -1,7 +1,5 @@
-
-
-#ifndef KAKUROTEST_INFOCELL_H
-#define KAKUROTEST_INFOCELL_H
+#ifndef BOARDGENERATIONFIRSTTRY_INFOCELL_H
+#define BOARDGENERATIONFIRSTTRY_INFOCELL_H
 
 #include "EmptyCell.h"
 
@@ -19,4 +17,4 @@ public:
     Type getType() const override;
 };
 
-#endif //KAKUROTEST_INFOCELL_H
+#endif //BOARDGENERATIONFIRSTTRY_INFOCELL_H

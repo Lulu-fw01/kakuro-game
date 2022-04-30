@@ -1,7 +1,5 @@
-
-
-#ifndef KAKUROTEST_INPUTCELL_H
-#define KAKUROTEST_INPUTCELL_H
+#ifndef BOARDGENERATIONFIRSTTRY_INPUTCELL_H
+#define BOARDGENERATIONFIRSTTRY_INPUTCELL_H
 
 #include "EmptyCell.h"
 #include "vector"
@@ -23,4 +21,4 @@ public:
     std::vector<int> outerNumbers = std::vector<int>(9);
 };
 
-#endif //KAKUROTEST_INPUTCELL_H
+#endif //BOARDGENERATIONFIRSTTRY_INPUTCELL_H

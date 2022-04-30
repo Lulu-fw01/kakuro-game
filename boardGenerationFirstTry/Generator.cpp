@@ -1,4 +1,3 @@
-
 #include "Generator.h"
 #include "EmptyCell.h"
 #include "InputCell.h"

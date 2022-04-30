@@ -1,7 +1,5 @@
-
-
-#ifndef KAKUROTEST_BLOCK_H
-#define KAKUROTEST_BLOCK_H
+#ifndef BOARDGENERATIONFIRSTTRY_BLOCK_H
+#define BOARDGENERATIONFIRSTTRY_BLOCK_H
 
 #include "EmptyCell.h"
 
@@ -18,4 +16,4 @@ public:
     Block();
 };
 
-#endif //KAKUROTEST_BLOCK_H
+#endif //BOARDGENERATIONFIRSTTRY_BLOCK_H

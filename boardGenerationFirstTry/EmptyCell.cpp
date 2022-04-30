@@ -1,5 +1,3 @@
-
-
 #include "EmptyCell.h"
 
 std::string EmptyCell::getCellStr() const {

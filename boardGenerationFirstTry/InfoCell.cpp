@@ -1,5 +1,3 @@
-
-
 #include "InfoCell.h"
 
 InfoCell::InfoCell() {

@@ -1,5 +1,3 @@
-
-
 #include <vector>
 #include <algorithm>
 #include "Generator.h"

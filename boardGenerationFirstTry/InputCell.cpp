@@ -1,5 +1,3 @@
-
-
 #include "InputCell.h"
 
 InputCell::InputCell() {

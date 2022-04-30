@@ -1,5 +1,3 @@
-
-
 #include <iostream>
 #include "Board.h"
 #include "InfoCell.h"
