@@ -1,10 +1,9 @@
-#include <iostream>
-#include <string>
-
+#include <algorithm>
 #include "Generator.h"
 
 
 int main() {
-    Generator::generateAndPrint();
+    auto board = Generator::generate(10, 10, 1);
+    Board::print(board);
     return 0;
 }

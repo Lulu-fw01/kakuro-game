@@ -1,10 +1,5 @@
-//
-// Created by luka on 05.04.2022.
-//
-
 #ifndef BOARDGENERATIONFIRSTTRY_GENERATOR_H
 #define BOARDGENERATIONFIRSTTRY_GENERATOR_H
-
 
 #include <vector>
 #include <set>
@@ -19,8 +14,9 @@ public:
 
     static void generateAndPrint();
 
-private:
     static int getRandomNum(int min, int max);
+
+private:
 
     static int getNext();
 
@@ -33,7 +29,12 @@ private:
     static void fillPenultimateRow(Board &board, int &infoMissedCount, std::set<int> &hSet);
 
     static void fillPenultimateColumn(Board &board, int &infoMissedCount, std::set<int> &hSet);
-};
 
+    static void fillNumbers(Board &board);
+
+    static void fillSums(Board &board);
+
+    static std::vector<std::vector<Block>> findBlocks(Board &board);
+};
 
 #endif //BOARDGENERATIONFIRSTTRY_GENERATOR_H

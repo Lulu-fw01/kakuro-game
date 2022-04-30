@@ -1,7 +1,3 @@
-//
-// Created by luka on 05.04.2022.
-//
-
 #include "InputCell.h"
 
 InputCell::InputCell() {
@@ -13,7 +9,7 @@ InputCell::InputCell(int value) {
 }
 
 std::string InputCell::getCellStr() const {
-    return '[' + std::to_string(value) + ']';
+    return " [" + std::to_string(value) + "] ";
 }
 
 EmptyCell::Type InputCell::getType() const {

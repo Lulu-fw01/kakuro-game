@@ -1,11 +1,8 @@
-//
-// Created by luka on 21.04.2022.
-//
-
 #include <iostream>
 #include "Board.h"
 #include "InfoCell.h"
 #include "InputCell.h"
+#include "Block.h"
 
 /**
  * @brief Constructor.
@@ -16,7 +13,9 @@
 Board::Board(int height, int width) {
     m_height = height;
     m_width = width;
-    m_cells = std::vector<std::vector<std::shared_ptr<EmptyCell> >> (height, std::vector<std::shared_ptr<EmptyCell>>(width, std::shared_ptr<EmptyCell>()));
+    m_cells = std::vector<std::vector<std::shared_ptr<EmptyCell> >>(height,
+                                                                    std::vector<std::shared_ptr<EmptyCell>>(width,
+                                                                                                            std::shared_ptr<EmptyCell>()));
 }
 
 std::vector<std::vector<std::shared_ptr<EmptyCell>>> Board::getCells() {
@@ -125,9 +124,9 @@ void Board::setCell(int row, int column, EmptyCell::Type type) {
  * */
 void Board::print(const Board &board) {
     for (const auto &i: board.m_cells) {
-        for (const auto& j: i) {
+        for (const auto &j: i) {
             if (j->getType() == EmptyCell::Type::TYPE_INFO) {
-                std::cout << "\033[31m"<< j->getCellStr() <<"\033[0m ";
+                std::cout << "\033[31m" << j->getCellStr() << "\033[0m ";
             } else {
                 std::cout << j->getCellStr() << " ";
             }
@@ -136,14 +135,6 @@ void Board::print(const Board &board) {
     }
     std::cout << std::endl;
 
-}
-
-Board::~Board() {
-    /*for (auto i: m_cells) {
-        for (int j = 0; j < m_width; ++j) {
-            delete i[j];
-        }
-    }*/
 }
 
 /**
@@ -155,3 +146,83 @@ Board::~Board() {
 EmptyCell::Type Board::getCellType(int row, int column) const {
     return m_cells[row][column]->getType();
 }
+
+void Board::setIndexes() {
+    for (int i = 0; i < m_height; ++i) {
+        for (int j = 0; j < m_width; ++j) {
+            m_cells[i][j]->m_rowNumber = i;
+            m_cells[i][j]->m_columnNumber = j;
+        }
+    }
+}
+
+
+
+/*std::vector<std::vector<Block>> Board::findBlocks() {
+    std::vector<std::vector<Block>> numbers(m_height);
+    for (int i = 0; i < m_height; ++i) {
+        numbers[i] = std::vector<Block>(m_width);
+    }
+    for (int i = 0; i < m_height; ++i) {
+        for (int j = 0; j < m_width; ++j) {
+            if (m_cells[i][j]->getType() == EmptyCell::Type::TYPE_INPUT) {
+                Block block = Block(i, j);
+                // horizontal
+                // right
+                for (int k = j; k < m_width; ++k) {
+                    if (m_cells[i][k]->getType() != EmptyCell::Type::TYPE_INPUT) {
+                        break;
+                    } else {
+                        if (k != j) {
+                            block.m_numberOfCells++;
+                            block.m_numberOfHorizontalCells++;
+                            block.m_horizontalCells.push_back(m_cells[i][k]);
+                        }
+                    }
+                }
+                // left
+                for (int k = j; k >= 0; --k) {
+                    if (m_cells[i][k]->getType() != EmptyCell::Type::TYPE_INPUT) {
+                        break;
+                    } else {
+                        if (k != j) {
+                            block.m_numberOfCells++;
+                            block.m_numberOfHorizontalCells++;
+                            block.m_horizontalCells.push_back(m_cells[i][k]);
+                        }
+                    }
+                }
+                // vertical
+                // down
+                for (int k = i; k < m_height; ++k) {
+                    if (m_cells[k][j]->getType() != EmptyCell::Type::TYPE_INPUT) {
+                        break;
+                    } else {
+                        if (k != i) {
+                            block.m_numberOfCells++;
+                            block.m_numberOfVerticalCells++;
+                            block.m_verticalCells.push_back(m_cells[k][j]);
+                        }
+                    }
+                }
+                // up
+                for (int k = i; k >= 0; --k) {
+                    if (m_cells[k][j]->getType() != EmptyCell::Type::TYPE_INPUT) {
+                        break;
+                    } else {
+                        if (k != i) {
+                            block.m_numberOfCells++;
+                            block.m_numberOfVerticalCells++;
+                            block.m_verticalCells.push_back(m_cells[k][j]);
+                        }
+                    }
+                }
+                numbers[i][j] = block;
+            }
+            else {
+                numbers[i][j].m_currentRow = -1;
+            }
+        }
+    }
+    return numbers;
+}*/

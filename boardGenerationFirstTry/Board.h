@@ -1,14 +1,9 @@
-//
-// Created by luka on 21.04.2022.
-//
-
 #ifndef BOARDGENERATIONFIRSTTRY_BOARD_H
 #define BOARDGENERATIONFIRSTTRY_BOARD_H
 
-
 #include <vector>
 #include <memory>
-
+#include "Block.h"
 #include "EmptyCell.h"
 
 class Board {
@@ -35,7 +30,9 @@ public:
 
     EmptyCell::Type getCellType(int row, int column) const;
 
-    ~Board();
+    void setIndexes();
+
+    std::vector<std::vector<Block>> findBlocks();
 
 private:
     std::vector<std::vector<std::shared_ptr<EmptyCell>>> m_cells;
@@ -44,6 +41,5 @@ private:
 
     bool checkUpLeft(int row, int column) const;
 };
-
 
 #endif //BOARDGENERATIONFIRSTTRY_BOARD_H
