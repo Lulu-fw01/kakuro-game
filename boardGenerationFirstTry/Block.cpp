@@ -14,12 +14,14 @@ Block::Block(int numberOfCellsH, int numberOfCellsV, int i, int j) {
     m_currentRow = i;
     m_currentColumn = j;
 }
+
 Block::Block(int i, int j) {
     m_currentRow = i;
     m_currentColumn = j;
     this->m_numberOfHorizontalCells = 0;
     this->m_numberOfVerticalCells = 0;
 }
+
 Block::Block() {
     m_currentRow = -1;
 }

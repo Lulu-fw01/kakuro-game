@@ -9,9 +9,13 @@ class InfoCell : public EmptyCell {
 public:
     int horizontalSum;
     int verticalSum;
+
     InfoCell();
+
     InfoCell(int hSum, int vSum);
-    std::string getCellStr() const override ;
+
+    std::string getCellStr() const override;
+
     Type getType() const override;
 };
 

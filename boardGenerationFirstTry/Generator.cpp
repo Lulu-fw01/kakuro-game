@@ -58,6 +58,7 @@ void Generator::createPattern(Board &board) {
     }
 
     addInfoCells(board);
+    // TODO try to add empty cells while add info cells.
     addEmptyCells(board);
 }
 
@@ -350,11 +351,11 @@ void Generator::fillSums(Board &board) {
             if (board.getCells()[i][j]->getType() == EmptyCell::Type::TYPE_INFO) {
                 // horizontal
                 // right
-                int horizontal_sum = 0, vertical_sum = 0;
+                int horizontalSum = 0, verticalSum = 0;
                 for (int k = j; k < board.getHeight(); ++k) {
                     if (k != j) {
                         if (board.getCells()[i][k]->getType() == EmptyCell::Type::TYPE_INPUT) {
-                            horizontal_sum += std::static_pointer_cast<InputCell>(board.getCells()[i][k])->value;
+                            horizontalSum += std::static_pointer_cast<InputCell>(board.getCells()[i][k])->value;
                         } else {
                             break;
                         }
@@ -365,14 +366,14 @@ void Generator::fillSums(Board &board) {
                 for (int k = i; k < board.getWidth(); ++k) {
                     if (k != i) {
                         if (board.getCells()[k][j]->getType() == EmptyCell::Type::TYPE_INPUT) {
-                            vertical_sum += std::static_pointer_cast<InputCell>(board.getCells()[k][j])->value;
+                            verticalSum += std::static_pointer_cast<InputCell>(board.getCells()[k][j])->value;
                         } else {
                             break;
                         }
                     }
                 }
-                std::static_pointer_cast<InfoCell>(board.getCells()[i][j])->horizontalSum = horizontal_sum;
-                std::static_pointer_cast<InfoCell>(board.getCells()[i][j])->verticalSum = vertical_sum;
+                std::static_pointer_cast<InfoCell>(board.getCells()[i][j])->horizontalSum = horizontalSum;
+                std::static_pointer_cast<InfoCell>(board.getCells()[i][j])->verticalSum = verticalSum;
             }
         }
     }

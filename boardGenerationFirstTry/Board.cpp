@@ -15,7 +15,9 @@
 Board::Board(int height, int width) {
     m_height = height;
     m_width = width;
-    m_cells = std::vector<std::vector<std::shared_ptr<EmptyCell> >> (height, std::vector<std::shared_ptr<EmptyCell>>(width, std::shared_ptr<EmptyCell>()));
+    m_cells = std::vector<std::vector<std::shared_ptr<EmptyCell> >>(height,
+                                                                    std::vector<std::shared_ptr<EmptyCell>>(width,
+                                                                                                            std::shared_ptr<EmptyCell>()));
 }
 
 std::vector<std::vector<std::shared_ptr<EmptyCell>>> Board::getCells() {
@@ -124,9 +126,9 @@ void Board::setCell(int row, int column, EmptyCell::Type type) {
  * */
 void Board::print(const Board &board) {
     for (const auto &i: board.m_cells) {
-        for (const auto& j: i) {
+        for (const auto &j: i) {
             if (j->getType() == EmptyCell::Type::TYPE_INFO) {
-                std::cout << "\033[31m"<< j->getCellStr() <<"\033[0m ";
+                std::cout << "\033[31m" << j->getCellStr() << "\033[0m ";
             } else {
                 std::cout << j->getCellStr() << " ";
             }
@@ -135,14 +137,6 @@ void Board::print(const Board &board) {
     }
     std::cout << std::endl;
 
-}
-
-Board::~Board() {
-    /*for (auto m_rowNumber: m_cells) {
-        for (int m_columnNumber = 0; m_columnNumber < m_width; ++m_columnNumber) {
-            delete m_rowNumber[m_columnNumber];
-        }
-    }*/
 }
 
 /**

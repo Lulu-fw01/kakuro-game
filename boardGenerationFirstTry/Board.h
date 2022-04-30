@@ -32,14 +32,11 @@ public:
 
     EmptyCell::Type getCellType(int row, int column) const;
 
-    ~Board();
-
     void setIndexes();
 
     std::vector<std::vector<Block>> findBlocks();
 
 private:
-    // TODO use shared pointer.
     std::vector<std::vector<std::shared_ptr<EmptyCell>>> m_cells;
     int m_height;
     int m_width;
