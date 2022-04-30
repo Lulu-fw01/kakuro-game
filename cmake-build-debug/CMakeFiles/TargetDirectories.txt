@@ -1,0 +1,3 @@
+/Users/barbararozenko/CLionProjects/kakuroTest/cmake-build-debug/CMakeFiles/rebuild_cache.dir
+/Users/barbararozenko/CLionProjects/kakuroTest/cmake-build-debug/CMakeFiles/edit_cache.dir
+/Users/barbararozenko/CLionProjects/kakuroTest/cmake-build-debug/CMakeFiles/kakuroTest.dir
