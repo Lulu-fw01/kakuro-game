@@ -1,3 +1,0 @@
-/home/luka/git/kakuro-game/kakuro_game/android/app/.cxx/cmake/debug/armeabi-v7a/CMakeFiles/rebuild_cache.dir
-/home/luka/git/kakuro-game/kakuro_game/android/app/.cxx/cmake/debug/armeabi-v7a/CMakeFiles/edit_cache.dir
-/home/luka/git/kakuro-game/kakuro_game/android/app/.cxx/cmake/debug/armeabi-v7a/CMakeFiles/kakuro_native_api.dir

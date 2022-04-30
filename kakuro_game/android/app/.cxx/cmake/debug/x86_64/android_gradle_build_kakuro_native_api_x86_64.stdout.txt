@@ -1,2 +1,0 @@
-ninja: Entering directory `/home/luka/git/kakuro-game/kakuro_game/android/app/.cxx/cmake/debug/x86_64'
-ninja: no work to do.

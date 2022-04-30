@@ -1,7 +1,0 @@
-# ninja log v5
-0	622	1651273229	CMakeFiles/kakuro_native_api.dir/kakuroApi.cpp.o	4ca6fccd3cc2cf9a
-623	814	1651273229	/home/luka/git/kakuro-game/kakuro_game/build/app/intermediates/cmake/release/obj/x86_64/libkakuro_native_api.so	35fb90c5f41fedf6
-22	768	1651273845	CMakeFiles/kakuro_native_api.dir/kakuroApi.cpp.o	4ca6fccd3cc2cf9a
-768	1879	1651273846	/home/luka/git/kakuro-game/kakuro_game/build/app/intermediates/cmake/release/obj/x86_64/libkakuro_native_api.so	35fb90c5f41fedf6
-23	610	1651274121	CMakeFiles/kakuro_native_api.dir/kakuroApi.cpp.o	4ca6fccd3cc2cf9a
-610	838	1651274121	/home/luka/git/kakuro-game/kakuro_game/build/app/intermediates/cmake/release/obj/x86_64/libkakuro_native_api.so	35fb90c5f41fedf6
