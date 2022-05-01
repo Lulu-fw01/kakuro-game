@@ -32,7 +32,6 @@ public:
 
     void setIndexes();
 
-    std::vector<std::vector<Block>> findBlocks();
 
 private:
     std::vector<std::vector<std::shared_ptr<EmptyCell>>> m_cells;

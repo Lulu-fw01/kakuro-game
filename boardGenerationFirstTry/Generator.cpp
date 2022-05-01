@@ -261,22 +261,7 @@ void Generator::fillNumbers(Board &board) {
                     }
                     bool filled = false;
                     std::vector<int> availableNumbers = findAvailableNumbers(board, i_iter, j_iter);
-                    /*for (int k = 0; k < 9; ++k) {
-                        if (std::static_pointer_cast<InputCell>(board.getCells()[i_iter][j_iter])->innerNumbers[k] == 0) {
-                            availableNumbers.push_back(k);
-                        }
-                    }*/
                     if (!availableNumbers.empty()) {
-                        /*int random_index = getRandomNum(0, availableNumbers.size() - 1);
-                        int index = availableNumbers[random_index];
-                        std::static_pointer_cast<InputCell>(board.getCells()[i_iter][j_iter])->value = index + 1;
-                        std::static_pointer_cast<InputCell>(board.getCells()[i_iter][j_iter])->innerNumbers[index] = 1;
-                        for (int l = 0; l < blocks[i][j].m_numberOfHorizontalCells; ++l) {
-                            std::static_pointer_cast<InputCell>(blocks[i][j].m_horizontalCells[l])->outerNumbers[index] = 1;
-                        }
-                        for (int l = 0; l < blocks[i][j].m_numberOfVerticalCells; ++l) {
-                            std::static_pointer_cast<InputCell>(blocks[i][j].m_verticalCells[l])->outerNumbers[index] = 1;
-                        }*/
                         chooseNumber(blocks, i, j, board, i_iter, j_iter, availableNumbers);
                         filled = true;
                     }
@@ -306,23 +291,7 @@ void Generator::fillNumbers(Board &board) {
 
                     bool filled = false;
                     std::vector<int> availableNumbers = findAvailableNumbers(board, i_iter, j_iter);
-                    /*for (int k = 0; k < 9; ++k) {
-                        if (std::static_pointer_cast<InputCell>(board.getCells()[i_iter][j_iter])->innerNumbers[k] == 0) {
-                            availableNumbers.push_back(k);
-                        }
-                    }*/
-
                     if (!availableNumbers.empty()) {
-                        /*int random_index = getRandomNum(0, availableNumbers.size() - 1);
-                        int index = availableNumbers[random_index];
-                        std::static_pointer_cast<InputCell>(board.getCells()[i_iter][j_iter])->value = index + 1;
-                        std::static_pointer_cast<InputCell>(board.getCells()[i_iter][j_iter])->innerNumbers[index] = 1;
-                        for (int l = 0; l < blocks[i][j].m_numberOfHorizontalCells; ++l) {
-                            std::static_pointer_cast<InputCell>(blocks[i][j].m_horizontalCells[l])->outerNumbers[index] = 1;
-                        }
-                        for (int l = 0; l < blocks[i][j].m_numberOfVerticalCells; ++l) {
-                            std::static_pointer_cast<InputCell>(blocks[i][j].m_verticalCells[l])->outerNumbers[index] = 1;
-                        }*/
                         chooseNumber(blocks, i, j, board, i_iter, j_iter, availableNumbers);
                         filled = true;
                     }
@@ -443,57 +412,7 @@ std::vector<std::vector<Block>> Generator::findBlocks(Board &board) {
         for (int j = 0; j < board.getWidth(); ++j) {
             if (board.getCells()[i][j]->getType() == EmptyCell::Type::TYPE_INPUT) {
                 Block block = Block(i, j);
-                // horizontal
-                // right
-                /*for (int k = j; k < board.getWidth(); ++k) {
-                    if (board.getCells()[i][k]->getType() != EmptyCell::Type::TYPE_INPUT) {
-                        break;
-                    } else {
-                        if (k != j) {
-                            block.m_numberOfCells++;
-                            block.m_numberOfHorizontalCells++;
-                            block.m_horizontalCells.push_back(board.getCells()[i][k]);
-                        }
-                    }
-                }
-                // left
-                for (int k = j; k >= 0; --k) {
-                    if (board.getCells()[i][k]->getType() != EmptyCell::Type::TYPE_INPUT) {
-                        break;
-                    } else {
-                        if (k != j) {
-                            block.m_numberOfCells++;
-                            block.m_numberOfHorizontalCells++;
-                            block.m_horizontalCells.push_back(board.getCells()[i][k]);
-                        }
-                    }
-                }*/
                 findHorizontalCells(block, board, i, j);
-                // vertical
-                // down
-                /*for (int k = i; k < board.getHeight(); ++k) {
-                    if (board.getCells()[k][j]->getType() != EmptyCell::Type::TYPE_INPUT) {
-                        break;
-                    } else {
-                        if (k != i) {
-                            block.m_numberOfCells++;
-                            block.m_numberOfVerticalCells++;
-                            block.m_verticalCells.push_back(board.getCells()[k][j]);
-                        }
-                    }
-                }
-                // up
-                for (int k = i; k >= 0; --k) {
-                    if (board.getCells()[k][j]->getType() != EmptyCell::Type::TYPE_INPUT) {
-                        break;
-                    } else {
-                        if (k != i) {
-                            block.m_numberOfCells++;
-                            block.m_numberOfVerticalCells++;
-                            block.m_verticalCells.push_back(board.getCells()[k][j]);
-                        }
-                    }
-                }*/
                 findVerticalCells(block, board, i, j);
                 blocks[i][j] = block;
             }
