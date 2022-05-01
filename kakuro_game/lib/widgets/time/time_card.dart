@@ -13,26 +13,3 @@ Widget timeCard({required String time}) => Container(
             fontWeight: FontWeight.bold, color: fifthColor, fontSize: 14),
       ),
     );
-
-
-
-/*
-
-Widget timeCard({required String time}) => Column(
-      mainAxisAlignment: MainAxisAlignment.center,
-      children: [
-        Container(
-          padding: const EdgeInsets.all(8),
-          decoration: BoxDecoration(
-              color: buttonColor, 
-              borderRadius: BorderRadius.circular(20)),
-          child: Text(
-            time,
-            style: const TextStyle(
-                fontWeight: FontWeight.bold, color: fifthColor, fontSize: 14),
-          ),
-        ),
-      ],
-    );
-
-*/
