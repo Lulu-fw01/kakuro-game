@@ -4,7 +4,7 @@
 #include <string>
 #include <vector>
 
-class EmptyCell {
+struct EmptyCell {
 public:
     EmptyCell();
 

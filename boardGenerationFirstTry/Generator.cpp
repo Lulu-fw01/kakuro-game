@@ -224,7 +224,7 @@ void Generator::addEmptyCells(Board &board) {
 std::vector<int> findAvailableNumbers(Board &board, int row, int column) {
     std::vector<int> availableNumbers;
     for (int k = 0; k < 9; ++k) {
-        if (std::static_pointer_cast<InputCell>(board.getCells()[row][column])->innerNumbers[k] == 0) {
+        if (std::static_pointer_cast<InputCell>(board.getCells()[row][column])->m_innerNumbers[k] == 0) {
             availableNumbers.push_back(k);
         }
     }
@@ -235,13 +235,13 @@ void chooseNumber(std::vector<std::vector<Block>> &blocks, int blockRowIndex, in
                   Board &board, int cellRowIndex, int cellColumnIndex, std::vector<int> availableNumbers) {
     int random_index = Generator::getRandomNum(0, availableNumbers.size() - 1);
     int index = availableNumbers[random_index];
-    std::static_pointer_cast<InputCell>(board.getCells()[cellRowIndex][cellColumnIndex])->value = index + 1;
-    std::static_pointer_cast<InputCell>(board.getCells()[cellRowIndex][cellColumnIndex])->innerNumbers[index] = 1;
+    std::static_pointer_cast<InputCell>(board.getCells()[cellRowIndex][cellColumnIndex])->m_value = index + 1;
+    std::static_pointer_cast<InputCell>(board.getCells()[cellRowIndex][cellColumnIndex])->m_innerNumbers[index] = 1;
     for (int l = 0; l < blocks[blockRowIndex][blockColumnIndex].m_numberOfHorizontalCells; ++l) {
-        std::static_pointer_cast<InputCell>(blocks[blockRowIndex][blockColumnIndex].m_horizontalCells[l])->outerNumbers[index] = 1;
+        std::static_pointer_cast<InputCell>(blocks[blockRowIndex][blockColumnIndex].m_horizontalCells[l])->m_outerNumbers[index] = 1;
     }
     for (int l = 0; l < blocks[blockRowIndex][blockColumnIndex].m_numberOfVerticalCells; ++l) {
-        std::static_pointer_cast<InputCell>(blocks[blockRowIndex][blockColumnIndex].m_verticalCells[l])->outerNumbers[index] = 1;
+        std::static_pointer_cast<InputCell>(blocks[blockRowIndex][blockColumnIndex].m_verticalCells[l])->m_outerNumbers[index] = 1;
     }
 }
 
@@ -254,10 +254,10 @@ void Generator::fillNumbers(Board &board) {
                 if (rightFilled) {
                     int i_iter = blocks[i][j].m_currentRow;
                     int j_iter = blocks[i][j].m_currentColumn;
-                    if (std::static_pointer_cast<InputCell>(board.getCells()[i_iter][j_iter])->value == 0) {
-                        std::static_pointer_cast<InputCell>(board.getCells()[i_iter][j_iter])->innerNumbers.assign(
-                                std::static_pointer_cast<InputCell>(board.getCells()[i_iter][j_iter])->outerNumbers.begin(),
-                                std::static_pointer_cast<InputCell>(board.getCells()[i_iter][j_iter])->outerNumbers.end());
+                    if (std::static_pointer_cast<InputCell>(board.getCells()[i_iter][j_iter])->m_value == 0) {
+                        std::static_pointer_cast<InputCell>(board.getCells()[i_iter][j_iter])->m_innerNumbers.assign(
+                                std::static_pointer_cast<InputCell>(board.getCells()[i_iter][j_iter])->m_outerNumbers.begin(),
+                                std::static_pointer_cast<InputCell>(board.getCells()[i_iter][j_iter])->m_outerNumbers.end());
                     }
                     bool filled = false;
                     std::vector<int> availableNumbers = findAvailableNumbers(board, i_iter, j_iter);
@@ -266,7 +266,7 @@ void Generator::fillNumbers(Board &board) {
                         filled = true;
                     }
                     if (!filled) {
-                        std::static_pointer_cast<InputCell>(board.getCells()[i_iter][j_iter])->value = 0;
+                        std::static_pointer_cast<InputCell>(board.getCells()[i_iter][j_iter])->m_value = 0;
                         rightFilled = false;
                         if (j == 0) {
                             i--;
@@ -280,14 +280,14 @@ void Generator::fillNumbers(Board &board) {
                 } else {
                     int i_iter = blocks[i][j].m_currentRow;
                     int j_iter = blocks[i][j].m_currentColumn;
-                    int temp_value = std::static_pointer_cast<InputCell>(board.getCells()[i_iter][j_iter])->value - 1;
+                    int temp_value = std::static_pointer_cast<InputCell>(board.getCells()[i_iter][j_iter])->m_value - 1;
                     for (int l = 0; l < blocks[i][j].m_numberOfHorizontalCells; ++l) {
-                        std::static_pointer_cast<InputCell>(blocks[i][j].m_horizontalCells[l])->outerNumbers[temp_value] = 0;
+                        std::static_pointer_cast<InputCell>(blocks[i][j].m_horizontalCells[l])->m_outerNumbers[temp_value] = 0;
                     }
                     for (int l = 0; l < blocks[i][j].m_numberOfVerticalCells; ++l) {
-                        std::static_pointer_cast<InputCell>(blocks[i][j].m_verticalCells[l])->outerNumbers[temp_value] = 0;
+                        std::static_pointer_cast<InputCell>(blocks[i][j].m_verticalCells[l])->m_outerNumbers[temp_value] = 0;
                     }
-                    std::static_pointer_cast<InputCell>(board.getCells()[i_iter][j_iter])->innerNumbers[temp_value] = 1;
+                    std::static_pointer_cast<InputCell>(board.getCells()[i_iter][j_iter])->m_innerNumbers[temp_value] = 1;
 
                     bool filled = false;
                     std::vector<int> availableNumbers = findAvailableNumbers(board, i_iter, j_iter);
@@ -296,7 +296,7 @@ void Generator::fillNumbers(Board &board) {
                         filled = true;
                     }
                     if (!filled) {
-                        std::static_pointer_cast<InputCell>(board.getCells()[i_iter][j_iter])->value = 0;
+                        std::static_pointer_cast<InputCell>(board.getCells()[i_iter][j_iter])->m_value = 0;
                         rightFilled = false;
                         if (j == 0) {
                             i--;
@@ -323,7 +323,7 @@ void Generator::fillSums(Board &board) {
                 for (int k = j; k < board.getHeight(); ++k) {
                     if (k != j) {
                         if (board.getCells()[i][k]->getType() == EmptyCell::Type::TYPE_INPUT) {
-                            horizontalSum += std::static_pointer_cast<InputCell>(board.getCells()[i][k])->value;
+                            horizontalSum += std::static_pointer_cast<InputCell>(board.getCells()[i][k])->m_value;
                         } else {
                             break;
                         }
@@ -334,7 +334,7 @@ void Generator::fillSums(Board &board) {
                 for (int k = i; k < board.getWidth(); ++k) {
                     if (k != i) {
                         if (board.getCells()[k][j]->getType() == EmptyCell::Type::TYPE_INPUT) {
-                            verticalSum += std::static_pointer_cast<InputCell>(board.getCells()[k][j])->value;
+                            verticalSum += std::static_pointer_cast<InputCell>(board.getCells()[k][j])->m_value;
                         } else {
                             break;
                         }

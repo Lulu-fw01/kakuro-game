@@ -3,7 +3,7 @@
 
 #include "EmptyCell.h"
 
-class Block {
+struct Block {
 public:
     int m_numberOfCells = -1, m_numberOfHorizontalCells = 0, m_numberOfVerticalCells = 0;
     std::vector<std::shared_ptr<EmptyCell>> m_horizontalCells, m_verticalCells;

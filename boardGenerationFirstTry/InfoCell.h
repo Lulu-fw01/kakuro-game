@@ -3,7 +3,7 @@
 
 #include "EmptyCell.h"
 
-class InfoCell : public EmptyCell {
+struct InfoCell : public EmptyCell {
 public:
     int horizontalSum;
     int verticalSum;
