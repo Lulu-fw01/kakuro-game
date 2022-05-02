@@ -26,12 +26,11 @@ public:
 
     static void print(const Board &board);
 
-    std::shared_ptr<EmptyCell> getCell(int row, int column);
-
     EmptyCell::Type getCellType(int row, int column) const;
 
     void setIndexes();
 
+    std::string toNativeFormat() const;
 
 private:
     std::vector<std::vector<std::shared_ptr<EmptyCell>>> m_cells;
@@ -39,6 +38,8 @@ private:
     int m_width;
 
     bool checkUpLeft(int row, int column) const;
+
+    std::string cellToNativeFormat(int row, int column) const;
 };
 
 #endif //BOARDGENERATIONFIRSTTRY_BOARD_H

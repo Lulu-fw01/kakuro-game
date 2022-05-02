@@ -155,3 +155,35 @@ void Board::setIndexes() {
         }
     }
 }
+
+/**
+ * @brief This function converts board to string with cells in native format.
+ * */
+std::string Board::toNativeFormat() const {
+    std::string result;
+    for (int i = 0; i < m_height; ++i) {
+        for (int j = 0; j < m_width; ++j) {
+            result += cellToNativeFormat(i, j);
+            if (i != m_height - 1 || j != m_width - 1) {
+                result += " ";
+            }
+        }
+    }
+
+    return result;
+}
+
+std::string Board::cellToNativeFormat(int row, int column) const {
+    switch (m_cells[row][column]->getType()) {
+        case EmptyCell::Type::TYPE_EMPTY:
+            return "emp";
+        case EmptyCell::Type::TYPE_INFO: {
+            auto cell = std::static_pointer_cast<InfoCell>(m_cells[row][column]);
+            return "inf#" + std::to_string(cell->m_verticalSum) + "\\" + std::to_string(cell->m_horizontalSum);
+        }
+        case EmptyCell::Type::TYPE_INPUT: {
+            auto val = std::static_pointer_cast<InputCell>(m_cells[row][column])->m_value;
+            return "inp#" + std::to_string(val);
+        }
+    }
+}
