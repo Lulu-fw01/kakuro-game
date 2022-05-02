@@ -7,34 +7,25 @@
  * @brief generate new kakuro board.
  *
  * */
-Board Generator::generate(int height, int width, int difficulty) {
+Board generation::generate(int height, int width, generation::Difficulty difficulty) {
     std::srand(static_cast<unsigned int>(time(nullptr)));
     // TODO add difficulty.
     // Create empty board.
     Board board(height, width);
-    createPattern(board);
+    createPattern(board, difficulty);
     fillNumbers(board);
     fillSums(board);
 
     return board;
 }
 
-/**
- * @brief Temporary method for generating and printing board.
- * */
-void Generator::generateAndPrint() {
-    auto board = generate(10, 10, 1);
-
-    Board::print(board);
-}
-
-int Generator::getRandomNum(int min, int max) {
+int generation::getRandomNum(int min, int max) {
     return min + rand() % (max - min + 1);
 }
 
-int Generator::getNext() {
+int generation::getNext(generation::Difficulty difficulty) {
     // TODO add difficulty.
-    return getRandomNum(3, 9);
+    return getRandomNum(difficulty, 9);
 }
 
 /**
@@ -43,7 +34,7 @@ int Generator::getNext() {
  *
  * @param board kakuro board.
  * */
-void Generator::createPattern(Board &board) {
+void generation::createPattern(Board &board, generation::Difficulty difficulty) {
     board.setCell(0, 0, EmptyCell::Type::TYPE_EMPTY);
 
     // Fill first row with Info cells.
@@ -56,12 +47,12 @@ void Generator::createPattern(Board &board) {
         board.setCell(0, j, EmptyCell::Type::TYPE_INFO);
     }
 
-    addInfoCells(board);
+    addInfoCells(board, difficulty);
     // TODO try to add empty cells while add info cells.
     addEmptyCells(board);
 }
 
-void Generator::fillPenultimateRow(Board &board, int &infoMissedCount, std::set<int> &hSet) {
+void generation::fillPenultimateRow(Board &board, int &infoMissedCount, std::set<int> &hSet, generation::Difficulty difficulty) {
     bool infoNext;
     int next;
     int row = board.getHeight() - 2;
@@ -75,7 +66,7 @@ void Generator::fillPenultimateRow(Board &board, int &infoMissedCount, std::set<
                 infoMissedCount--;
             }
         }
-        next = getNext();
+        next = getNext(difficulty);
         if (hSet.find(next) == hSet.end()) {
             hSet.insert(next);
         } else {
@@ -96,7 +87,7 @@ void Generator::fillPenultimateRow(Board &board, int &infoMissedCount, std::set<
     }
 }
 
-void Generator::fillPenultimateColumn(Board &board, int &infoMissedCount, std::set<int> &hSet) {
+void generation::fillPenultimateColumn(Board &board, int &infoMissedCount, std::set<int> &hSet, generation::Difficulty difficulty) {
     bool infoNext;
     int next;
     int column = board.getWidth() - 2;
@@ -110,7 +101,7 @@ void Generator::fillPenultimateColumn(Board &board, int &infoMissedCount, std::s
                 infoMissedCount--;
             }
         }
-        next = getNext();
+        next = getNext(difficulty);
         if (hSet.find(next) == hSet.end()) {
             hSet.insert(next);
         } else {
@@ -136,7 +127,7 @@ void Generator::fillPenultimateColumn(Board &board, int &infoMissedCount, std::s
  *
  * @param board kakuro board.
  * */
-void Generator::addInfoCells(Board &board) {
+void generation::addInfoCells(Board &board, generation::Difficulty difficulty) {
     int next;
     int infoMissedCount = 0;
     bool infoNext;
@@ -152,7 +143,7 @@ void Generator::addInfoCells(Board &board) {
                     infoMissedCount--;
                 }
             }
-            next = getNext();
+            next = getNext(difficulty);
             if (hSet.find(next) == hSet.end()) {
                 hSet.insert(next);
             } else {
@@ -173,18 +164,18 @@ void Generator::addInfoCells(Board &board) {
 
     int r = getRandomNum(0, 9);
     if (r % 2 == 0) {
-        fillPenultimateRow(board, infoMissedCount, hSet);
-        fillPenultimateColumn(board, infoMissedCount, hSet);
+        fillPenultimateRow(board, infoMissedCount, hSet, difficulty);
+        fillPenultimateColumn(board, infoMissedCount, hSet, difficulty);
     } else {
-        fillPenultimateColumn(board, infoMissedCount, hSet);
-        fillPenultimateRow(board, infoMissedCount, hSet);
+        fillPenultimateColumn(board, infoMissedCount, hSet, difficulty);
+        fillPenultimateRow(board, infoMissedCount, hSet, difficulty);
     }
 }
 
 /**
  * This function change useless InfoCells with EmptyCells.
  * */
-void Generator::addEmptyCells(Board &board) {
+void generation::addEmptyCells(Board &board) {
     int down, right;
     for (int i = 0; i < board.getHeight(); i++) {
         for (int j = 0; j < board.getWidth(); j++) {
@@ -250,7 +241,7 @@ std::vector<int> findAvailableNumbers(Board &board, int row, int column) {
  */
 void chooseNumber(std::vector<std::vector<Block>> &blocks, int blockRowIndex, int blockColumnIndex,
                   Board &board, int cellRowIndex, int cellColumnIndex, std::vector<int> availableNumbers) {
-    int randomIndex = Generator::getRandomNum(0, availableNumbers.size() - 1);
+    int randomIndex = generation::getRandomNum(0, availableNumbers.size() - 1);
     int index = availableNumbers[randomIndex];
     std::static_pointer_cast<InputCell>(board.getCells()[cellRowIndex][cellColumnIndex])->m_value = index + 1;
     std::static_pointer_cast<InputCell>(board.getCells()[cellRowIndex][cellColumnIndex])->m_innerNumbers[index] = 1;
@@ -266,7 +257,7 @@ void chooseNumber(std::vector<std::vector<Block>> &blocks, int blockRowIndex, in
  * @brief function to fill kakuro board with numbers.
  * @param board kakuro board.
  */
-void Generator::fillNumbers(Board &board) {
+void generation::fillNumbers(Board &board) {
     auto blocks = findBlocks(board);
     bool rightFilled = true;
     for (int i = 0; i < board.getHeight(); ++i) {
@@ -338,7 +329,7 @@ void Generator::fillNumbers(Board &board) {
  * @brief function to fill kakuro board with sums in info cells.
  * @param board kakuro board.
  */
-void Generator::fillSums(Board &board) {
+void generation::fillSums(Board &board) {
     for (int i = 0; i < board.getWidth(); ++i) {
         for (int j = 0; j < board.getHeight(); ++j) {
             if (board.getCellType(i, j) == EmptyCell::Type::TYPE_INFO) {
@@ -447,7 +438,7 @@ void findVerticalCells(Block &block, Board &board, int rowIndex, int columnNumbe
  * @param board kakuro board.
  * @return vector of blocks.
  */
-std::vector<std::vector<Block>> Generator::findBlocks(Board &board) {
+std::vector<std::vector<Block>> generation::findBlocks(Board &board) {
     std::vector<std::vector<Block>> blocks(board.getHeight());
     for (int i = 0; i < board.getHeight(); ++i) {
         blocks[i] = std::vector<Block>(board.getWidth());

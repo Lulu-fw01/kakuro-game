@@ -1,9 +1,8 @@
-#include <algorithm>
 #include "Generator.h"
 
 
 int main() {
-    auto board = Generator::generate(10, 10, 1);
+    auto board = generation::generate(10, 10, generation::DIFFICULTY_MEDIUM);
     Board::print(board);
     return 0;
 }

@@ -7,34 +7,39 @@
 #include "EmptyCell.h"
 #include "Board.h"
 
-class Generator {
-public:
+namespace generation {
 
-    static Board generate(int height, int width, int difficulty);
+    /**
+     * Difficulty of the field.
+     * */
+    enum Difficulty {
+        DIFFICULTY_HARD = 1,
+        DIFFICULTY_MEDIUM,
+        DIFFICULTY_EASY,
+        DIFFICULTY_BEGINNER
+    };
 
-    static void generateAndPrint();
+    Board generate(int height, int width, generation::Difficulty difficulty);
 
-    static int getRandomNum(int min, int max);
+    int getRandomNum(int min, int max);
 
-private:
+    int getNext(generation::Difficulty difficulty);
 
-    static int getNext();
+    void createPattern(Board &board, generation::Difficulty difficulty);
 
-    static void createPattern(Board &board);
+    void addInfoCells(Board &board, generation::Difficulty difficulty);
 
-    static void addInfoCells(Board &board);
+    void addEmptyCells(Board &board);
 
-    static void addEmptyCells(Board &board);
+    void fillPenultimateRow(Board &board, int &infoMissedCount, std::set<int> &hSet, generation::Difficulty difficulty);
 
-    static void fillPenultimateRow(Board &board, int &infoMissedCount, std::set<int> &hSet);
+    void fillPenultimateColumn(Board &board, int &infoMissedCount, std::set<int> &hSet, generation::Difficulty difficulty);
 
-    static void fillPenultimateColumn(Board &board, int &infoMissedCount, std::set<int> &hSet);
+    void fillNumbers(Board &board);
 
-    static void fillNumbers(Board &board);
+    void fillSums(Board &board);
 
-    static void fillSums(Board &board);
-
-    static std::vector<std::vector<Block>> findBlocks(Board &board);
+    std::vector<std::vector<Block>> findBlocks(Board &board);
 };
 
 #endif //BOARDGENERATIONFIRSTTRY_GENERATOR_H
