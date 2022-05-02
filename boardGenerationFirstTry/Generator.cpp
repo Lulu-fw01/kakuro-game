@@ -221,6 +221,13 @@ void Generator::addEmptyCells(Board &board) {
 
 }
 
+/**
+ * @brief function to find available numbers to put into cell.
+ * @param board kakuro board.
+ * @param row index of row.
+ * @param column index of column.
+ * @return vector with available numbers.
+ */
 std::vector<int> findAvailableNumbers(Board &board, int row, int column) {
     std::vector<int> availableNumbers;
     for (int k = 0; k < 9; ++k) {
@@ -231,10 +238,20 @@ std::vector<int> findAvailableNumbers(Board &board, int row, int column) {
     return availableNumbers;
 }
 
+/**
+ * @brief function to set a number into cell and mark it in vectors.
+ * @param blocks blocks of cells.
+ * @param blockRowIndex row index in blocks of cell the number is put.
+ * @param blockColumnIndex column index in blocks of cell the number is put.
+ * @param board kakuro board.
+ * @param cellRowIndex row index in board of cell the number is put.
+ * @param cellColumnIndex column index in board of cell the number is put.
+ * @param availableNumbers vector of available numbers.
+ */
 void chooseNumber(std::vector<std::vector<Block>> &blocks, int blockRowIndex, int blockColumnIndex,
                   Board &board, int cellRowIndex, int cellColumnIndex, std::vector<int> availableNumbers) {
-    int random_index = Generator::getRandomNum(0, availableNumbers.size() - 1);
-    int index = availableNumbers[random_index];
+    int randomIndex = Generator::getRandomNum(0, availableNumbers.size() - 1);
+    int index = availableNumbers[randomIndex];
     std::static_pointer_cast<InputCell>(board.getCells()[cellRowIndex][cellColumnIndex])->m_value = index + 1;
     std::static_pointer_cast<InputCell>(board.getCells()[cellRowIndex][cellColumnIndex])->m_innerNumbers[index] = 1;
     for (int l = 0; l < blocks[blockRowIndex][blockColumnIndex].m_numberOfHorizontalCells; ++l) {
@@ -245,6 +262,10 @@ void chooseNumber(std::vector<std::vector<Block>> &blocks, int blockRowIndex, in
     }
 }
 
+/**
+ * @brief function to fill kakuro board with numbers.
+ * @param board kakuro board.
+ */
 void Generator::fillNumbers(Board &board) {
     auto blocks = findBlocks(board);
     bool rightFilled = true;
@@ -313,6 +334,10 @@ void Generator::fillNumbers(Board &board) {
     }
 }
 
+/**
+ * @brief function to fill kakuro board with sums in info cells.
+ * @param board kakuro board.
+ */
 void Generator::fillSums(Board &board) {
     for (int i = 0; i < board.getWidth(); ++i) {
         for (int j = 0; j < board.getHeight(); ++j) {
@@ -340,13 +365,20 @@ void Generator::fillSums(Board &board) {
                         }
                     }
                 }
-                std::static_pointer_cast<InfoCell>(board.getCells()[i][j])->horizontalSum = horizontalSum;
-                std::static_pointer_cast<InfoCell>(board.getCells()[i][j])->verticalSum = verticalSum;
+                std::static_pointer_cast<InfoCell>(board.getCells()[i][j])->m_horizontalSum = horizontalSum;
+                std::static_pointer_cast<InfoCell>(board.getCells()[i][j])->m_verticalSum = verticalSum;
             }
         }
     }
 }
 
+/**
+ * @brief function to find cells in the same row block as the given one.
+ * @param block block for the given cell.
+ * @param board kakuro board.
+ * @param rowIndex index of row.
+ * @param columnNumber index of column.
+ */
 void findHorizontalCells(Block &block, Board &board, int rowIndex, int columnNumber) {
     // horizontal
     // right
@@ -375,6 +407,13 @@ void findHorizontalCells(Block &block, Board &board, int rowIndex, int columnNum
     }
 }
 
+/**
+ * @brief function to find cells in the same column block as the given one.
+ * @param block block for the given cell.
+ * @param board kakuro board.
+ * @param rowIndex index of row.
+ * @param columnNumber index of column.
+ */
 void findVerticalCells(Block &block, Board &board, int rowIndex, int columnNumber) {
     // vertical
     // down
@@ -403,6 +442,11 @@ void findVerticalCells(Block &block, Board &board, int rowIndex, int columnNumbe
     }
 }
 
+/**
+ * @brief function to find cells in the same blocks as another cell.
+ * @param board kakuro board.
+ * @return vector of blocks.
+ */
 std::vector<std::vector<Block>> Generator::findBlocks(Board &board) {
     std::vector<std::vector<Block>> blocks(board.getHeight());
     for (int i = 0; i < board.getHeight(); ++i) {

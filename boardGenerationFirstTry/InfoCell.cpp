@@ -1,28 +1,28 @@
 #include "InfoCell.h"
 
 InfoCell::InfoCell() {
-    horizontalSum = 0;
-    verticalSum = 0;
+    m_horizontalSum = 0;
+    m_verticalSum = 0;
 }
 
 InfoCell::InfoCell(int hSum, int vSum) {
-    horizontalSum = hSum;
-    verticalSum = vSum;
+    m_horizontalSum = hSum;
+    m_verticalSum = vSum;
 }
 
 std::string InfoCell::getCellStr() const {
-    if (verticalSum <= 10 || horizontalSum < 10) {
-        if (verticalSum <= 10 && horizontalSum < 10) {
-            return " " + std::to_string(verticalSum) + "\\" + std::to_string(horizontalSum) + " ";
+    if (m_verticalSum <= 10 || m_horizontalSum < 10) {
+        if (m_verticalSum <= 10 && m_horizontalSum < 10) {
+            return " " + std::to_string(m_verticalSum) + "\\" + std::to_string(m_horizontalSum) + " ";
         } else {
-            if (verticalSum <= 10) {
-                return " " + std::to_string(verticalSum) + "\\" + std::to_string(horizontalSum);
+            if (m_verticalSum <= 10) {
+                return " " + std::to_string(m_verticalSum) + "\\" + std::to_string(m_horizontalSum);
             } else {
-                return std::to_string(verticalSum) + "\\" + std::to_string(horizontalSum) + " ";
+                return std::to_string(m_verticalSum) + "\\" + std::to_string(m_horizontalSum) + " ";
             }
         }
     } else {
-        return std::to_string(verticalSum) + "\\" + std::to_string(horizontalSum);
+        return std::to_string(m_verticalSum) + "\\" + std::to_string(m_horizontalSum);
     }
 }
 

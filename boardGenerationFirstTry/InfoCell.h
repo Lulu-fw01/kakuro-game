@@ -5,8 +5,8 @@
 
 struct InfoCell : public EmptyCell {
 public:
-    int horizontalSum;
-    int verticalSum;
+    int m_horizontalSum;
+    int m_verticalSum;
 
     InfoCell();
 
