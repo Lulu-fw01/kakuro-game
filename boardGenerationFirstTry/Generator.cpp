@@ -341,13 +341,13 @@ void Generator::fillNumbers(Board &board) {
 void Generator::fillSums(Board &board) {
     for (int i = 0; i < board.getWidth(); ++i) {
         for (int j = 0; j < board.getHeight(); ++j) {
-            if (board.getCells()[i][j]->getType() == EmptyCell::Type::TYPE_INFO) {
+            if (board.getCellType(i, j) == EmptyCell::Type::TYPE_INFO) {
                 // horizontal
                 // right
                 int horizontalSum = 0, verticalSum = 0;
                 for (int k = j; k < board.getHeight(); ++k) {
                     if (k != j) {
-                        if (board.getCells()[i][k]->getType() == EmptyCell::Type::TYPE_INPUT) {
+                        if (board.getCellType(i, k) == EmptyCell::Type::TYPE_INPUT) {
                             horizontalSum += std::static_pointer_cast<InputCell>(board.getCells()[i][k])->m_value;
                         } else {
                             break;
@@ -358,7 +358,7 @@ void Generator::fillSums(Board &board) {
                 // down
                 for (int k = i; k < board.getWidth(); ++k) {
                     if (k != i) {
-                        if (board.getCells()[k][j]->getType() == EmptyCell::Type::TYPE_INPUT) {
+                        if (board.getCellType(k, j) == EmptyCell::Type::TYPE_INPUT) {
                             verticalSum += std::static_pointer_cast<InputCell>(board.getCells()[k][j])->m_value;
                         } else {
                             break;
@@ -383,7 +383,7 @@ void findHorizontalCells(Block &block, Board &board, int rowIndex, int columnNum
     // horizontal
     // right
     for (int k = columnNumber; k < board.getWidth(); ++k) {
-        if (board.getCells()[rowIndex][k]->getType() != EmptyCell::Type::TYPE_INPUT) {
+        if (board.getCellType(rowIndex, k) != EmptyCell::Type::TYPE_INPUT) {
             break;
         } else {
             if (k != columnNumber) {
@@ -395,7 +395,7 @@ void findHorizontalCells(Block &block, Board &board, int rowIndex, int columnNum
     }
     // left
     for (int k = columnNumber; k >= 0; --k) {
-        if (board.getCells()[rowIndex][k]->getType() != EmptyCell::Type::TYPE_INPUT) {
+        if (board.getCellType(rowIndex, k) != EmptyCell::Type::TYPE_INPUT) {
             break;
         } else {
             if (k != columnNumber) {
@@ -418,7 +418,7 @@ void findVerticalCells(Block &block, Board &board, int rowIndex, int columnNumbe
     // vertical
     // down
     for (int k = rowIndex; k < board.getHeight(); ++k) {
-        if (board.getCells()[k][columnNumber]->getType() != EmptyCell::Type::TYPE_INPUT) {
+        if (board.getCellType(k, columnNumber) != EmptyCell::Type::TYPE_INPUT) {
             break;
         } else {
             if (k != rowIndex) {
@@ -430,7 +430,7 @@ void findVerticalCells(Block &block, Board &board, int rowIndex, int columnNumbe
     }
     // up
     for (int k = rowIndex; k >= 0; --k) {
-        if (board.getCells()[k][columnNumber]->getType() != EmptyCell::Type::TYPE_INPUT) {
+        if (board.getCellType(k, columnNumber) != EmptyCell::Type::TYPE_INPUT) {
             break;
         } else {
             if (k != rowIndex) {
@@ -454,7 +454,7 @@ std::vector<std::vector<Block>> Generator::findBlocks(Board &board) {
     }
     for (int i = 0; i < board.getHeight(); ++i) {
         for (int j = 0; j < board.getWidth(); ++j) {
-            if (board.getCells()[i][j]->getType() == EmptyCell::Type::TYPE_INPUT) {
+            if (board.getCellType(i, j) == EmptyCell::Type::TYPE_INPUT) {
                 Block block = Block(i, j);
                 findHorizontalCells(block, board, i, j);
                 findVerticalCells(block, board, i, j);
