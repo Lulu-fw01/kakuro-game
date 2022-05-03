@@ -12,7 +12,7 @@ void main() {
       child: MaterialApp(
         initialRoute: homeRoute,
         routes: {
-          homeRoute: (BuildContext context) => const MenuScreen(),
+          homeRoute: (BuildContext context) => MenuScreen(),
           gameRoute: (BuildContext context) => const GameScreen(),
         },
       )));

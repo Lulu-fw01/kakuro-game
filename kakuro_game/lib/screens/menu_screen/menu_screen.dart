@@ -1,4 +1,3 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:kakuro_game/assets/consts.dart';
 
@@ -7,7 +6,19 @@ import 'package:kakuro_game/assets/consts.dart';
 class MenuScreen extends StatelessWidget {
   final _sizeTextBlack = const TextStyle(fontSize: 20.0, color: buttonContentColor);
 
-  const MenuScreen({Key? key}) : super(key: key);
+  MenuScreen({Key? key}) : super(key: key);
+
+  static const _sizes = ['8', '9', '10', '11', '12', '13', '14', '15'];
+  static const _difficulties = ['Beginner', 'Easy', 'Medium', 'Hard'];
+
+
+  int _heightIndex = 2;
+  int _widthIndex = 2;
+  int _difficultyIndex = 1;
+
+  void _onButtonPlayClicked(BuildContext context) {
+    Navigator.pushNamed(context, gameRoute);
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -37,25 +48,35 @@ class MenuScreen extends StatelessWidget {
                     "Play",
                     style: _sizeTextBlack,
                   ),
-                  onPressed: () {
-                    Navigator.pushNamed(context, gameRoute);
-                    },
+                  onPressed: () => _onButtonPlayClicked(context),
                 )
               ),
               
-              
+              // TODO make more beautiful part with lists.
               Padding(
-                  padding: const EdgeInsets.only(top: 25), 
-                  child: Container(
-                      child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceAround,
+                  padding: const EdgeInsets.only(top: 25),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                          _parameterList("height"),
-                          _parameterList("width"),
-                          _parameterList("difficulty"),
+                  _parameterList(
+                      values: _sizes,
+                      onSelectedItemChanged: (int index) =>
+                          {_heightIndex = index},
+                      label: 'height'),
+                      const SizedBox(width: 25),
+                  _parameterList(
+                      values: _sizes,
+                      onSelectedItemChanged: (int index) =>
+                          {_widthIndex = index},
+                      label: "width"),
                     ],
-                  ))),
-                      
+                  )),
+
+              Padding(
+                padding: const EdgeInsets.only(top: 25),
+                child:
+                    _parameterList(values: _difficulties, label: 'difficulty'),
+              ),        
                     
               Padding(
                 padding: const EdgeInsets.only(top: 25.0),
@@ -76,42 +97,50 @@ class MenuScreen extends StatelessWidget {
       );
   }
 
-  // TODO add list of values in parameters, add function in parameters.
-  // TODO use ListWheelScrollView.useDelegate
-  Widget _parameterList([String label = ""]) => Container(
-    decoration: BoxDecoration(border: Border.all(width: 3, color: fourthColor),
+  Widget _parameterList(
+          {required List<String> values,
+          void Function(int)? onSelectedItemChanged,
+          String label = ""}) =>
+      Container(
+          decoration: BoxDecoration(
+              border: Border.all(width: 3, color: fourthColor),
               borderRadius: const BorderRadius.all(Radius.circular(4))),
-    child:
-      Column(mainAxisAlignment: MainAxisAlignment.spaceAround, children: [
-        SizedBox(
-          height: 70,
-          width: 60,
-          child: ListWheelScrollView(
-            useMagnifier: true,
-            magnification: 1.7,
-            diameterRatio: 1,
-            squeeze: 1.8,
-            itemExtent: 50,
-            physics: const FixedExtentScrollPhysics(),
-            children: [
-              _listValue(value: "9"),
-              _listValue(value: "10"),
-              _listValue(value: "11"),
-              _listValue(value: "12"),
-              _listValue(value: "13"),
-            ],
-          ),
-        ),
-        Padding(padding: const EdgeInsets.only(bottom: 8), child: 
-        Text(label, style: const TextStyle(fontSize: 14)),)
-      ]));
+          child: Column(
+              mainAxisAlignment: MainAxisAlignment.spaceAround,
+              children: [
+                SizedBox(
+                  height: 70,
+                  width: values[0].length > 2 ? 150 : 60,
+                  child: ListWheelScrollView.useDelegate(
+                    useMagnifier: true,
+                    magnification: 1.7,
+                    diameterRatio: 1,
+                    squeeze: 1.8,
+                    itemExtent: 50,
+                    physics: const FixedExtentScrollPhysics(),
+                    childDelegate: ListWheelChildBuilderDelegate(
+                        childCount: values.length,
+                        builder: (BuildContext context, int index) {
+                          if (index < 0 || index > values.length) {
+                            return null;
+                          }
+                          return _listSizeValue(value: values[index]);
+                        }),
+                    onSelectedItemChanged: onSelectedItemChanged,
+                  ),
+                ),
+                Padding(
+                  padding: const EdgeInsets.only(bottom: 8),
+                  child: Text(label, style: const TextStyle(fontSize: 14)),
+                )
+              ]));
 
- Widget _listValue({required String value}) => Center(
+  Widget _listSizeValue({required String value}) => Center(
       child: Container(
-          width: 30,
+          width: value.length > 2 ? 60 : 30,
           height: 30,
-          decoration:
-              BoxDecoration(border: Border.all(color: buttonColor, width: 0.7),
+          decoration: BoxDecoration(
+              border: Border.all(color: buttonColor, width: 0.7),
               borderRadius: const BorderRadius.all(Radius.circular(2)),
               color: buttonColor),
           child: Center(
