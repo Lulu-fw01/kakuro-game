@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:kakuro_game/models/field_settings/field_settings.dart';
 import 'package:kakuro_game/models/options_icons.dart';
 import 'package:kakuro_game/providers/stopwatch_notifier.dart';
+import 'package:kakuro_game/screens/menu_screen/menu_screen.dart';
 import 'package:kakuro_game/widgets/options_floating_button/option_button/stopwatch_button.dart';
-import 'package:kakuro_game/widgets/time/time_card.dart';
 import 'package:provider/provider.dart';
 import 'package:kakuro_game/assets/consts.dart';
 import 'package:kakuro_game/utilities/field/field.dart';
@@ -12,12 +13,14 @@ import 'package:kakuro_game/widgets/time/game_stopwatch.dart';
 
 /// Screen with game field.
 class GameScreen extends StatelessWidget {
-  //Field field;
+
+  /// Route of this screen
+  static const routeName = "/game";
 
   const GameScreen({Key? key}) : super(key: key);
 
   void _toMenuScreen(BuildContext context) {
-    Navigator.pushNamed(context, homeRoute);
+    Navigator.pushNamed(context, MenuScreen.routeName);
   }
 
   void _changeStopwatchVisible(StopwatchNotifier notifier) {
@@ -31,7 +34,13 @@ class GameScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    var f = Field.getRandomField(5, 5, 3);
+
+    // Get information about field from the route.
+    final settings = ModalRoute.of(context)!.settings.arguments as FieldSettings;
+
+    var field = Field.getRandomField(settings.height, settings.width, settings.difficulty);
+
+    //var field = Field.getRandomField(5, 5, 3);
 
     // Get notifier about stopwatch visible.
     final notifier = Provider.of<StopwatchNotifier>(context);
@@ -59,7 +68,7 @@ class GameScreen extends StatelessWidget {
                           child: Wrap(
                         direction: Axis.vertical,
                         spacing: 1.5,
-                        children: f.getRows(),
+                        children: field.getRows(),
                       )),
                     )),
                   );

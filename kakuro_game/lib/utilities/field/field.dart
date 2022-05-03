@@ -1,4 +1,6 @@
 
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:kakuro_game/providers/ffi_bridge/ffi_bridge.dart';
 import 'package:kakuro_game/utilities/field/cells/empty_cell.dart';

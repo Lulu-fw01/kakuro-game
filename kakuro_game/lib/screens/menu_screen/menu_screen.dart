@@ -1,27 +1,31 @@
 import 'package:flutter/material.dart';
 import 'package:kakuro_game/assets/consts.dart';
+import 'package:kakuro_game/models/field_settings/field_settings.dart';
+import 'package:kakuro_game/screens/game_screen/game_screen.dart';
 
 
 /// Main menu screen of kakuro-game.
 class MenuScreen extends StatelessWidget {
-  final _sizeTextBlack = const TextStyle(fontSize: 20.0, color: buttonContentColor);
 
-  MenuScreen({Key? key}) : super(key: key);
+  static const routeName = "/home";
+
+  const MenuScreen({Key? key}) : super(key: key);
 
   static const _sizes = ['8', '9', '10', '11', '12', '13', '14', '15'];
   static const _difficulties = ['Beginner', 'Easy', 'Medium', 'Hard'];
 
-
-  int _heightIndex = 2;
-  int _widthIndex = 2;
-  int _difficultyIndex = 1;
-
-  void _onButtonPlayClicked(BuildContext context) {
-    Navigator.pushNamed(context, gameRoute);
+  void _onButtonPlayClicked(BuildContext context, final int _height, final int _width, final int _difficulty) {
+    // TODO uncomment.
+    //Navigator.pushNamed(context, GameScreen.routeName, arguments: FieldSettings(_height, _width, _difficulty));
+    Navigator.pushNamed(context, GameScreen.routeName, arguments: FieldSettings(5, 5, _difficulty));
   }
 
   @override
   Widget build(BuildContext context) {
+    int _heightIndex = 0;
+    int _widthIndex = 0;
+    int _difficultyIndex = 0;
+
     return Scaffold(
         // Background color of the screen.
         backgroundColor: backgroundColor,
@@ -44,11 +48,11 @@ class MenuScreen extends StatelessWidget {
                   // button minimal width.
                   minWidth: 150.0,
                   // Text inside of the button.
-                  child: Text(
+                  child: const Text(
                     "Play",
-                    style: _sizeTextBlack,
+                    style: TextStyle(color: buttonContentColor, fontSize: 20.0),
                   ),
-                  onPressed: () => _onButtonPlayClicked(context),
+                  onPressed: () => _onButtonPlayClicked(context, _heightIndex + 8, _widthIndex + 8, 4 - _difficultyIndex),
                 )
               ),
               
@@ -74,8 +78,11 @@ class MenuScreen extends StatelessWidget {
 
               Padding(
                 padding: const EdgeInsets.only(top: 25),
-                child:
-                    _parameterList(values: _difficulties, label: 'difficulty'),
+                child: _parameterList(
+                    values: _difficulties,
+                    onSelectedItemChanged: (int index) =>
+                        {_difficultyIndex = index},
+                    label: 'difficulty'),
               ),        
                     
               Padding(
@@ -84,9 +91,9 @@ class MenuScreen extends StatelessWidget {
                   color: buttonColor,
                   height: 50.0,
                   minWidth: 150.0,
-                  child: Text(
+                  child: const Text(
                     "Rules",
-                    style: _sizeTextBlack,
+                    style: TextStyle(color: buttonContentColor, fontSize: 20.0),
                   ),
                   onPressed: () {  },
                 )
@@ -99,7 +106,7 @@ class MenuScreen extends StatelessWidget {
 
   Widget _parameterList(
           {required List<String> values,
-          void Function(int)? onSelectedItemChanged,
+          required void Function(int)? onSelectedItemChanged,
           String label = ""}) =>
       Container(
           decoration: BoxDecoration(
@@ -148,4 +155,24 @@ class MenuScreen extends StatelessWidget {
             value,
             style: const TextStyle(color: buttonContentColor, fontSize: 14),
           ))));
+
+
+  Widget _menuScreenButton({String text = "", required void Function()? onClick}) => Padding(
+                // Indent from the top border.
+                padding: const EdgeInsets.only(top: 25.0),
+                child: MaterialButton(
+                  // Button color.
+                  color: buttonColor,
+                  // Button height.
+                  height: 50.0,
+                  // button minimal width.
+                  minWidth: 150.0,
+                  // Text inside of the button.
+                  child: Text(
+                    text,
+                    style: const TextStyle(color: buttonContentColor, fontSize: 20.0),
+                  ),
+                  onPressed: () => onClick,
+                )
+              );
 }
