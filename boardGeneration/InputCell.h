@@ -1,5 +1,5 @@
-#ifndef BOARDGENERATIONFIRSTTRY_INPUTCELL_H
-#define BOARDGENERATIONFIRSTTRY_INPUTCELL_H
+#ifndef BOARDGENERATION_INPUTCELL_H
+#define BOARDGENERATION_INPUTCELL_H
 
 #include "EmptyCell.h"
 #include "vector"
@@ -21,4 +21,4 @@ public:
     std::vector<int> m_outerNumbers = std::vector<int>(9);
 };
 
-#endif //BOARDGENERATIONFIRSTTRY_INPUTCELL_H
+#endif //BOARDGENERATION_INPUTCELL_H

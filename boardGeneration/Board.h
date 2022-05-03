@@ -1,5 +1,5 @@
-#ifndef BOARDGENERATIONFIRSTTRY_BOARD_H
-#define BOARDGENERATIONFIRSTTRY_BOARD_H
+#ifndef BOARDGENERATION_BOARD_H
+#define BOARDGENERATION_BOARD_H
 
 #include <vector>
 #include <memory>
@@ -42,4 +42,4 @@ private:
     std::string cellToNativeFormat(int row, int column) const;
 };
 
-#endif //BOARDGENERATIONFIRSTTRY_BOARD_H
+#endif //BOARDGENERATION_BOARD_H

@@ -1,5 +1,5 @@
-#ifndef BOARDGENERATIONFIRSTTRY_GENERATOR_H
-#define BOARDGENERATIONFIRSTTRY_GENERATOR_H
+#ifndef BOARDGENERATION_GENERATOR_H
+#define BOARDGENERATION_GENERATOR_H
 
 #include <vector>
 #include <set>
@@ -42,4 +42,4 @@ namespace generation {
     std::vector<std::vector<Block>> findBlocks(Board &board);
 };
 
-#endif //BOARDGENERATIONFIRSTTRY_GENERATOR_H
+#endif //BOARDGENERATION_GENERATOR_H
