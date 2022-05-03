@@ -2,11 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:kakuro_game/assets/consts.dart';
 import 'package:kakuro_game/models/field_settings/field_settings.dart';
 import 'package:kakuro_game/screens/game_screen/game_screen.dart';
+import 'dart:developer';
 
 
 /// Main menu screen of kakuro-game.
 class MenuScreen extends StatelessWidget {
-
+  /// Route of this screen.
   static const routeName = "/home";
 
   const MenuScreen({Key? key}) : super(key: key);
@@ -17,6 +18,8 @@ class MenuScreen extends StatelessWidget {
   void _onButtonPlayClicked(BuildContext context, final int _height, final int _width, final int _difficulty) {
     // TODO uncomment.
     //Navigator.pushNamed(context, GameScreen.routeName, arguments: FieldSettings(_height, _width, _difficulty));
+
+    log('Play button click, go to game screen with parameters: height: $_height, width: $_width and difficulty: $_difficulty');
     Navigator.pushNamed(context, GameScreen.routeName, arguments: FieldSettings(5, 5, _difficulty));
   }
 
@@ -36,43 +39,29 @@ class MenuScreen extends StatelessWidget {
             // Button alignment vertically and centered.
             mainAxisAlignment: MainAxisAlignment.center,
             // List of elements inside.
-            children: <Widget> [
-              Padding(
-                // Indent from the top border.
-                padding: const EdgeInsets.only(top: 25.0),
-                child: MaterialButton(
-                  // Button color.
-                  color: buttonColor,
-                  // Button height.
-                  height: 50.0,
-                  // button minimal width.
-                  minWidth: 150.0,
-                  // Text inside of the button.
-                  child: const Text(
-                    "Play",
-                    style: TextStyle(color: buttonContentColor, fontSize: 20.0),
-                  ),
-                  onPressed: () => _onButtonPlayClicked(context, _heightIndex + 8, _widthIndex + 8, 4 - _difficultyIndex),
-                )
-              ),
-              
+            children: <Widget>[
+              _menuScreenButton(
+                  text: 'Play',
+                  onClick: () => _onButtonPlayClicked(context, _heightIndex + 8,
+                      _widthIndex + 8, 4 - _difficultyIndex)),
+
               // TODO make more beautiful part with lists.
               Padding(
                   padding: const EdgeInsets.only(top: 25),
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                  _parameterList(
-                      values: _sizes,
-                      onSelectedItemChanged: (int index) =>
-                          {_heightIndex = index},
-                      label: 'height'),
+                      _parameterList(
+                          values: _sizes,
+                          onSelectedItemChanged: (int index) =>
+                              {_heightIndex = index},
+                          label: 'height'),
                       const SizedBox(width: 25),
-                  _parameterList(
-                      values: _sizes,
-                      onSelectedItemChanged: (int index) =>
-                          {_widthIndex = index},
-                      label: "width"),
+                      _parameterList(
+                          values: _sizes,
+                          onSelectedItemChanged: (int index) =>
+                              {_widthIndex = index},
+                          label: "width"),
                     ],
                   )),
 
@@ -83,27 +72,16 @@ class MenuScreen extends StatelessWidget {
                     onSelectedItemChanged: (int index) =>
                         {_difficultyIndex = index},
                     label: 'difficulty'),
-              ),        
-                    
-              Padding(
-                padding: const EdgeInsets.only(top: 25.0),
-                child: MaterialButton(
-                  color: buttonColor,
-                  height: 50.0,
-                  minWidth: 150.0,
-                  child: const Text(
-                    "Rules",
-                    style: TextStyle(color: buttonContentColor, fontSize: 20.0),
-                  ),
-                  onPressed: () {  },
-                )
-              )
+              ),
+
+              _menuScreenButton(text: "Rules", onClick: () => {})
             ],
           ),
-        )
-      );
+        ));
   }
 
+  /// Widget which contains [ListWheelScrollView].
+  /// In this widget user can select parameter value.
   Widget _parameterList(
           {required List<String> values,
           required void Function(int)? onSelectedItemChanged,
@@ -156,23 +134,24 @@ class MenuScreen extends StatelessWidget {
             style: const TextStyle(color: buttonContentColor, fontSize: 14),
           ))));
 
-
-  Widget _menuScreenButton({String text = "", required void Function()? onClick}) => Padding(
-                // Indent from the top border.
-                padding: const EdgeInsets.only(top: 25.0),
-                child: MaterialButton(
-                  // Button color.
-                  color: buttonColor,
-                  // Button height.
-                  height: 50.0,
-                  // button minimal width.
-                  minWidth: 150.0,
-                  // Text inside of the button.
-                  child: Text(
-                    text,
-                    style: const TextStyle(color: buttonContentColor, fontSize: 20.0),
-                  ),
-                  onPressed: () => onClick,
-                )
-              );
+  /// Button for menu screen.
+  Widget _menuScreenButton(
+          {String text = "", required void Function()? onClick}) =>
+      Padding(
+          // Indent from the top border.
+          padding: const EdgeInsets.only(top: 25.0),
+          child: MaterialButton(
+            // Button color.
+            color: buttonColor,
+            // Button height.
+            height: 50.0,
+            // button minimal width.
+            minWidth: 150.0,
+            // Text inside of the button.
+            child: Text(
+              text,
+              style: const TextStyle(color: buttonContentColor, fontSize: 20.0),
+            ),
+            onPressed: onClick,
+          ));
 }

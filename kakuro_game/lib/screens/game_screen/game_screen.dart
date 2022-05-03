@@ -40,8 +40,6 @@ class GameScreen extends StatelessWidget {
 
     var field = Field.getRandomField(settings.height, settings.width, settings.difficulty);
 
-    //var field = Field.getRandomField(5, 5, 3);
-
     // Get notifier about stopwatch visible.
     final notifier = Provider.of<StopwatchNotifier>(context);
     

@@ -1,7 +1,9 @@
+import 'dart:developer';
 import 'dart:ffi';
 import 'dart:io';
 import 'package:ffi/ffi.dart';
 
+/// Class which contains functions from native c++ code.
 class FFIBridge {
 
   static final DynamicLibrary _nativeApiLib = Platform.isAndroid
@@ -16,6 +18,7 @@ class FFIBridge {
 
   /// This function calls function from native c++ library.
   static String generateKakuroBoard(int height, int weight, int difficulty) {
+    log('Call native function for generating.');
     Pointer<Utf8> cStrBoard = _generateBoard(height, weight, difficulty);
     
     return cStrBoard.toDartString();
