@@ -3,13 +3,16 @@
 #include "InputCell.h"
 #include "InfoCell.h"
 
+
+int correctRow(Board& board, int row, int column, bool skipPenultimate);
+int correctColumn(Board& board, int row, int column, bool skipPenultimate);
+
 /**
  * @brief generate new kakuro board.
  *
  * */
 Board generation::generate(int height, int width, generation::Difficulty difficulty) {
     std::srand(static_cast<unsigned int>(time(nullptr)));
-    // TODO add difficulty.
     // Create empty board.
     Board board(height, width);
     createPattern(board, difficulty);
@@ -24,7 +27,6 @@ int generation::getRandomNum(int min, int max) {
 }
 
 int generation::getNext(generation::Difficulty difficulty) {
-    // TODO add difficulty.
     return getRandomNum(difficulty, 9);
 }
 
@@ -38,17 +40,12 @@ void generation::createPattern(Board &board, generation::Difficulty difficulty) 
     board.setCell(0, 0, EmptyCell::Type::TYPE_EMPTY);
 
     // Fill first row with Info cells.
-    for (int i = 1; i < board.getHeight(); ++i) {
-        board.setCell(i, 0, EmptyCell::Type::TYPE_INFO);
-    }
-
-    // Fill first column with Info cells.
     for (int j = 1; j < board.getWidth(); ++j) {
         board.setCell(0, j, EmptyCell::Type::TYPE_INFO);
     }
 
     addInfoCells(board, difficulty);
-    // TODO try to add empty cells while add info cells.
+    // TODO later try to add empty cells while add info cells.
     addEmptyCells(board);
 }
 
@@ -57,6 +54,7 @@ void generation::fillPenultimateRow(Board &board, int &infoMissedCount, std::set
     int next;
     int row = board.getHeight() - 2;
     bool valid;
+    int infoRowLength = 0;
     for (int j = 1; j < board.getWidth(); j++) {
         infoNext = false;
         valid = board.isValidUpLeftDown(j);
@@ -83,6 +81,12 @@ void generation::fillPenultimateRow(Board &board, int &infoMissedCount, std::set
 
         if (infoNext) {
             board.setCell(row, j, EmptyCell::Type::TYPE_INFO);
+            infoRowLength = 0;
+        } else {
+            infoRowLength++;
+            if(infoRowLength == 10) {
+                infoRowLength = j - correctRow(board, row, j, false);
+            }
         }
     }
 }
@@ -92,6 +96,7 @@ void generation::fillPenultimateColumn(Board &board, int &infoMissedCount, std::
     int next;
     int column = board.getWidth() - 2;
     bool valid;
+    int infoColumnLength = 0;
     for (int j = 1; j < board.getHeight(); j++) {
         infoNext = false;
         valid = board.isValidUpLeftRight(j);
@@ -118,8 +123,53 @@ void generation::fillPenultimateColumn(Board &board, int &infoMissedCount, std::
 
         if (infoNext) {
             board.setCell(j, column, EmptyCell::Type::TYPE_INFO);
+            infoColumnLength = 0;
+        } else {
+            infoColumnLength++;
+            if (infoColumnLength == 10) {
+                infoColumnLength = j - correctColumn(board, j, column, false);
+            }
         }
     }
+}
+
+int correctColumn(Board& board, int row, int column, bool skipPenultimate) {
+    int startRow = row - 9;
+    std::vector<int> freePositions;
+    for (int i = startRow; i <= row; ++i) {
+        if ((i != board.getHeight() - 2 || !skipPenultimate) && board.isLeftValid(i, column) && board.isHigherValid(i, column) && board.isRightValid(i, column) && board.isBelowValid(i, column)) {
+            freePositions.push_back(i);
+        }
+    }
+
+    int ind;
+    if (freePositions.empty()) {
+        ind = generation::getRandomNum(startRow, row);
+    } else {
+        ind = freePositions[generation::getRandomNum(0, freePositions.size() - 1)];
+    }
+    board.setCell(ind, column, EmptyCell::Type::TYPE_INFO);
+    return ind;
+}
+
+// TODO add penultimate row/column flag.
+int correctRow(Board& board, int row, int column, bool skipPenultimate) {
+    int startCol = column - 9;
+    std::vector<int> freePositions;
+    for (int i = startCol; i <= column; ++i) {
+        if ((i != board.getWidth() - 2 || !skipPenultimate) && board.isLeftValid(row, i) && board.isHigherValid(row, i) && board.isRightValid(row, i)) {
+            freePositions.push_back(i);
+        }
+    }
+
+    int ind;
+    if (freePositions.empty()) {
+        ind = generation::getRandomNum(startCol, column);
+    } else {
+        ind = freePositions[generation::getRandomNum(0, freePositions.size() - 1)];
+    }
+    board.setCell(row, ind, EmptyCell::Type::TYPE_INFO);
+    return ind;
 }
 
 /**
@@ -133,7 +183,12 @@ void generation::addInfoCells(Board &board, generation::Difficulty difficulty) {
     bool infoNext;
     std::set<int> hSet;
     bool valid;
+    int infoRowLength;
+
+    std::vector<int> infoColumnLength(board.getWidth(), 0);
     for (int i = 1; i < board.getHeight(); i++) {
+        board.setCell(i, 0, EmptyCell::Type::TYPE_INFO);
+        infoRowLength = 0;
         for (int j = 1; j < board.getWidth(); j++) {
             infoNext = false;
             valid = board.isValidUpLeft(i, j);
@@ -159,6 +214,26 @@ void generation::addInfoCells(Board &board, generation::Difficulty difficulty) {
             }
 
             board.setCell(i, j, infoNext ? EmptyCell::Type::TYPE_INFO : EmptyCell::Type::TYPE_INPUT);
+            if (infoNext) {
+                infoRowLength = 0;
+                infoColumnLength[j] = 0;
+            } else {
+                infoRowLength++;
+                infoColumnLength[j]++;
+                // TODO skip penultimte row/col.
+                if (i != board.getHeight() - 2 && infoRowLength >= 10) {
+                    int changedColNum = correctRow(board, i, j, true);
+                    infoRowLength = j - changedColNum;
+                    infoColumnLength[changedColNum] = 0;
+                }
+                if (j != board.getWidth() - 2 && infoColumnLength[j] >= 10) {
+                    int changedRowNum = correctColumn(board, i, j, true);
+                    infoColumnLength[j] = i - changedRowNum;
+                    if (infoColumnLength[j] == 0) {
+                        infoRowLength = 0;
+                    }
+                }
+            }
         }
     }
 
@@ -208,8 +283,6 @@ void generation::addEmptyCells(Board &board) {
             }
         }
     }
-
-
 }
 
 /**
@@ -294,6 +367,7 @@ void generation::fillNumbers(Board &board) {
                     int j_iter = blocks[i][j].m_currentColumn;
                     int temp_value = std::static_pointer_cast<InputCell>(board.getCells()[i_iter][j_iter])->m_value - 1;
                     for (int l = 0; l < blocks[i][j].m_numberOfHorizontalCells; ++l) {
+                        // TODO sometimes error here.
                         std::static_pointer_cast<InputCell>(blocks[i][j].m_horizontalCells[l])->m_outerNumbers[temp_value] = 0;
                     }
                     for (int l = 0; l < blocks[i][j].m_numberOfVerticalCells; ++l) {

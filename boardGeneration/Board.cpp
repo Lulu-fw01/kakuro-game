@@ -15,7 +15,7 @@ Board::Board(int height, int width) {
     m_width = width;
     m_cells = std::vector<std::vector<std::shared_ptr<EmptyCell> >>(height,
                                                                     std::vector<std::shared_ptr<EmptyCell>>(width,
-                                                                                                            std::shared_ptr<EmptyCell>()));
+                                                                                                            std::make_shared<EmptyCell>()));
 }
 
 std::vector<std::vector<std::shared_ptr<EmptyCell>>> Board::getCells() {
@@ -53,6 +53,82 @@ bool Board::checkUpLeft(int row, int column) const {
             m_cells[prevH][column]->getType() == EmptyCell::Type::TYPE_INPUT) {
             return false;
         }
+    }
+    return true;
+}
+
+/**
+ * @brief Method for checking if cells righter than chosen allow for chosen to be info.
+ *
+ * @param row row number.
+ * @param column column number.
+ * */
+bool Board::isRightValid(int row, int column) const {
+    if (column == m_width - 1) {
+        return true;
+    }
+    if (column == m_width - 2 && (m_cells[row][column + 1] == nullptr || getCellType(row, column + 1) == EmptyCell::Type::TYPE_INPUT)) {
+        return false;
+    }
+    if (m_cells[row][column + 1] == nullptr) {
+        return true;
+    }
+    if (getCellType(row, column + 1) == EmptyCell::Type::TYPE_INPUT && getCellType(row, column + 2) != EmptyCell::Type::TYPE_INPUT) {
+        return false;
+    }
+    return true;
+}
+
+/**
+ * @brief Method for checking if cells lefter than chosen allow for chosen to be info.
+ *
+ * @param row row number.
+ * @param column column number.
+ * */
+bool Board::isLeftValid(int row, int column) const {
+    if (column == 0 || column == 1) {
+        return true;
+    }
+    if (getCellType(row, column - 1) == EmptyCell::Type::TYPE_INPUT && getCellType(row, column - 2) != EmptyCell::Type::TYPE_INPUT) {
+        return false;
+    }
+    return true;
+}
+
+/**
+ * @brief Method for checking if cells higher than chosen allow for chosen to be info.
+ *
+ * @param row row number.
+ * @param column column number.
+ * */
+bool Board::isHigherValid(int row, int column) const {
+    if (row == 0 || row == 1) {
+        return true;
+    }
+    if (getCellType(row - 1, column) == EmptyCell::Type::TYPE_INPUT && getCellType(row - 2, column) != EmptyCell::Type::TYPE_INPUT) {
+        return false;
+    }
+    return true;
+}
+
+/**
+ * @brief Method for checking if cells below than chosen allow for chosen to be info.
+ *
+ * @param row row number.
+ * @param column column number.
+ * */
+bool Board::isBelowValid(int row, int column) const {
+    if (row == m_height - 1) {
+        return true;
+    }
+    if (row == m_height - 2 && (m_cells[row + 1][column] == nullptr || getCellType(row + 1, column) == EmptyCell::Type::TYPE_INPUT)) {
+        return false;
+    }
+    if (m_cells[row + 1][column] == nullptr) {
+        return true;
+    }
+    if (getCellType(row + 1, column) == EmptyCell::Type::TYPE_INPUT && m_cells[row + 2][column] != nullptr && getCellType(row + 2, column) != EmptyCell::Type::TYPE_INPUT) {
+        return false;
     }
     return true;
 }
@@ -125,7 +201,7 @@ void Board::setCell(int row, int column, EmptyCell::Type type) {
 void Board::print(const Board &board) {
     for (const auto &i: board.m_cells) {
         for (const auto &j: i) {
-            if (j->getType() == EmptyCell::Type::TYPE_INFO) {
+            if (j->getType() != EmptyCell::Type::TYPE_INPUT) {
                 std::cout << "\033[31m" << j->getCellStr() << "\033[0m ";
             } else {
                 std::cout << j->getCellStr() << " ";
@@ -185,5 +261,7 @@ std::string Board::cellToNativeFormat(int row, int column) const {
             auto val = std::static_pointer_cast<InputCell>(m_cells[row][column])->m_value;
             return "inp#" + std::to_string(val);
         }
+        default:
+            return "";
     }
 }

@@ -16,6 +16,14 @@ public:
 
     int getWidth() const;
 
+    bool isRightValid(int row, int Column) const;
+
+    bool isLeftValid(int row, int column) const;
+
+    bool isHigherValid(int row, int column) const;
+
+    bool isBelowValid(int row, int column) const;
+
     bool isValidUpLeft(int row, int column) const;
 
     bool isValidUpLeftDown(int column) const;
