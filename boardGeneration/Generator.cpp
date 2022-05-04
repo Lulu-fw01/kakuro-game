@@ -405,13 +405,13 @@ void generation::fillNumbers(Board &board) {
  */
 void generation::fillSums(Board &board) {
     // TODO wrong!!!
-    for (int i = 0; i < board.getWidth(); ++i) {
-        for (int j = 0; j < board.getHeight(); ++j) {
+    for (int i = 0; i < board.getHeight(); ++i) {
+        for (int j = 0; j < board.getWidth(); ++j) {
             if (board.getCellType(i, j) == EmptyCell::Type::TYPE_INFO) {
                 // horizontal
                 // right
                 int horizontalSum = 0, verticalSum = 0;
-                for (int k = j; k < board.getHeight(); ++k) {
+                for (int k = j; k < board.getWidth(); ++k) {
                     if (k != j) {
                         // TODO i can't be row, because i < board.getWidth.
                         if (board.getCellType(i, k) == EmptyCell::Type::TYPE_INPUT) {
@@ -423,7 +423,7 @@ void generation::fillSums(Board &board) {
                 }
                 // vertical
                 // down
-                for (int k = i; k < board.getWidth(); ++k) {
+                for (int k = i; k < board.getHeight(); ++k) {
                     if (k != i) {
                         if (board.getCellType(k, j) == EmptyCell::Type::TYPE_INPUT) {
                             verticalSum += std::static_pointer_cast<InputCell>(board.getCells()[k][j])->m_value;
