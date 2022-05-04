@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:kakuro_game/assets/consts.dart';
 
 /// Empty widget if there are not input widget or value widget
 class EmptyCellWidget extends StatelessWidget {
@@ -11,7 +12,7 @@ class EmptyCellWidget extends StatelessWidget {
         height: 38,
         child: DecoratedBox(
             decoration: BoxDecoration(
-          color: Colors.black,
+          color: backgroundColor,
         )));
   }
 }

@@ -1,66 +1,96 @@
+import 'dart:developer';
 
 import 'package:flutter/material.dart';
+import 'package:kakuro_game/providers/ffi_bridge/ffi_bridge.dart';
 import 'package:kakuro_game/utilities/field/cells/empty_cell.dart';
 import 'package:kakuro_game/utilities/field/cells/info_cell.dart';
-import 'package:kakuro_game/widgets/field/cell/empty_cell_widget.dart';
-import 'package:kakuro_game/widgets/field/cell/input_cell_widget.dart';
-import 'package:kakuro_game/widgets/field/cell/info_cell_widget.dart';
+import 'package:kakuro_game/utilities/field/cells/input_cell.dart';
 
 /// Class that describes kakuro field.
 class Field {
+  late final int _width;
+  late final int _height;
 
-   late final int _width;
-   late final int _height;
+  /// Width of field.
+  int get width => _width;
 
-   /// Width of field.
-   int get width => _width;
+  /// Height of field.
+  int get height => _height;
 
-   /// Height of field.
-   int get height => _height;
-
-   Field(int width, int height) {
-     _width = width;
-     _height = height;
-     _cells = List.generate(_height, (index) => List.filled(_width, null), growable: false);
-
-     // First column always has info cells.
-     for (int i = 0; i < _height; i++) { 
-       _cells[i][0] = InfoCell();
-     }
-
-     // First row always has info cells.
-     for (int j = 0; j < _width; j++) {
-       _cells[0][j] = InfoCell();
-     }
-   }
-  
-  /// Cells of the field.
-  late List<List<EmptyCell?>> _cells;
-
-  List<Row> getRows() {
-    List<Row> rows = List<Row>.filled(5, Row());
-    
-    var row0 = Row(children: const [EmptyCellWidget(), EmptyCellWidget(), InfoCellWidget(verticalValue: 16), InfoCellWidget(verticalValue: 23), EmptyCellWidget()],
-    mainAxisAlignment: MainAxisAlignment.center);
-    rows[0] = row0;
-
-    var row1 = Row(children: const [EmptyCellWidget(), InfoCellWidget(verticalValue: 4, horizontalValue: 4), InputCellWidget(), InputCellWidget(), InfoCellWidget(verticalValue: 9)],
-    mainAxisAlignment: MainAxisAlignment.center);
-    rows[1] = row1;
-
-    var row2 = Row(children: const [InfoCellWidget(horizontalValue: 27), InputCellWidget(), InputCellWidget(), InputCellWidget(), InputCellWidget()],
-    mainAxisAlignment: MainAxisAlignment.center);
-    rows[2] = row2;
-
-    var row3 = Row(children: const [InfoCellWidget(horizontalValue: 10), InputCellWidget(), InputCellWidget(), InputCellWidget(), InputCellWidget()],
-    mainAxisAlignment: MainAxisAlignment.center);
-    rows[3] = row3;
-
-    var row4 = Row(children: const [EmptyCellWidget(), InfoCellWidget(horizontalValue: 11), InputCellWidget(), InputCellWidget(), EmptyCellWidget()],
-    mainAxisAlignment: MainAxisAlignment.center);
-    rows[4] = row4;
-
-    return rows;
+  Field(int height, int width) {
+    _width = width;
+    _height = height;
+    _cells = List.generate(_height, (index) => List.filled(_width, EmptyCell()),
+        growable: false);
   }
 
+  /// Cells of the field.
+  late List<List<EmptyCell>> _cells;
+
+  List<List<EmptyCell>> get cells => _cells;
+
+  /// This method returns field as list of widgets.
+  List<Widget> getRows() {
+    List<Wrap> cells = List<Wrap>.filled(height, Wrap());
+
+    for (int i = 0; i < height; ++i) {
+      cells[i] = Wrap(
+        children: _cells[i].map((e) => e.getWidget()).toList(),
+      );
+    }
+
+    return cells;
+  }
+
+  /// Method for generating kakuro board.
+  static Field getRandomField(int height, int width, int difficulty) {
+    log('Start field generation.');
+    String stringField =
+        FFIBridge.generateKakuroBoard(height, width, difficulty);
+    return getFieldFromString(stringField, height, width);
+  }
+
+  static Field getFieldFromString(String stringField, int height, int width) {
+    var newField = Field(height, width);
+
+    var strCells = stringField.split(' ');
+    log('Parse field in string format. Number of cells in string: ${strCells.length}');
+    int cellNum = 0;
+    for (int i = 0; i < height; ++i) {
+      for (int j = 0; j < width; ++j) {
+        newField._cells[i][j] = cellFromString(strCells[cellNum]);
+        cellNum++;
+      }
+    }
+
+    log('Field was created.');
+    return newField;
+  }
+
+  /// This Function parse cell in [String] format into [EmptyCell], [InfoCell] or [InputCell].
+  ///
+  /// String formats:
+  ///   - 'emp' for empty cell.
+  ///   - 'inf#down\right' for info cell, example: inf#45\11.
+  ///   - 'inp#val' for input cell, example: inp#9.
+  static EmptyCell cellFromString(String strCell) {
+    if (strCell == 'emp') {
+      return EmptyCell();
+    }
+    var splitStr = strCell.split('#');
+    String type = splitStr[0];
+    String body = splitStr[1];
+    switch (type) {
+      case 'inf':
+        var downRight = body.split('\\');
+        int vVal = int.parse(downRight[0]);
+        int hVal = int.parse(downRight[1]);
+        return InfoCell(horizontalValue: hVal, verticalValue: vVal);
+      case 'inp':
+        int answer = int.parse(body);
+        return InputCell(answerValue: answer);
+      default:
+        return EmptyCell();
+    }
+  }
 }
