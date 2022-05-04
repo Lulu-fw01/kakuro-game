@@ -109,7 +109,7 @@ class MenuScreen extends StatelessWidget {
                           if (index < 0 || index > values.length) {
                             return null;
                           }
-                          return _listSizeValue(value: values[index]);
+                          return _listValue(value: values[index]);
                         }),
                     onSelectedItemChanged: onSelectedItemChanged,
                   ),
@@ -120,9 +120,9 @@ class MenuScreen extends StatelessWidget {
                 )
               ]));
 
-  Widget _listSizeValue({required String value}) => Center(
+  Widget _listValue({required String value}) => Center(
       child: Container(
-          width: value.length > 2 ? 60 : 30,
+          width: value.length > 2 ? 75 : 30,
           height: 30,
           decoration: BoxDecoration(
               border: Border.all(color: buttonColor, width: 0.7),
@@ -133,6 +133,7 @@ class MenuScreen extends StatelessWidget {
             value,
             style: const TextStyle(color: buttonContentColor, fontSize: 14),
           ))));
+
 
   /// Button for menu screen.
   Widget _menuScreenButton(
