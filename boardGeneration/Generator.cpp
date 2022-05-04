@@ -6,6 +6,8 @@
 
 int correctRow(Board& board, int row, int column, bool skipPenultimate);
 int correctColumn(Board& board, int row, int column, bool skipPenultimate);
+int getRandomNum(int min, int max);
+int getNext(generation::Difficulty difficulty);
 
 /**
  * @brief generate new kakuro board.
@@ -22,11 +24,11 @@ Board generation::generate(int height, int width, generation::Difficulty difficu
     return board;
 }
 
-int generation::getRandomNum(int min, int max) {
+int getRandomNum(int min, int max) {
     return min + rand() % (max - min + 1);
 }
 
-int generation::getNext(generation::Difficulty difficulty) {
+int getNext(generation::Difficulty difficulty) {
     return getRandomNum(difficulty, 9);
 }
 
@@ -144,9 +146,9 @@ int correctColumn(Board& board, int row, int column, bool skipPenultimate) {
 
     int ind;
     if (freePositions.empty()) {
-        ind = generation::getRandomNum(startRow, row);
+        ind = getRandomNum(startRow, row);
     } else {
-        ind = freePositions[generation::getRandomNum(0, freePositions.size() - 1)];
+        ind = freePositions[getRandomNum(0, freePositions.size() - 1)];
     }
     board.setCell(ind, column, EmptyCell::Type::TYPE_INFO);
     return ind;
@@ -163,9 +165,9 @@ int correctRow(Board& board, int row, int column, bool skipPenultimate) {
 
     int ind;
     if (freePositions.empty()) {
-        ind = generation::getRandomNum(startCol, column);
+        ind = getRandomNum(startCol, column);
     } else {
-        ind = freePositions[generation::getRandomNum(0, freePositions.size() - 1)];
+        ind = freePositions[getRandomNum(0, freePositions.size() - 1)];
     }
     board.setCell(row, ind, EmptyCell::Type::TYPE_INFO);
     return ind;
@@ -312,7 +314,7 @@ std::vector<int> findAvailableNumbers(Board &board, int row, int column) {
  */
 void chooseNumber(std::vector<std::vector<Block>> &blocks, int blockRowIndex, int blockColumnIndex,
                   Board &board, int cellRowIndex, int cellColumnIndex, std::vector<int> availableNumbers) {
-    int randomIndex = generation::getRandomNum(0, availableNumbers.size() - 1);
+    int randomIndex = getRandomNum(0, availableNumbers.size() - 1);
     int index = availableNumbers[randomIndex];
     std::static_pointer_cast<InputCell>(board.getCells()[cellRowIndex][cellColumnIndex])->m_value = index + 1;
     std::static_pointer_cast<InputCell>(board.getCells()[cellRowIndex][cellColumnIndex])->m_innerNumbers[index] = 1;

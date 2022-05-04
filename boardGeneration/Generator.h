@@ -21,10 +21,6 @@ namespace generation {
 
     Board generate(int height, int width, generation::Difficulty difficulty);
 
-    int getRandomNum(int min, int max);
-
-    int getNext(generation::Difficulty difficulty);
-
     void createPattern(Board &board, generation::Difficulty difficulty);
 
     void addInfoCells(Board &board, generation::Difficulty difficulty);
