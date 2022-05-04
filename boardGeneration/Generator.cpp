@@ -152,7 +152,6 @@ int correctColumn(Board& board, int row, int column, bool skipPenultimate) {
     return ind;
 }
 
-// TODO add penultimate row/column flag.
 int correctRow(Board& board, int row, int column, bool skipPenultimate) {
     int startCol = column - 9;
     std::vector<int> freePositions;
@@ -220,7 +219,6 @@ void generation::addInfoCells(Board &board, generation::Difficulty difficulty) {
             } else {
                 infoRowLength++;
                 infoColumnLength[j]++;
-                // TODO skip penultimte row/col.
                 if (i != board.getHeight() - 2 && infoRowLength >= 10) {
                     int changedColNum = correctRow(board, i, j, true);
                     infoRowLength = j - changedColNum;
@@ -404,6 +402,7 @@ void generation::fillNumbers(Board &board) {
  * @param board kakuro board.
  */
 void generation::fillSums(Board &board) {
+    // TODO wrong!!!
     for (int i = 0; i < board.getWidth(); ++i) {
         for (int j = 0; j < board.getHeight(); ++j) {
             if (board.getCellType(i, j) == EmptyCell::Type::TYPE_INFO) {
@@ -412,6 +411,7 @@ void generation::fillSums(Board &board) {
                 int horizontalSum = 0, verticalSum = 0;
                 for (int k = j; k < board.getHeight(); ++k) {
                     if (k != j) {
+                        // TODO i can't be row, because i < board.getWidth.
                         if (board.getCellType(i, k) == EmptyCell::Type::TYPE_INPUT) {
                             horizontalSum += std::static_pointer_cast<InputCell>(board.getCells()[i][k])->m_value;
                         } else {
