@@ -35,27 +35,12 @@ class Field {
 
   /// Make every [InputCell]'s actual value equal to answer.
   void showAnswer() {
-    /*for (var row in _cells) {
-      row.whereType<InputCell>().forEach((element) {
-        element.changeToAnswer();
-        element.updateWidgetValue();
-      });
-    }*/
-    
-    /*_cells.map((e) => e.whereType<InputCell>().forEach((element) {
-          element.changeToAnswer();
-          //element.updateWidgetValue();
-        }));*/
-
     for (var row in _cells) {
-      for (var cell in row) {
-        if (cell is InputCell) {
-          cell.actualValue = cell.answerValue;
-          cell.updateWidgetState();
-        }
-      }
+      row.whereType<InputCell>().forEach((cell) {
+        cell.actualValue = cell.answerValue;
+        cell.updateWidgetState();
+      });
     }
-
     solved = true;
   }
 
