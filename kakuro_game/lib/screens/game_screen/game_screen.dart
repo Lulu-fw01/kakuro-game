@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:kakuro_game/models/field_settings/field_settings.dart';
 import 'package:kakuro_game/models/options_icons.dart';
 import 'package:kakuro_game/providers/field_notifier.dart';
 import 'package:kakuro_game/providers/stopwatch_notifier.dart';
 import 'package:kakuro_game/screens/menu_screen/menu_screen.dart';
+import 'package:kakuro_game/utilities/field/field.dart';
 import 'package:kakuro_game/widgets/options_floating_button/option_button/stopwatch_button.dart';
 import 'package:provider/provider.dart';
 import 'package:kakuro_game/assets/consts.dart';
@@ -30,7 +30,9 @@ class GameScreen extends StatelessWidget {
 
   void _showHint(BuildContext context) {}
 
-  void _showAnswer(BuildContext context, FieldNotifier notifier) {}
+  void _showAnswer(BuildContext context, Field field) {
+    field.showAnswer();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -62,7 +64,7 @@ class GameScreen extends StatelessWidget {
                           child: Wrap(
                         direction: Axis.vertical,
                         spacing: 1.5,
-                        children: fieldNotifier.field!.getRows(),
+                        children: fieldNotifier.field.getRows(),
                       )),
                     )),
                   );
@@ -103,7 +105,7 @@ class GameScreen extends StatelessWidget {
             ),
           ),
           OptionButton(
-            onPressed: () => _showAnswer(context, fieldNotifier),
+            onPressed: () => _showAnswer(context, fieldNotifier.field),
             icon: const Icon(
               OptionsIcons.award,
               color: buttonContentColor,

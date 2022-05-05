@@ -1,11 +1,13 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/rendering.dart';
 import 'package:kakuro_game/assets/consts.dart';
+import 'package:kakuro_game/utilities/field/cells/input_cell.dart';
 
 
-/// Cell where user can add value.
+/// Cell where user can change value.
 class InputCellWidget extends StatefulWidget {
-  const InputCellWidget({Key? key}) : super(key: key);
+  final InputCell cell;
+
+  const InputCellWidget({Key? key, required this.cell}) : super(key: key);
 
   @override
   _InputCellState createState() => _InputCellState();
@@ -13,17 +15,16 @@ class InputCellWidget extends StatefulWidget {
 
 class _InputCellState extends State<InputCellWidget> {
 
-  int _value = 0;
-
-  /// Value in cell that user has entered.
-  int get value => _value;
+  @override
+  void initState() {
+    super.initState();
+    widget.cell.updateWidgetState = () => setState(() { });
+  }
 
   void _changeValue(int newValue) {
-    if (_value != newValue) {
-      setState(() {
-        _value = newValue;
-      });
-    }
+    setState(() {
+      widget.cell.actualValue = newValue;
+    });
   }
 
   Widget _dialogButton({required int value, required BuildContext context}) =>
@@ -90,7 +91,7 @@ class _InputCellState extends State<InputCellWidget> {
             )),
           ),
           child: Text(
-            _value.toString(),
+            widget.cell.actualValue.toString(),
             style: const TextStyle(color: buttonContentColor),
           )),
     );

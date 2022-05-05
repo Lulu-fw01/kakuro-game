@@ -6,17 +6,24 @@ import 'package:kakuro_game/widgets/field/cell/input_cell_widget.dart';
 /// Class that describes cell, where user can change value.
 class InputCell extends EmptyCell {
 
-  int _actualValue = 0;
+  /// Actual value in this cell.
+  int actualValue = 0;
 
-  ///Actual value in this cell.
-  int get actualValue => _actualValue;
-
+  /// Possible answer for this value.
   final int answerValue;
 
-  InputCell({required this.answerValue});
+  /// Return true if  value in this cell is equal to answer value.
+  bool isRightActual() => actualValue == answerValue;
+
+  InputCell({required this.answerValue}) {
+    updateWidgetState = () => {};
+  }
+
+  /// This function should call method of widget, that will update state.
+  late VoidCallback updateWidgetState;
 
   @override
   Widget getWidget() {
-    return const InputCellWidget();
+    return InputCellWidget(cell: this,);
   }
 }

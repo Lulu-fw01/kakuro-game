@@ -4,5 +4,5 @@ import '../utilities/field/field.dart';
 
 /// Notifier which provides access to kakuro board of the game.
 class FieldNotifier extends ChangeNotifier {
-  Field? field;
+  late Field field;
 }
