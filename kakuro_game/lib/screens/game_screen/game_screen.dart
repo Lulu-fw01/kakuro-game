@@ -7,7 +7,6 @@ import 'package:kakuro_game/screens/menu_screen/menu_screen.dart';
 import 'package:kakuro_game/widgets/options_floating_button/option_button/stopwatch_button.dart';
 import 'package:provider/provider.dart';
 import 'package:kakuro_game/assets/consts.dart';
-import 'package:kakuro_game/utilities/field/field.dart';
 import 'package:kakuro_game/widgets/options_floating_button/option_button/option_button.dart';
 import 'package:kakuro_game/widgets/options_floating_button/options_floating_button.dart';
 import 'package:kakuro_game/widgets/time/game_stopwatch.dart';
@@ -31,7 +30,7 @@ class GameScreen extends StatelessWidget {
 
   void _showHint(BuildContext context) {}
 
-  void _showAnswer(BuildContext context) {}
+  void _showAnswer(BuildContext context, FieldNotifier notifier) {}
 
   @override
   Widget build(BuildContext context) {
@@ -104,7 +103,7 @@ class GameScreen extends StatelessWidget {
             ),
           ),
           OptionButton(
-            onPressed: () => _showAnswer(context),
+            onPressed: () => _showAnswer(context, fieldNotifier),
             icon: const Icon(
               OptionsIcons.award,
               color: buttonContentColor,
