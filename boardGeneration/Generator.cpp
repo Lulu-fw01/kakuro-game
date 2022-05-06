@@ -333,6 +333,7 @@ void chooseNumber(std::vector<std::vector<Block>> &blocks, int blockRowIndex, in
 void generation::fillNumbers(Board &board) {
     auto blocks = findBlocks(board);
     bool rightFilled = true;
+    int temp_value = 0;
     for (int i = 0; i < board.getHeight(); ++i) {
         for (int j = 0; j < board.getWidth(); ++j) {
             if (blocks[i][j].m_currentRow != -1) {
@@ -351,6 +352,7 @@ void generation::fillNumbers(Board &board) {
                         filled = true;
                     }
                     if (!filled) {
+                        temp_value = std::static_pointer_cast<InputCell>(board.getCells()[i_iter][j_iter])->m_value - 1;
                         std::static_pointer_cast<InputCell>(board.getCells()[i_iter][j_iter])->m_value = 0;
                         rightFilled = false;
                         if (j == 0) {
@@ -365,7 +367,8 @@ void generation::fillNumbers(Board &board) {
                 } else {
                     int i_iter = blocks[i][j].m_currentRow;
                     int j_iter = blocks[i][j].m_currentColumn;
-                    int temp_value = std::static_pointer_cast<InputCell>(board.getCells()[i_iter][j_iter])->m_value - 1;
+                    // int temp_value = std::static_pointer_cast<InputCell>(board.getCells()[i_iter][j_iter])->m_value - 1;
+                    // if (temp_value == -1) temp_value = 0;
                     for (int l = 0; l < blocks[i][j].m_numberOfHorizontalCells; ++l) {
                         // TODO sometimes error here.
                         std::static_pointer_cast<InputCell>(blocks[i][j].m_horizontalCells[l])->m_outerNumbers[temp_value] = 0;
@@ -382,6 +385,7 @@ void generation::fillNumbers(Board &board) {
                         filled = true;
                     }
                     if (!filled) {
+                        temp_value = std::static_pointer_cast<InputCell>(board.getCells()[i_iter][j_iter])->m_value - 1;
                         std::static_pointer_cast<InputCell>(board.getCells()[i_iter][j_iter])->m_value = 0;
                         rightFilled = false;
                         if (j == 0) {
