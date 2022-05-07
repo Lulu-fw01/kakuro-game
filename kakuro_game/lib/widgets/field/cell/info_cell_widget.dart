@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:kakuro_game/assets/consts.dart';
 
 
-/// Widget with information for user about vertical and horizontal amounts
+/// Widget with information for user about vertical and horizontal amounts.
 class InfoCellWidget extends StatelessWidget {
   const InfoCellWidget({Key? key, required this.horizontalValue, required this.verticalValue})
       : super(key: key);
@@ -14,7 +14,7 @@ class InfoCellWidget extends StatelessWidget {
   /// Sum of digits vertically.
   final int verticalValue;
 
-  Widget _SumText({required int sum}) => Text(
+  Widget _sumText({required int sum}) => Text(
                       sum == 0 ? "" : sum.toString(),
                       style: const TextStyle(fontSize: 12, color: buttonColor),
                     );
@@ -43,7 +43,7 @@ class InfoCellWidget extends StatelessWidget {
                     alignment: Alignment.bottomLeft,
                     child: Padding(
                         padding: EdgeInsets.only(bottom: 4.0, left: paddingVerticalVal),
-                        child: _SumText(sum: verticalValue))),
+                        child: _sumText(sum: verticalValue))),
               ),
             ),
             ClipPath(
@@ -57,7 +57,7 @@ class InfoCellWidget extends StatelessWidget {
                       child: Padding(
                           padding: EdgeInsets.only(
                               right: paddingHorizontalVal, top: 4.0),
-                          child: _SumText(sum: horizontalValue))),
+                          child: _sumText(sum: horizontalValue))),
                 )),
           ]),
         ));
@@ -93,6 +93,5 @@ class _RightTriangleClipper extends CustomClipper<Path> {
   }
 
   @override
-  bool shouldReclip(covariant CustomClipper<Path> oldClipper) => false;
-  
+  bool shouldReclip(covariant CustomClipper<Path> oldClipper) => false; 
 }
