@@ -1,4 +1,3 @@
-
 import 'package:flutter/widgets.dart';
 
 /// Notifier for [GameStopwatch].
@@ -12,7 +11,6 @@ class StopwatchNotifier extends ChangeNotifier {
   set stopwatchVisible(bool newVisible) {
     if (_stopwatchVisible != newVisible) {
       _stopwatchVisible = newVisible;
-      notifyListeners();
     } 
   }
 

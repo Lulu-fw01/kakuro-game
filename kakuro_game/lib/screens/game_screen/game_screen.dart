@@ -1,21 +1,26 @@
 import 'package:flutter/material.dart';
+import 'package:kakuro_game/models/options_icons.dart';
+import 'package:kakuro_game/providers/field_notifier.dart';
 import 'package:kakuro_game/providers/stopwatch_notifier.dart';
+import 'package:kakuro_game/screens/menu_screen/menu_screen.dart';
+import 'package:kakuro_game/utilities/field/field.dart';
 import 'package:kakuro_game/widgets/options_floating_button/option_button/stopwatch_button.dart';
 import 'package:provider/provider.dart';
 import 'package:kakuro_game/assets/consts.dart';
-import 'package:kakuro_game/utilities/field/field.dart';
 import 'package:kakuro_game/widgets/options_floating_button/option_button/option_button.dart';
 import 'package:kakuro_game/widgets/options_floating_button/options_floating_button.dart';
 import 'package:kakuro_game/widgets/time/game_stopwatch.dart';
 
 /// Screen with game field.
 class GameScreen extends StatelessWidget {
-  //Field field;
+
+  /// Route of this screen
+  static const routeName = "/game";
 
   const GameScreen({Key? key}) : super(key: key);
 
   void _toMenuScreen(BuildContext context) {
-    Navigator.pushNamed(context, homeRoute);
+    Navigator.pushNamed(context, MenuScreen.routeName);
   }
 
   void _changeStopwatchVisible(StopwatchNotifier notifier) {
@@ -25,44 +30,50 @@ class GameScreen extends StatelessWidget {
 
   void _showHint(BuildContext context) {}
 
-  void _showAnswer(BuildContext context) {}
+  void _showAnswer(BuildContext context, Field field) {
+    field.showAnswer();
+  }
 
   @override
   Widget build(BuildContext context) {
-    var f = Field(5, 5);
 
     // Get notifier about stopwatch visible.
     final notifier = Provider.of<StopwatchNotifier>(context);
-
+    
+    final fieldNotifier = Provider.of<FieldNotifier>(context);
     return Scaffold(
       // Background color of the screen.
       backgroundColor: backgroundColor,
       // Place buttons in the center of screen.
-      body: Column(
-        //mainAxisAlignment: MainAxisAlignment.start,
+      body: Stack(
+        alignment: Alignment.topCenter,
         children: [
-          const Expanded(
-            flex: 2,
-            child: Padding(
-              padding: EdgeInsets.all(6.0),
-              child: GameStopwatch(),
-            ),
+          Container(
+              alignment: Alignment.center,
+              width: MediaQuery.of(context).size.width,
+              child: Center(child: LayoutBuilder(
+                builder: (context, constraints) {
+                  return SizedBox(
+                    width: constraints.maxWidth,
+                    height: constraints.maxHeight,
+                    child: ClipRect(
+                        child: InteractiveViewer(
+                      minScale: 0.7,
+                      maxScale: 2,
+                      child: Center(
+                          child: Wrap(
+                        direction: Axis.vertical,
+                        spacing: 1.5,
+                        children: fieldNotifier.field.getRows(),
+                      )),
+                    )),
+                  );
+                },
+              ))),
+          const Padding(
+            padding: EdgeInsets.all(56.0),
+            child: GameStopwatch(),
           ),
-          Expanded(
-              flex: 8,
-              child: Container(
-                  alignment: Alignment.center,
-                  width: double.infinity,
-                  child: Center(
-                      child: InteractiveViewer(
-                    minScale: 0.1,
-                    maxScale: 2,
-                    // Arrange rows of buttons in a column.
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: f.getRows(),
-                    ),
-                  ))))
         ],
       ),
       floatingActionButton: OptionsFab(
@@ -89,14 +100,14 @@ class GameScreen extends StatelessWidget {
           OptionButton(
             onPressed: () => _showHint(context),
             icon: const Icon(
-              Icons.done,
+              OptionsIcons.lamp,
               color: buttonContentColor,
             ),
           ),
           OptionButton(
-            onPressed: () => _showAnswer(context),
+            onPressed: () => _showAnswer(context, fieldNotifier.field),
             icon: const Icon(
-              Icons.done_all,
+              OptionsIcons.award,
               color: buttonContentColor,
             ),
           ),

@@ -1,5 +1,6 @@
 {
     "cSpell.words": [
         "kakuro"
-    ]
+    ],
+    "cmake.configureOnOpen": false
 }
