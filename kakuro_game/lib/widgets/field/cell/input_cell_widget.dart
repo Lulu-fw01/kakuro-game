@@ -82,12 +82,12 @@ class _InputCellState extends State<InputCellWidget> {
       child: TextButton(
           onPressed: _showDialog,
           style: ButtonStyle(
-            backgroundColor:
-                MaterialStateProperty.all<Color?>(Colors.blue[800]),
+            backgroundColor: MaterialStateProperty.all<Color?>(cellColor),
             side: MaterialStateProperty.all<BorderSide>(const BorderSide(
               color: buttonColor,
-              width: 1,
-              style: BorderStyle.solid,
+            )),
+            shape: MaterialStateProperty.all(RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(4.0),
             )),
           ),
           child: Text(

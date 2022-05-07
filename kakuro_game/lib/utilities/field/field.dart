@@ -5,7 +5,6 @@ import 'package:kakuro_game/providers/ffi_bridge/ffi_bridge.dart';
 import 'package:kakuro_game/utilities/field/cells/empty_cell.dart';
 import 'package:kakuro_game/utilities/field/cells/info_cell.dart';
 import 'package:kakuro_game/utilities/field/cells/input_cell.dart';
-import 'package:kakuro_game/widgets/field/cell/input_cell_widget.dart';
 
 /// Class that describes kakuro field.
 class Field {
