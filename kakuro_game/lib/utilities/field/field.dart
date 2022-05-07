@@ -43,6 +43,16 @@ class Field {
     solved = true;
   }
 
+  /// This method set in random [InputCell] with incorrect answer correct answer.
+  void showHint() {
+    var wrongAnswers = <InputCell>[];
+    
+    for (var row in _cells) {
+      wrongAnswers.addAll(row.whereType<InputCell>().where((cell) => cell.actualValue != cell.answerValue).toList());
+    }
+
+  }
+
   /// This method check if current cells values form a solution.
   bool checkSolution() {
     return false;

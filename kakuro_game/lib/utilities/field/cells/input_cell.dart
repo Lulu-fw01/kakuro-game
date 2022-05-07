@@ -12,9 +12,6 @@ class InputCell extends EmptyCell {
   /// Possible answer for this value.
   final int answerValue;
 
-  /// Return true if  value in this cell is equal to answer value.
-  bool isRightActual() => actualValue == answerValue;
-
   InputCell({required this.answerValue}) {
     updateWidgetState = () => {};
   }
