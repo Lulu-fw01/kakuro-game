@@ -1,4 +1,3 @@
-
 import 'dart:async';
 
 import 'package:flutter/material.dart';
@@ -9,12 +8,10 @@ import 'package:provider/provider.dart';
 
 /// Stopwatch widget.
 class GameStopwatch extends StatefulWidget {
-
   const GameStopwatch({Key? key}) : super(key: key);
 
   @override
   State<StatefulWidget> createState() => _GameStopwatchState();
-  
 }
 
 class _GameStopwatchState extends State<GameStopwatch> {
@@ -22,6 +19,7 @@ class _GameStopwatchState extends State<GameStopwatch> {
 
   Timer? timer;
   bool countDown = true;
+
   /// Visible property.
   bool visible = true;
 
@@ -33,7 +31,7 @@ class _GameStopwatchState extends State<GameStopwatch> {
 
   void addTime() {
     setState(() {
-      final seconds = duration.inSeconds + 1;  
+      final seconds = duration.inSeconds + 1;
       duration = Duration(seconds: seconds);
     });
   }
@@ -44,7 +42,7 @@ class _GameStopwatchState extends State<GameStopwatch> {
     super.dispose();
   }
 
-  void stopTimer(){
+  void stopTimer() {
     setState(() => timer?.cancel());
   }
 

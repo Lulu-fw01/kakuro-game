@@ -10,10 +10,10 @@ import '../../utilities/field/field.dart';
 
 /// Main menu screen of kakuro-game.
 class MenuScreen extends StatelessWidget {
+  const MenuScreen({Key? key}) : super(key: key);
+
   /// Route of this screen.
   static const routeName = "/home";
-
-  const MenuScreen({Key? key}) : super(key: key);
 
   static const _sizes = ['5', '6', '7', '8', '9', '10', '11', '12', '13', '14'];
   static const _difficulties = ['Beginner', 'Easy', 'Medium', 'Hard'];

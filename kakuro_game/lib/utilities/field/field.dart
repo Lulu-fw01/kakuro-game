@@ -6,6 +6,16 @@ import 'package:kakuro_game/utilities/field/cells/input_cell.dart';
 
 /// Class that describes kakuro field.
 class Field {
+  /// Constructor.
+  ///   - height - number of rows in field.
+  ///   - width - number of columns in field.
+  Field(int height, int width) {
+    _width = width;
+    _height = height;
+    _cells = List.generate(_height, (index) => List.filled(_width, EmptyCell()),
+        growable: false);
+  }
+
   late final int _width;
   late final int _height;
 
@@ -22,13 +32,6 @@ class Field {
   late List<List<EmptyCell>> _cells;
 
   List<List<EmptyCell>> get cells => _cells;
-
-  Field(int height, int width) {
-    _width = width;
-    _height = height;
-    _cells = List.generate(_height, (index) => List.filled(_width, EmptyCell()),
-        growable: false);
-  }
 
   /// Make every [InputCell]'s actual value equal to answer.
   void showAnswer() {

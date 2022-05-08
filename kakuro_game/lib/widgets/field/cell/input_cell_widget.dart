@@ -2,23 +2,22 @@ import 'package:flutter/material.dart';
 import 'package:kakuro_game/assets/consts.dart';
 import 'package:kakuro_game/utilities/field/cells/input_cell.dart';
 
-
 /// Cell where user can change value.
 class InputCellWidget extends StatefulWidget {
-  final InputCell cell;
-
   const InputCellWidget({Key? key, required this.cell}) : super(key: key);
+
+  /// Cell of this widget.
+  final InputCell cell;
 
   @override
   _InputCellState createState() => _InputCellState();
 }
 
 class _InputCellState extends State<InputCellWidget> {
-
   @override
   void initState() {
     super.initState();
-    widget.cell.updateWidgetState = () => setState(() { });
+    widget.cell.updateWidgetState = () => setState(() {});
   }
 
   void _changeValue(int newValue) {
@@ -30,7 +29,8 @@ class _InputCellState extends State<InputCellWidget> {
   Widget _dialogButton({required int value, required BuildContext context}) =>
       TextButton(
         style: ButtonStyle(
-          backgroundColor: MaterialStateProperty.all<Color?>(buttonColor.withOpacity(0.8)),
+          backgroundColor:
+              MaterialStateProperty.all<Color?>(buttonColor.withOpacity(0.8)),
         ),
         onPressed: () => {_changeValue(value), Navigator.of(context).pop()},
         child: Text(
@@ -58,9 +58,9 @@ class _InputCellState extends State<InputCellWidget> {
     showDialog(
         context: context,
         builder: (BuildContext context) {
-            return Dialog(
-              backgroundColor: fourthColor.withOpacity(0.3),
-                child: Column(
+          return Dialog(
+            backgroundColor: fourthColor.withOpacity(0.3),
+            child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               crossAxisAlignment: CrossAxisAlignment.center,
               mainAxisSize: MainAxisSize.min,
@@ -72,7 +72,7 @@ class _InputCellState extends State<InputCellWidget> {
             ),
           );
         });
-}
+  }
 
   @override
   Widget build(BuildContext context) {
