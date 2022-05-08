@@ -2,11 +2,10 @@
 
 #include <cstring>
 #include <string>
+#include <iostream>
 #include <ctype.h>
 
 #include "Generator.h"
-
-static char buffer[1024];
 
 EXPORT
 char* generateBoard(int height, int width, int difficulty) {
