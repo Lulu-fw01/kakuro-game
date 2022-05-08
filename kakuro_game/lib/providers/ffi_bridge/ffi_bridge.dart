@@ -1,7 +1,7 @@
-import 'dart:developer';
 import 'dart:ffi';
 import 'dart:io';
 import 'package:ffi/ffi.dart';
+import 'package:flutter/widgets.dart';
 
 /// Class which contains functions from native c++ code.
 class FFIBridge {
@@ -17,10 +17,10 @@ class FFIBridge {
           .asFunction();
 
   /// This function calls function from native c++ library.
-  static String generateKakuroBoard(int height, int weight, int difficulty) {
-    log('Call native function for generating.');
-    Pointer<Utf8> cStrBoard = _generateBoard(height, weight, difficulty);
-    
+  static String generateKakuroBoard(int height, int width, int difficulty) {
+    debugPrint('Call native function for generating.');
+    Pointer<Utf8> cStrBoard = _generateBoard(height, width, difficulty);
+    debugPrint('Got string from native function.');
     return cStrBoard.toDartString();
   }
 }

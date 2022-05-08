@@ -1,5 +1,3 @@
-import 'dart:developer';
-
 import 'package:flutter/material.dart';
 import 'package:kakuro_game/providers/ffi_bridge/ffi_bridge.dart';
 import 'package:kakuro_game/utilities/field/cells/empty_cell.dart';
@@ -46,11 +44,13 @@ class Field {
   /// This method set in random [InputCell] with incorrect answer correct answer.
   void showHint() {
     var wrongAnswers = <InputCell>[];
-    
-    for (var row in _cells) {
-      wrongAnswers.addAll(row.whereType<InputCell>().where((cell) => cell.actualValue != cell.answerValue).toList());
-    }
 
+    for (var row in _cells) {
+      wrongAnswers.addAll(row
+          .whereType<InputCell>()
+          .where((cell) => cell.actualValue != cell.answerValue)
+          .toList());
+    }
   }
 
   /// This method check if current cells values form a solution.
@@ -74,9 +74,10 @@ class Field {
 
   /// Method for generating kakuro board.
   static Field getRandomField(int height, int width, int difficulty) {
-    log('Start field generation.');
+    debugPrint('Start field generation.');
     String stringField =
         FFIBridge.generateKakuroBoard(height, width, difficulty);
+    debugPrint("Field in string format : $stringField");
     return getFieldFromString(stringField, height, width);
   }
 
@@ -85,7 +86,8 @@ class Field {
     var newField = Field(height, width);
 
     var strCells = stringField.split(' ');
-    log('Parse field in string format. Number of cells in string: ${strCells.length}');
+    debugPrint(
+        'Parse field in string format. Number of cells in string: ${strCells.length}');
     int cellNum = 0;
     for (int i = 0; i < height; ++i) {
       for (int j = 0; j < width; ++j) {
@@ -94,7 +96,7 @@ class Field {
       }
     }
 
-    log('Field was created.');
+    debugPrint('Field was created');
     return newField;
   }
 

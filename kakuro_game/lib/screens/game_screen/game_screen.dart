@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:flutter/material.dart';
 import 'package:kakuro_game/models/options_icons.dart';
 import 'package:kakuro_game/providers/field_notifier.dart';
@@ -41,6 +43,10 @@ class GameScreen extends StatelessWidget {
     final notifier = Provider.of<StopwatchNotifier>(context);
     
     final fieldNotifier = Provider.of<FieldNotifier>(context);
+
+    final fieldWidth = fieldNotifier.field.width * 38.0;
+    final fieldHeight = fieldNotifier.field.height * 38.0;
+
     return Scaffold(
       // Background color of the screen.
       backgroundColor: backgroundColor,
@@ -50,7 +56,7 @@ class GameScreen extends StatelessWidget {
         children: [
           Container(
               alignment: Alignment.center,
-              width: MediaQuery.of(context).size.width,
+              //width: MediaQuery.of(context).size.width,
               child: Center(child: LayoutBuilder(
                 builder: (context, constraints) {
                   return SizedBox(
@@ -58,7 +64,18 @@ class GameScreen extends StatelessWidget {
                     height: constraints.maxHeight,
                     child: ClipRect(
                         child: InteractiveViewer(
-                      minScale: 0.7,
+                      //constrained: false,
+                      boundaryMargin: EdgeInsets.only(
+                        left: 38,
+                        right: fieldWidth > constraints.maxWidth
+                            ? (fieldWidth - constraints.maxWidth + 38)
+                            : 38,
+                        top: 38,
+                        bottom: fieldHeight > constraints.maxHeight
+                            ? (fieldHeight - constraints.maxHeight + 38)
+                            : 38,
+                      ),
+                      minScale: 0.3,
                       maxScale: 2,
                       child: Center(
                           child: Wrap(

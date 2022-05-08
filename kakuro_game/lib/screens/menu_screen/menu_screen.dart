@@ -1,9 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:kakuro_game/assets/consts.dart';
-import 'package:kakuro_game/models/field_settings/field_settings.dart';
 import 'package:kakuro_game/providers/field_notifier.dart';
 import 'package:kakuro_game/screens/game_screen/game_screen.dart';
-import 'dart:developer';
 
 import 'package:provider/provider.dart';
 
@@ -17,14 +15,14 @@ class MenuScreen extends StatelessWidget {
 
   const MenuScreen({Key? key}) : super(key: key);
 
-  static const _sizes = ['8', '9', '10', '11', '12', '13', '14', '15'];
+  static const _sizes = ['5', '6', '7', '8', '9', '10', '11', '12', '13', '14'];
   static const _difficulties = ['Beginner', 'Easy', 'Medium', 'Hard'];
 
   void _onButtonPlayClicked(BuildContext context, FieldNotifier notifier, final int _height, final int _width, final int _difficulty) {
   
-    log('Play button was clicked, create new game with parameters: height: $_height, width: $_width and difficulty: $_difficulty');
+    debugPrint('Play button was clicked, create new game with parameters: height: $_height, width: $_width and difficulty: $_difficulty');
     // TODO change to correct values.
-    notifier.field = Field.getRandomField(5, 5, _difficulty);
+    notifier.field = Field.getRandomField(_height, _width, _difficulty);
     Navigator.pushNamed(context, GameScreen.routeName);
   }
 
@@ -49,8 +47,8 @@ class MenuScreen extends StatelessWidget {
             children: <Widget>[
               _menuScreenButton(
                   text: 'Play',
-                  onClick: () => _onButtonPlayClicked(context, fieldNotifier, _heightIndex + 8,
-                      _widthIndex + 8, 4 - _difficultyIndex)),
+                  onClick: () => _onButtonPlayClicked(context, fieldNotifier, _heightIndex + 5,
+                      _widthIndex + 5, 4 - _difficultyIndex)),
 
               // TODO make more beautiful part with lists.
               Padding(
