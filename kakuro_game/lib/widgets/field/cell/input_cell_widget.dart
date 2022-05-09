@@ -1,3 +1,4 @@
+
 import 'package:flutter/material.dart';
 import 'package:kakuro_game/assets/consts.dart';
 import 'package:kakuro_game/utilities/field/cells/input_cell.dart';
@@ -13,10 +14,46 @@ class InputCellWidget extends StatefulWidget {
   _InputCellState createState() => _InputCellState();
 }
 
-class _InputCellState extends State<InputCellWidget> {
+extension on AnimationController {
+  void repeatEx({required int times, VoidCallback? onCompleted}) {
+    var count = 0;
+    addStatusListener((status) {
+      if (status == AnimationStatus.completed) {
+        if (++count < times) {
+          reverse();
+        } else {
+          onCompleted!();
+        }
+      } else if (status == AnimationStatus.dismissed) {
+        forward();
+      }
+    });
+  }
+}
+
+
+class _InputCellState extends State<InputCellWidget> with TickerProviderStateMixin {
+  late AnimationController _hintAnimationController;
+  late bool showingHint;
+
   @override
   void initState() {
     super.initState();
+    showingHint = false;
+
+    _hintAnimationController =
+        AnimationController(vsync: this, duration: const Duration(milliseconds: 300))
+        ..repeatEx(times: 5, onCompleted: () => setState(() {
+          showingHint = false;
+        }));
+
+    widget.cell.showHintAnimation = () {
+      setState(() {
+        _hintAnimationController.forward();
+        showingHint = true;
+      });
+    };
+
     widget.cell.updateWidgetState = () => setState(() {});
   }
 
@@ -90,10 +127,26 @@ class _InputCellState extends State<InputCellWidget> {
               borderRadius: BorderRadius.circular(4.0),
             )),
           ),
-          child: Text(
-            widget.cell.actualValue.toString(),
-            style: const TextStyle(color: buttonContentColor),
-          )),
+          child: _cellText()),
     );
   }
+
+  Widget _cellText() => showingHint
+      ? FadeTransition(
+          opacity: _hintAnimationController,
+          child: Text(
+            widget.cell.actualValue.toString(),
+            style: const TextStyle(color: fifthColor),
+          ),
+        )
+      : Text(
+          widget.cell.actualValue.toString(),
+          style: const TextStyle(color: buttonContentColor),
+        );
+
+   @override
+    void dispose() {
+      _hintAnimationController.dispose();
+      super.dispose();
+    }
 }

@@ -30,9 +30,11 @@ class GameScreen extends StatelessWidget {
     notifier.changeVisible();
   }
 
-  void _showHint(BuildContext context) {}
+  void _showHint(Field field) {
+    field.showHint();
+  }
 
-  void _showAnswer(BuildContext context, Field field) {
+  void _showAnswer(Field field) {
     field.showAnswer();
   }
 
@@ -115,14 +117,14 @@ class GameScreen extends StatelessWidget {
             ),
           ),
           OptionButton(
-            onPressed: () => _showHint(context),
+            onPressed: () => _showHint(fieldNotifier.field),
             icon: const Icon(
               OptionsIcons.lamp,
               color: buttonContentColor,
             ),
           ),
           OptionButton(
-            onPressed: () => _showAnswer(context, fieldNotifier.field),
+            onPressed: () => _showAnswer(fieldNotifier.field),
             icon: const Icon(
               OptionsIcons.award,
               color: buttonContentColor,

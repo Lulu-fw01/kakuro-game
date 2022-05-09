@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:flutter/material.dart';
 import 'package:kakuro_game/providers/ffi_bridge/ffi_bridge.dart';
 import 'package:kakuro_game/utilities/field/cells/empty_cell.dart';
@@ -35,6 +37,7 @@ class Field {
 
   /// Make every [InputCell]'s actual value equal to answer.
   void showAnswer() {
+    // TODO maybe use if and not render widgets with correct value.
     for (var row in _cells) {
       row.whereType<InputCell>().forEach((cell) {
         cell.actualValue = cell.answerValue;
@@ -44,8 +47,7 @@ class Field {
     solved = true;
   }
 
-  /// This method set in random [InputCell] with incorrect answer correct answer.
-  void showHint() {
+  List<InputCell> findWrongAnswers() {
     var wrongAnswers = <InputCell>[];
 
     for (var row in _cells) {
@@ -54,6 +56,21 @@ class Field {
           .where((cell) => cell.actualValue != cell.answerValue)
           .toList());
     }
+
+    return wrongAnswers;
+  }
+
+  /// This method set in random [InputCell] with incorrect answer correct answer.
+  void showHint() {
+    var wrongAnswers = findWrongAnswers();
+
+    if (wrongAnswers.isEmpty) {
+      return;
+    }
+    var rnd = Random();
+    int ind = rnd.nextInt(wrongAnswers.length);
+    wrongAnswers[ind].actualValue = wrongAnswers[ind].answerValue;
+    wrongAnswers[ind].showHintAnimation();
   }
 
   /// This method check if current cells values form a solution.

@@ -17,6 +17,9 @@ class InputCell extends EmptyCell {
   /// This function should call method of widget, that will update state.
   late VoidCallback updateWidgetState;
 
+  /// This function call method from widget state which show hint animation.
+  late VoidCallback showHintAnimation;
+
   @override
   Widget getWidget() {
     return InputCellWidget(
