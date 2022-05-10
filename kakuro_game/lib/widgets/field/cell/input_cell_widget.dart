@@ -101,7 +101,7 @@ class _InputCellState extends State<InputCellWidget>
         context: context,
         builder: (BuildContext context) {
           return Dialog(
-            backgroundColor: fourthColor.withOpacity(0.3),
+            backgroundColor: backgroundColor.withOpacity(0.3),
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               crossAxisAlignment: CrossAxisAlignment.center,
@@ -143,7 +143,7 @@ class _InputCellState extends State<InputCellWidget>
           opacity: _hintAnimationController,
           child: Text(
             widget.cell.actualValue.toString(),
-            style: const TextStyle(color: fifthColor),
+            style: const TextStyle(color: Color(0xFFFDE71E)),
           ),
         )
       : Text(
