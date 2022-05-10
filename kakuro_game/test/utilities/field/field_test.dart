@@ -63,5 +63,19 @@ void main() {
 
     });
 
+    test('Find cells with wrong answers', () {
+      var strField = ('emp emp inf#0\\16 inf#23\\0 emp '
+          'emp inf#4\\4 inp#9 inp#4 inf#9\\0 '
+          'inf#0\\27 inp#2 inp#1 inp#3 inp#7 '
+          'inf#0\\10 inp#6 inp#7 inp#5 inp#9 '
+          'emp inf#0\\11 inp#8 inp#2 emp');
+      var field = Field.getFieldFromString(strField, 5, 5);
+
+      var wAnswers = field.findWrongAnswers();
+
+      expect(wAnswers.length, 12);
+
+    });
+
   });
 }
