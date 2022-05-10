@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:kakuro_game/assets/consts.dart';
-import 'package:kakuro_game/providers/field_notifier.dart';
+import 'package:kakuro_game/providers/field_controller.dart';
 import 'package:kakuro_game/screens/game_screen/game_screen.dart';
 
 import 'package:provider/provider.dart';
@@ -18,10 +18,9 @@ class MenuScreen extends StatelessWidget {
   static const _sizes = ['5', '6', '7', '8', '9', '10', '11', '12', '13', '14'];
   static const _difficulties = ['Beginner', 'Easy', 'Medium', 'Hard'];
 
-  void _onButtonPlayClicked(BuildContext context, FieldNotifier notifier, final int _height, final int _width, final int _difficulty) {
+  void _onButtonPlayClicked(BuildContext context, FieldController notifier, final int _height, final int _width, final int _difficulty) {
   
     debugPrint('Play button was clicked, create new game with parameters: height: $_height, width: $_width and difficulty: $_difficulty');
-    // TODO change to correct values.
     notifier.field = Field.getRandomField(_height, _width, _difficulty);
     Navigator.pushNamed(context, GameScreen.routeName);
   }
@@ -32,7 +31,7 @@ class MenuScreen extends StatelessWidget {
     int _widthIndex = 0;
     int _difficultyIndex = 0;
 
-    final fieldNotifier = Provider.of<FieldNotifier>(context);
+    final fieldNotifier = Provider.of<FieldController>(context);
 
     return Scaffold(
         // Background color of the screen.

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:kakuro_game/models/options_icons.dart';
-import 'package:kakuro_game/providers/field_notifier.dart';
+import 'package:kakuro_game/providers/field_controller.dart';
 import 'package:kakuro_game/providers/stopwatch_controller.dart';
 import 'package:kakuro_game/screens/menu_screen/menu_screen.dart';
 import 'package:kakuro_game/utilities/field/field.dart';
@@ -32,7 +32,7 @@ class GameScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final fieldNotifier = Provider.of<FieldNotifier>(context);
+    final fieldNotifier = Provider.of<FieldController>(context);
 
     final fieldWidth = fieldNotifier.field.width * 38.0;
     final fieldHeight = fieldNotifier.field.height * 38.0;
