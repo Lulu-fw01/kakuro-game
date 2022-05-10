@@ -1,4 +1,3 @@
-
 import 'package:flutter/material.dart';
 import 'package:kakuro_game/assets/consts.dart';
 import 'package:kakuro_game/utilities/field/cells/input_cell.dart';
@@ -14,6 +13,9 @@ class InputCellWidget extends StatefulWidget {
   _InputCellState createState() => _InputCellState();
 }
 
+/// Extension for animation controller.
+/// Animation wll work n times and then stop.
+/// After animation onCompleted function will be called.
 extension on AnimationController {
   void repeatEx({required int times, VoidCallback? onCompleted}) {
     var count = 0;
@@ -31,8 +33,8 @@ extension on AnimationController {
   }
 }
 
-
-class _InputCellState extends State<InputCellWidget> with TickerProviderStateMixin {
+class _InputCellState extends State<InputCellWidget>
+    with TickerProviderStateMixin {
   late AnimationController _hintAnimationController;
   late bool showingHint;
 
@@ -40,12 +42,15 @@ class _InputCellState extends State<InputCellWidget> with TickerProviderStateMix
   void initState() {
     super.initState();
     showingHint = false;
-
-    _hintAnimationController =
-        AnimationController(vsync: this, duration: const Duration(milliseconds: 300))
-        ..repeatEx(times: 5, onCompleted: () => setState(() {
-          showingHint = false;
-        }));
+    // Create animation controller.
+    // Set our extension: repeat 5 times and as onCompeted method set new state for our widget.
+    _hintAnimationController = AnimationController(
+        vsync: this, duration: const Duration(milliseconds: 300))
+      ..repeatEx(
+          times: 5,
+          onCompleted: () => setState(() {
+                showingHint = false;
+              }));
 
     widget.cell.showHintAnimation = () {
       setState(() {
@@ -131,6 +136,8 @@ class _InputCellState extends State<InputCellWidget> with TickerProviderStateMix
     );
   }
 
+  /// Widget that describes test of cell:
+  /// If user asked about hint he will see text with animation.
   Widget _cellText() => showingHint
       ? FadeTransition(
           opacity: _hintAnimationController,
@@ -144,9 +151,9 @@ class _InputCellState extends State<InputCellWidget> with TickerProviderStateMix
           style: const TextStyle(color: buttonContentColor),
         );
 
-   @override
-    void dispose() {
-      _hintAnimationController.dispose();
-      super.dispose();
-    }
+  @override
+  void dispose() {
+    _hintAnimationController.dispose();
+    super.dispose();
+  }
 }
