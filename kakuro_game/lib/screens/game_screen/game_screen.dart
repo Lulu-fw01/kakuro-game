@@ -58,14 +58,14 @@ class GameScreen extends StatelessWidget {
                             child: InteractiveViewer(
                           //constrained: false,
                           boundaryMargin: EdgeInsets.only(
-                            left: 38,
+                            left: fieldWidth > constraints.maxWidth ? 38 : 0,
                             right: fieldWidth > constraints.maxWidth
                                 ? (fieldWidth - constraints.maxWidth + 38)
-                                : 38,
-                            top: 38,
-                            bottom: fieldHeight > constraints.maxHeight
+                                : 0,
+                            top: fieldHeight > 0.9 * constraints.maxHeight ? 38 : 0,
+                            bottom: fieldHeight > 0.9 * constraints.maxHeight
                                 ? (fieldHeight - constraints.maxHeight + 38)
-                                : 38,
+                                : 0,
                           ),
                           minScale: 0.3,
                           maxScale: 2,
