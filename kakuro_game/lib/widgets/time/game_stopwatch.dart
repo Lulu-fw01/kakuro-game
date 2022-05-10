@@ -2,7 +2,7 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
-import 'package:kakuro_game/providers/stopwatch_notifier.dart';
+import 'package:kakuro_game/providers/stopwatch_controller.dart';
 import 'package:kakuro_game/widgets/time/time_card.dart';
 import 'package:provider/provider.dart';
 
@@ -53,7 +53,7 @@ class _GameStopwatchState extends State<GameStopwatch> {
     final minutes = twoDigits(duration.inMinutes.remainder(60));
     final seconds = twoDigits(duration.inSeconds.remainder(60));
 
-    return Consumer<StopwatchNotifier>(
+    return Consumer<StopwatchController>(
         builder: (context, notifier, _) => Visibility(
             visible: notifier.stopwatchVisible,
             child: Row(mainAxisAlignment: MainAxisAlignment.center, children: [

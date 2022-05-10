@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:kakuro_game/models/options_icons.dart';
 import 'package:kakuro_game/providers/field_notifier.dart';
-import 'package:kakuro_game/providers/stopwatch_notifier.dart';
+import 'package:kakuro_game/providers/stopwatch_controller.dart';
 import 'package:kakuro_game/screens/menu_screen/menu_screen.dart';
 import 'package:kakuro_game/utilities/field/field.dart';
 import 'package:kakuro_game/widgets/options_floating_button/option_button/stopwatch_button.dart';
@@ -22,11 +22,6 @@ class GameScreen extends StatelessWidget {
     Navigator.pushNamed(context, MenuScreen.routeName);
   }
 
-  void _changeStopwatchVisible(StopwatchNotifier notifier) {
-    // Change visible of stopwatch.
-    notifier.changeVisible();
-  }
-
   void _showHint(Field field) {
     field.showHint();
   }
@@ -37,9 +32,6 @@ class GameScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // Get notifier about stopwatch visible.
-    final notifier = Provider.of<StopwatchNotifier>(context);
-
     final fieldNotifier = Provider.of<FieldNotifier>(context);
 
     final fieldWidth = fieldNotifier.field.width * 38.0;
@@ -104,7 +96,9 @@ class GameScreen extends StatelessWidget {
                 ),
               ),
               StopwatchButton(
-                onPressed: () => _changeStopwatchVisible(notifier),
+                onPressed: () =>
+                    Provider.of<StopwatchController>(context, listen: false)
+                        .changeVisible(),
                 onIcon: const Icon(
                   Icons.timer,
                   color: buttonContentColor,

@@ -1,18 +1,11 @@
 import 'package:flutter/widgets.dart';
 
 /// Notifier for [GameStopwatch].
-class StopwatchNotifier extends ChangeNotifier {
+class StopwatchController extends ChangeNotifier {
   bool _stopwatchVisible = true;
 
   /// Stopwatch visible.
   bool get stopwatchVisible => _stopwatchVisible;
-
-  /// Set stopwatch visible.
-  set stopwatchVisible(bool newVisible) {
-    if (_stopwatchVisible != newVisible) {
-      _stopwatchVisible = newVisible;
-    } 
-  }
 
   /// Change stopwatch visible to opposite.
   void changeVisible() {

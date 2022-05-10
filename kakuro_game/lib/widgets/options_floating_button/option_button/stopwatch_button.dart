@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:kakuro_game/assets/consts.dart';
-import 'package:kakuro_game/providers/stopwatch_notifier.dart';
+import 'package:kakuro_game/providers/stopwatch_controller.dart';
 import 'package:provider/provider.dart';
 
 /// Stopwatch button that appears when
@@ -21,16 +21,16 @@ class StopwatchButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Consumer<StopwatchNotifier>(
-        builder: (context, notifier, _) => Material(
-              shape: const CircleBorder(),
-              clipBehavior: Clip.antiAlias,
-              color: buttonColor,
-              elevation: 4.0,
-              child: IconButton(
-                onPressed: onPressed,
-                icon: notifier.stopwatchVisible ? onIcon : offIcon,
-              ),
-            ));
+    return Material(
+      shape: const CircleBorder(),
+      clipBehavior: Clip.antiAlias,
+      color: buttonColor,
+      elevation: 4.0,
+      child: IconButton(
+          onPressed: onPressed,
+          icon: Consumer<StopwatchController>(
+              builder: (context, controller, _) =>
+                  controller.stopwatchVisible ? onIcon : offIcon)),
+    );
   }
 }
