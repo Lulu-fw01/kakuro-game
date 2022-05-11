@@ -37,11 +37,12 @@ class Field {
 
   /// Make every [InputCell]'s actual value equal to answer.
   void showAnswer() {
-    // TODO maybe use if and not render widgets with correct value.
     for (var row in _cells) {
       row.whereType<InputCell>().forEach((cell) {
-        cell.actualValue = cell.answerValue;
-        cell.updateWidgetState();
+        if (cell.actualValue != cell.answerValue) {
+          cell.actualValue = cell.answerValue;
+          cell.updateWidgetState();
+        }
       });
     }
     solved = true;
