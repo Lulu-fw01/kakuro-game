@@ -4,6 +4,7 @@ import 'package:kakuro_game/providers/field_controller.dart';
 import 'package:kakuro_game/providers/stopwatch_controller.dart';
 import 'package:kakuro_game/screens/menu_screen/menu_screen.dart';
 import 'package:kakuro_game/utilities/field/field.dart';
+import 'package:kakuro_game/widgets/field/field_widget.dart';
 import 'package:kakuro_game/widgets/options_floating_button/option_button/stopwatch_button.dart';
 import 'package:provider/provider.dart';
 import 'package:kakuro_game/assets/consts.dart';
@@ -34,8 +35,6 @@ class GameScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     final fieldNotifier = Provider.of<FieldController>(context);
 
-    final fieldWidth = fieldNotifier.field.width * 38.0;
-    final fieldHeight = fieldNotifier.field.height * 38.0;
 
     return WillPopScope(
         onWillPop: _onWillPop,
@@ -45,41 +44,9 @@ class GameScreen extends StatelessWidget {
           // Place buttons in the center of screen.
           body: Stack(
             alignment: Alignment.topCenter,
-            children: [
-              Container(
-                  alignment: Alignment.center,
-                  //width: MediaQuery.of(context).size.width,
-                  child: Center(child: LayoutBuilder(
-                    builder: (context, constraints) {
-                      return SizedBox(
-                        width: constraints.maxWidth,
-                        height: constraints.maxHeight,
-                        child: ClipRect(
-                            child: InteractiveViewer(
-                          //constrained: false,
-                          boundaryMargin: EdgeInsets.only(
-                            left: fieldWidth > constraints.maxWidth ? 38 : 0,
-                            right: fieldWidth > constraints.maxWidth
-                                ? (fieldWidth - constraints.maxWidth + 38)
-                                : 0,
-                            top: fieldHeight > 0.9 * constraints.maxHeight ? 38 : 0,
-                            bottom: fieldHeight > 0.9 * constraints.maxHeight
-                                ? (fieldHeight - constraints.maxHeight + 38)
-                                : 0,
-                          ),
-                          minScale: 0.3,
-                          maxScale: 2,
-                          child: Center(
-                              child: Wrap(
-                            direction: Axis.vertical,
-                            spacing: 1.5,
-                            children: fieldNotifier.field.getRows(),
-                          )),
-                        )),
-                      );
-                    },
-                  ))),
-              const Padding(
+            children: const [
+              FieldWidget(),
+              Padding(
                 padding: EdgeInsets.all(56.0),
                 child: GameStopwatch(),
               ),
