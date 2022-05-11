@@ -39,6 +39,7 @@ class GameScreen extends StatelessWidget {
 
   void _checkAnswer(Field field, BuildContext context) {
     if (field.checkSolution()) {
+      // TODO This if in another method with return Text Widget.
       var text = RichText(
         text: const TextSpan(
           style: TextStyle(
@@ -59,6 +60,7 @@ class GameScreen extends StatelessWidget {
       );
       showAlertDialog(context, text);
     } else {
+      // TODO This else in another method with return Text widget.
       var text = RichText(
         text: const TextSpan(
           style: TextStyle(
@@ -138,9 +140,11 @@ class GameScreen extends StatelessWidget {
         ],
       ),
       floatingActionButton: Stack(
+        // TODO левая кнопка не ровно стоит на андроиде. мб Padding использовать или еще что-то. 
+        // мб в один Row поместить эти кнопки и по разным концам расскидать.
         children: <Widget>[
           Align(
-            alignment: Alignment.bottomLeft + Alignment(1, 0) / 6,
+            alignment: Alignment.bottomLeft + const Alignment(1, 0) / 6,
             child: FloatingActionButton(
               heroTag: 'check',
               onPressed: () => _checkAnswer(fieldNotifier.field, context),
@@ -198,6 +202,7 @@ class GameScreen extends StatelessWidget {
     );
   }
 
+  // TODO Maybe change to custom dialog.
   showAlertDialog(BuildContext context, RichText text) {
     // set up the button
     Widget okButton = TextButton(

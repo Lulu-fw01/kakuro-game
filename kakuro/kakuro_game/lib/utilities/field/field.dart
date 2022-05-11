@@ -75,6 +75,7 @@ class Field {
 
   /// This method check if current cells values form a solution.
   bool checkSolution() {
+    // TODO есть проблема. иногда решение получается не уникальное. Тогда просто пройтсь циклом не поможет.
     for (int i = 0; i < _height; ++i) {
       for (int j = 0; j < _width; ++j) {
         if (_cells[i][j] is InputCell &&

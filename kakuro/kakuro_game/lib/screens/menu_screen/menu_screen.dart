@@ -181,6 +181,7 @@ class MenuScreen extends StatelessWidget {
           TextSpan(
               text: 'Buttons:\n',
               style: TextStyle(fontWeight: FontWeight.bold)),
+              // TODO Одинаковыу TextSapn в отдельный виджет.
           TextSpan(
               text: 'Checkmark ',
               style: TextStyle(
@@ -215,7 +216,7 @@ class MenuScreen extends StatelessWidget {
       ),
     );
 
-    // set up the button
+    // Set up the button.
     Widget okButton = TextButton(
       child: const Text("OK"),
       onPressed: () {
@@ -223,7 +224,7 @@ class MenuScreen extends StatelessWidget {
       },
     );
 
-    // set up the AlertDialog
+    // Set up the AlertDialog.
     AlertDialog alert = AlertDialog(
       title: const Text("Guide"),
       content: text,
@@ -232,7 +233,7 @@ class MenuScreen extends StatelessWidget {
       ],
     );
 
-    // show the dialog
+    // Show the dialog.
     showDialog(
       context: context,
       builder: (BuildContext context) {
