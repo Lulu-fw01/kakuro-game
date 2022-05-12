@@ -1,7 +1,9 @@
+import 'dart:ffi';
+import 'dart:io';
 import 'dart:math';
 
+import 'package:ffi/ffi.dart';
 import 'package:flutter/material.dart';
-import 'package:kakuro_game/providers/ffi_bridge/ffi_bridge.dart';
 import 'package:kakuro_game/utilities/field/cells/empty_cell.dart';
 import 'package:kakuro_game/utilities/field/cells/info_cell.dart';
 import 'package:kakuro_game/utilities/field/cells/input_cell.dart';
@@ -96,8 +98,7 @@ class Field {
   /// Method for generating kakuro board.
   static Field getRandomField(int height, int width, int difficulty) {
     debugPrint('Start field generation.');
-    String stringField =
-        FFIBridge.generateKakuroBoard(height, width, difficulty);
+    String stringField = generateKakuroBoard(height, width, difficulty);
     debugPrint("Field in string format : $stringField");
     return getFieldFromString(stringField, height, width);
   }
@@ -148,5 +149,27 @@ class Field {
       default:
         return EmptyCell();
     }
+  }
+
+
+
+  /// C++ library.
+  static final DynamicLibrary _nativeApiLib = Platform.isAndroid
+      ? DynamicLibrary.open('libkakuro_native_api.so')
+      : DynamicLibrary.process();
+
+  /// Native function for generating field.
+  static final Pointer<Utf8> Function(int height, int width, int difficulty)
+      _generateBoard = _nativeApiLib
+          .lookup<NativeFunction<Pointer<Utf8> Function(Int32, Int32, Int32)>>(
+              'generateBoard')
+          .asFunction();
+
+  /// This function calls function from native C++ library.
+  static String generateKakuroBoard(int height, int width, int difficulty) {
+    debugPrint('Calling native function for generating field.');
+    Pointer<Utf8> cStrBoard = _generateBoard(height, width, difficulty);
+    debugPrint('Got string from native function.');
+    return cStrBoard.toDartString();
   }
 }
