@@ -37,49 +37,57 @@ class GameScreen extends StatelessWidget {
     field.showAnswer();
   }
 
+  RichText _getCorrectAnswerString() {
+    var text = RichText(
+      text: const TextSpan(
+        style: TextStyle(
+          fontSize: 16.0,
+          color: Colors.black,
+        ),
+        children: <TextSpan>[
+          TextSpan(
+              text: 'Congrats!\n',
+              style: TextStyle(
+                  fontWeight: FontWeight.bold,
+                  color: Color.fromARGB(255, 36, 131, 31))),
+          TextSpan(
+              text: 'Correct answer',
+              style: TextStyle(color: Color.fromARGB(255, 36, 131, 31))),
+        ],
+      ),
+    );
+    return text;
+  }
+
+  RichText _getWrongAnswerString() {
+    var text = RichText(
+      text: const TextSpan(
+        style: TextStyle(
+          fontSize: 16.0,
+          color: Colors.black,
+        ),
+        children: <TextSpan>[
+          TextSpan(
+              text: 'Try again!\n',
+              style: TextStyle(
+                  fontWeight: FontWeight.bold,
+                  color: Color.fromARGB(255, 167, 60, 38))),
+          TextSpan(
+              text: 'Wrong answer',
+              style: TextStyle(color: Color.fromARGB(255, 167, 60, 38))),
+        ],
+      ),
+    );
+    return text;
+  }
+
   void _checkAnswer(Field field, BuildContext context) {
     if (field.checkSolution()) {
       // TODO This if in another method with return Text Widget.
-      var text = RichText(
-        text: const TextSpan(
-          style: TextStyle(
-            fontSize: 16.0,
-            color: Colors.black,
-          ),
-          children: <TextSpan>[
-            TextSpan(
-                text: 'Congrats!\n',
-                style: TextStyle(
-                    fontWeight: FontWeight.bold,
-                    color: Color.fromARGB(255, 36, 131, 31))),
-            TextSpan(
-                text: 'Correct answer',
-                style: TextStyle(color: Color.fromARGB(255, 36, 131, 31))),
-          ],
-        ),
-      );
-      showAlertDialog(context, text);
+      showAlertDialog(context, _getCorrectAnswerString());
     } else {
       // TODO This else in another method with return Text widget.
-      var text = RichText(
-        text: const TextSpan(
-          style: TextStyle(
-            fontSize: 16.0,
-            color: Colors.black,
-          ),
-          children: <TextSpan>[
-            TextSpan(
-                text: 'Try again!\n',
-                style: TextStyle(
-                    fontWeight: FontWeight.bold,
-                    color: Color.fromARGB(255, 167, 60, 38))),
-            TextSpan(
-                text: 'Wrong answer',
-                style: TextStyle(color: Color.fromARGB(255, 167, 60, 38))),
-          ],
-        ),
-      );
-      showAlertDialog(context, text);
+      showAlertDialog(context, _getWrongAnswerString());
     }
   }
 
@@ -140,21 +148,24 @@ class GameScreen extends StatelessWidget {
         ],
       ),
       floatingActionButton: Stack(
-        // TODO левая кнопка не ровно стоит на андроиде. мб Padding использовать или еще что-то. 
+        // TODO левая кнопка не ровно стоит на андроиде. мб Padding использовать или еще что-то.
         // мб в один Row поместить эти кнопки и по разным концам расскидать.
         children: <Widget>[
-          Align(
-            alignment: Alignment.bottomLeft + const Alignment(1, 0) / 6,
-            child: FloatingActionButton(
-              heroTag: 'check',
-              onPressed: () => _checkAnswer(fieldNotifier.field, context),
-              child: const Icon(
-                Icons.check,
-                size: 30,
+          Padding(
+            padding: EdgeInsets.only(left: 32),
+            child: Align(
+              alignment: Alignment.bottomLeft,
+              child: FloatingActionButton(
+                heroTag: 'check',
+                onPressed: () => _checkAnswer(fieldNotifier.field, context),
+                child: const Icon(
+                  Icons.check,
+                  size: 30,
+                ),
+                shape: const CircleBorder(),
+                backgroundColor: buttonColor,
+                foregroundColor: buttonContentColor,
               ),
-              shape: const CircleBorder(),
-              backgroundColor: buttonColor,
-              foregroundColor: buttonContentColor,
             ),
           ),
           Align(
