@@ -187,7 +187,6 @@ class MenuScreen extends StatelessWidget {
               text:
                   '1) Place one digit from 1 to 9 in each empty box so that the sum of the digits in each set of consecutive empty boxes(horizontal or vertical) is the number appearing to the left of a set or above the set.\n2) No number may appear more than once in any consecutive boxes.\n\n'),
           _someTextBold('Buttons:\n'),
-          // TODO Одинаковыу TextSapn в отдельный виджет.
           _someTextGreen('Checkmark '),
           const TextSpan(text: '- check your solution\n'),
           _someTextGreen('Trophy '),

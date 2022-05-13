@@ -83,10 +83,8 @@ class GameScreen extends StatelessWidget {
 
   void _checkAnswer(Field field, BuildContext context) {
     if (field.checkSolution()) {
-      // TODO This if in another method with return Text Widget.
       showAlertDialog(context, _getCorrectAnswerString());
     } else {
-      // TODO This else in another method with return Text widget.
       showAlertDialog(context, _getWrongAnswerString());
     }
   }
@@ -152,7 +150,7 @@ class GameScreen extends StatelessWidget {
         // мб в один Row поместить эти кнопки и по разным концам расскидать.
         children: <Widget>[
           Padding(
-            padding: EdgeInsets.only(left: 32),
+            padding: const EdgeInsets.only(left: 32),
             child: Align(
               alignment: Alignment.bottomLeft,
               child: FloatingActionButton(
@@ -213,7 +211,6 @@ class GameScreen extends StatelessWidget {
     );
   }
 
-  // TODO Maybe change to custom dialog.
   showAlertDialog(BuildContext context, RichText text) {
     // set up the button
     Widget okButton = TextButton(
