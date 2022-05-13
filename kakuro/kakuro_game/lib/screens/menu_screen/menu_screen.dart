@@ -165,53 +165,39 @@ class MenuScreen extends StatelessWidget {
             onPressed: onClick,
           ));
 
+  TextSpan _someTextGreen(String text) => TextSpan(
+      text: text,
+      style: const TextStyle(
+          fontWeight: FontWeight.bold,
+          color: Color.fromARGB(255, 49, 122, 100)));
+
+  TextSpan _someTextBold(String text) =>
+      TextSpan(text: text, style: const TextStyle(fontWeight: FontWeight.bold));
+
   showAlertDialog(BuildContext context) {
     var text = RichText(
-      text: const TextSpan(
-        style: TextStyle(
+      text: TextSpan(
+        style: const TextStyle(
           fontSize: 16.0,
           color: Colors.black,
         ),
         children: <TextSpan>[
-          TextSpan(
-              text: 'Rules:\n', style: TextStyle(fontWeight: FontWeight.bold)),
-          TextSpan(
+          _someTextBold('Rules:\n'),
+          const TextSpan(
               text:
                   '1) Place one digit from 1 to 9 in each empty box so that the sum of the digits in each set of consecutive empty boxes(horizontal or vertical) is the number appearing to the left of a set or above the set.\n2) No number may appear more than once in any consecutive boxes.\n\n'),
-          TextSpan(
-              text: 'Buttons:\n',
-              style: TextStyle(fontWeight: FontWeight.bold)),
-              // TODO Одинаковыу TextSapn в отдельный виджет.
-          TextSpan(
-              text: 'Checkmark ',
-              style: TextStyle(
-                  fontWeight: FontWeight.bold,
-                  color: Color.fromARGB(255, 49, 122, 100))),
-          TextSpan(text: '- check your solution\n'),
-          TextSpan(
-              text: 'Trophy ',
-              style: TextStyle(
-                  fontWeight: FontWeight.bold,
-                  color: Color.fromARGB(255, 49, 122, 100))),
-          TextSpan(text: '- see the right solution\n'),
-          TextSpan(
-              text: 'Lamp ',
-              style: TextStyle(
-                  fontWeight: FontWeight.bold,
-                  color: Color.fromARGB(255, 49, 122, 100))),
-          TextSpan(text: '- get a hint\n'),
-          TextSpan(
-              text: 'Timer ',
-              style: TextStyle(
-                  fontWeight: FontWeight.bold,
-                  color: Color.fromARGB(255, 49, 122, 100))),
-          TextSpan(text: '- show or close a timer\n'),
-          TextSpan(
-              text: 'Home ',
-              style: TextStyle(
-                  fontWeight: FontWeight.bold,
-                  color: Color.fromARGB(255, 49, 122, 100))),
-          TextSpan(text: '- go to start page'),
+          _someTextBold('Buttons:\n'),
+          // TODO Одинаковыу TextSapn в отдельный виджет.
+          _someTextGreen('Checkmark '),
+          const TextSpan(text: '- check your solution\n'),
+          _someTextGreen('Trophy '),
+          const TextSpan(text: '- see the right solution\n'),
+          _someTextGreen('Lamp '),
+          const TextSpan(text: '- get a hint\n'),
+          _someTextGreen('Timer '),
+          const TextSpan(text: '- show or close a timer\n'),
+          _someTextGreen('Home '),
+          const TextSpan(text: '- go to start page'),
         ],
       ),
     );
