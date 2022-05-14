@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'dart:math' as math;
 
 /// Widget for animation of [OptionButton].
-/// 
+///
 /// Animated build of button.
 @immutable
 class ExpandingOptionButton extends StatelessWidget {

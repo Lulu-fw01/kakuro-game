@@ -1,20 +1,17 @@
-
 import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
-import 'package:kakuro_game/providers/stopwatch_notifier.dart';
+import 'package:kakuro_game/providers/stopwatch_controller.dart';
 import 'package:kakuro_game/widgets/time/time_card.dart';
 import 'package:provider/provider.dart';
 
 /// Stopwatch widget.
 class GameStopwatch extends StatefulWidget {
-
   const GameStopwatch({Key? key}) : super(key: key);
 
   @override
   State<StatefulWidget> createState() => _GameStopwatchState();
-  
 }
 
 class _GameStopwatchState extends State<GameStopwatch> {
@@ -22,6 +19,7 @@ class _GameStopwatchState extends State<GameStopwatch> {
 
   Timer? timer;
   bool countDown = true;
+
   /// Visible property.
   bool visible = true;
 
@@ -33,7 +31,7 @@ class _GameStopwatchState extends State<GameStopwatch> {
 
   void addTime() {
     setState(() {
-      final seconds = duration.inSeconds + 1;  
+      final seconds = duration.inSeconds + 1;
       duration = Duration(seconds: seconds);
     });
   }
@@ -44,7 +42,7 @@ class _GameStopwatchState extends State<GameStopwatch> {
     super.dispose();
   }
 
-  void stopTimer(){
+  void stopTimer() {
     setState(() => timer?.cancel());
   }
 
@@ -55,7 +53,7 @@ class _GameStopwatchState extends State<GameStopwatch> {
     final minutes = twoDigits(duration.inMinutes.remainder(60));
     final seconds = twoDigits(duration.inSeconds.remainder(60));
 
-    return Consumer<StopwatchNotifier>(
+    return Consumer<StopwatchController>(
         builder: (context, notifier, _) => Visibility(
             visible: notifier.stopwatchVisible,
             child: Row(mainAxisAlignment: MainAxisAlignment.center, children: [

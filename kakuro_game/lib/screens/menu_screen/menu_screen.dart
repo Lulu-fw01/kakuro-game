@@ -1,26 +1,28 @@
 import 'package:flutter/material.dart';
 import 'package:kakuro_game/assets/consts.dart';
-import 'package:kakuro_game/models/field_settings/field_settings.dart';
+import 'package:kakuro_game/providers/field_controller.dart';
 import 'package:kakuro_game/screens/game_screen/game_screen.dart';
-import 'dart:developer';
+
+import 'package:provider/provider.dart';
+
+import '../../utilities/field/field.dart';
 
 
 /// Main menu screen of kakuro-game.
 class MenuScreen extends StatelessWidget {
+  const MenuScreen({Key? key}) : super(key: key);
+
   /// Route of this screen.
   static const routeName = "/home";
 
-  const MenuScreen({Key? key}) : super(key: key);
-
-  static const _sizes = ['8', '9', '10', '11', '12', '13', '14', '15'];
+  static const _sizes = ['5', '6', '7', '8', '9', '10', '11', '12', '13', '14'];
   static const _difficulties = ['Beginner', 'Easy', 'Medium', 'Hard'];
 
-  void _onButtonPlayClicked(BuildContext context, final int _height, final int _width, final int _difficulty) {
-    // TODO uncomment.
-    //Navigator.pushNamed(context, GameScreen.routeName, arguments: FieldSettings(_height, _width, _difficulty));
-
-    log('Play button click, go to game screen with parameters: height: $_height, width: $_width and difficulty: $_difficulty');
-    Navigator.pushNamed(context, GameScreen.routeName, arguments: FieldSettings(5, 5, _difficulty));
+  void _onButtonPlayClicked(BuildContext context, FieldController notifier, final int _height, final int _width, final int _difficulty) {
+  
+    debugPrint('Play button was clicked, create new game with parameters: height: $_height, width: $_width and difficulty: $_difficulty');
+    notifier.field = Field.getRandomField(_height, _width, _difficulty);
+    Navigator.pushNamed(context, GameScreen.routeName);
   }
 
   @override
@@ -28,6 +30,8 @@ class MenuScreen extends StatelessWidget {
     int _heightIndex = 0;
     int _widthIndex = 0;
     int _difficultyIndex = 0;
+
+    final fieldNotifier = Provider.of<FieldController>(context);
 
     return Scaffold(
         // Background color of the screen.
@@ -42,8 +46,8 @@ class MenuScreen extends StatelessWidget {
             children: <Widget>[
               _menuScreenButton(
                   text: 'Play',
-                  onClick: () => _onButtonPlayClicked(context, _heightIndex + 8,
-                      _widthIndex + 8, 4 - _difficultyIndex)),
+                  onClick: () => _onButtonPlayClicked(context, fieldNotifier, _heightIndex + 5,
+                      _widthIndex + 5, 4 - _difficultyIndex)),
 
               // TODO make more beautiful part with lists.
               Padding(

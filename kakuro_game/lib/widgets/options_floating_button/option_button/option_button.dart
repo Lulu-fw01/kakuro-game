@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:kakuro_game/assets/consts.dart';
 
-/// Option button that appears when 
+/// Option button that appears when
 /// [OptionsFloatingButton] was clicked.
 @immutable
 class OptionButton extends StatelessWidget {

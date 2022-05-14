@@ -1,4 +1,4 @@
-///
+/// TODO think about it.
 /// Idea of this button was taken from https://docs.flutter.dev/cookbook/effects/expandable-fab
 
 import 'package:flutter/material.dart';
@@ -24,8 +24,10 @@ class OptionsFab extends StatefulWidget {
 
   /// In which state widget will be o start.
   final bool? initialOpen;
+
   /// Max distance to each element.
   final double distance;
+
   /// Widgets that will be shown when OptionsFab was clicked.
   final List<Widget> children;
 
@@ -156,7 +158,10 @@ class _OptionsFabState extends State<OptionsFab>
           child: FloatingActionButton(
             backgroundColor: fourthColor,
             onPressed: _toggle,
-            child: const Icon(Icons.menu, color: buttonContentColor,),
+            child: const Icon(
+              Icons.menu,
+              color: buttonContentColor,
+            ),
           ),
         ),
       ),
