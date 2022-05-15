@@ -17,3 +17,8 @@ char* generateBoard(int height, int width, int difficulty) {
 
     return cstr;
 }
+
+EXPORT
+bool checkSolution(int, int, char* board) {
+    return true;
+}
