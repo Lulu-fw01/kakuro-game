@@ -77,5 +77,9 @@ void main() {
 
     });
 
+    test('Field to native format string', () {
+
+    });
+
   });
 }

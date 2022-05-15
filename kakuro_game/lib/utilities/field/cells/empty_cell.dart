@@ -9,4 +9,7 @@ class EmptyCell {
   Widget getWidget() {
     return const EmptyCellWidget();
   }
+
+  /// Convert cell into native format [String].
+  String get nativeString => 'emp';
 }

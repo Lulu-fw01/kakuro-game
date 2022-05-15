@@ -26,4 +26,7 @@ class InputCell extends EmptyCell {
       cell: this,
     );
   }
+
+  @override
+  String get nativeString => 'inp#' + answerValue.toString() + '\\' + actualValue.toString();
 }

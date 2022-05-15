@@ -81,6 +81,17 @@ class Field {
     return false;
   }
 
+  String toNativeFormat() {
+    String board = "";
+    for (var row in _cells) {
+      for (var cell in row) {
+        board += cell.nativeString + ' ';
+      }
+    }
+
+    return board.substring(0, board.length - 1);
+  }
+
   /// This method returns field as list of widgets.
   List<Wrap> getRows() {
     List<Wrap> cells = List<Wrap>.filled(height, Wrap());
@@ -163,6 +174,13 @@ class Field {
       _generateBoard = _nativeApiLib
           .lookup<NativeFunction<Pointer<Utf8> Function(Int32, Int32, Int32)>>(
               'generateBoard')
+          .asFunction();
+
+  /// Native function for checking solution.
+  static final bool Function(int height, int width, Pointer<Utf8> board)
+      _checkSolution = _nativeApiLib
+          .lookup<NativeFunction<Bool Function(Int32, Int32, Pointer<Utf8>)>>(
+              'checkSolution')
           .asFunction();
 
   /// This function calls function from native C++ library.

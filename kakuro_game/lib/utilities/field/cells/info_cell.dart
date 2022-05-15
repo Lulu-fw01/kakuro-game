@@ -17,4 +17,7 @@ class InfoCell extends EmptyCell {
     return InfoCellWidget(
         horizontalValue: horizontalValue, verticalValue: verticalValue);
   }
+
+  @override
+  String get nativeString => 'inf#' + verticalValue.toString() + '\\' + horizontalValue.toString();
 }

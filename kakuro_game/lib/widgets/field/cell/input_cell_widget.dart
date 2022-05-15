@@ -24,6 +24,7 @@ extension on AnimationController {
         if (++count < times) {
           reverse();
         } else {
+          count = 0;
           onCompleted!();
         }
       } else if (status == AnimationStatus.dismissed) {
