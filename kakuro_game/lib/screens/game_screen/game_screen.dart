@@ -30,6 +30,62 @@ class GameScreen extends StatelessWidget {
     field.showAnswer();
   }
 
+  RichText _getCorrectAnswerString(Field field) {
+    int usedHints = field.usedHints;
+    var text = RichText(
+      text: TextSpan(
+        style: const TextStyle(
+          fontSize: 16.0,
+          color: Colors.black,
+        ),
+        children: <TextSpan>[
+          const TextSpan(
+              text: 'Congrats!\n',
+              style: TextStyle(
+                  fontWeight: FontWeight.bold,
+                  color: Color.fromARGB(255, 36, 131, 31))),
+          const TextSpan(
+              text: 'Correct answer\n',
+              style: TextStyle(color: Color.fromARGB(255, 36, 131, 31))),
+          TextSpan(
+            text: 'Used hints: $usedHints',
+          )
+        ],
+      ),
+    );
+    return text;
+  }
+
+  RichText _getWrongAnswerString() {
+    var text = RichText(
+      text: const TextSpan(
+        style: TextStyle(
+          fontSize: 16.0,
+          color: Colors.black,
+        ),
+        children: <TextSpan>[
+          TextSpan(
+              text: 'Try again!\n',
+              style: TextStyle(
+                  fontWeight: FontWeight.bold,
+                  color: Color.fromARGB(255, 167, 60, 38))),
+          TextSpan(
+              text: 'Wrong answer',
+              style: TextStyle(color: Color.fromARGB(255, 167, 60, 38))),
+        ],
+      ),
+    );
+    return text;
+  }
+
+  void _checkAnswer(Field field, BuildContext context) {
+    if (field.checkSolution()) {
+      showAlertDialog(context, _getCorrectAnswerString(field));
+    } else {
+      showAlertDialog(context, _getWrongAnswerString());
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     final fieldNotifier = Provider.of<FieldController>(context);
@@ -85,41 +141,67 @@ class GameScreen extends StatelessWidget {
               ),
             ],
           ),
-          floatingActionButton: OptionsFab(
-            distance: 112.0,
-            children: [
-              OptionButton(
-                onPressed: () => _toMenuScreen(context),
-                icon: const Icon(
-                  Icons.home,
-                  color: buttonContentColor,
+          floatingActionButton: Stack(
+            // TODO левая кнопка не ровно стоит на андроиде. мб Padding использовать или еще что-то.
+            // мб в один Row поместить эти кнопки и по разным концам расскидать.
+            children: <Widget>[
+              Padding(
+                padding: const EdgeInsets.only(left: 32),
+                child: Align(
+                  alignment: Alignment.bottomLeft,
+                  child: FloatingActionButton(
+                    heroTag: 'check',
+                    onPressed: () => _checkAnswer(fieldNotifier.field, context),
+                    child: const Icon(
+                      Icons.check,
+                      size: 30,
+                    ),
+                    shape: const CircleBorder(),
+                    backgroundColor: buttonColor,
+                    foregroundColor: buttonContentColor,
+                  ),
                 ),
               ),
-              StopwatchButton(
-                onPressed: () =>
-                    Provider.of<StopwatchController>(context, listen: false)
-                        .changeVisible(),
-                onIcon: const Icon(
-                  Icons.timer,
-                  color: buttonContentColor,
-                ),
-                offIcon: const Icon(
-                  Icons.timer_off,
-                  color: buttonContentColor,
-                ),
-              ),
-              OptionButton(
-                onPressed: () => _showHint(fieldNotifier.field),
-                icon: const Icon(
-                  OptionsIcons.lamp,
-                  color: buttonContentColor,
-                ),
-              ),
-              OptionButton(
-                onPressed: () => _showAnswer(fieldNotifier.field),
-                icon: const Icon(
-                  OptionsIcons.award,
-                  color: buttonContentColor,
+              Align(
+                alignment: Alignment.bottomRight,
+                child: OptionsFab(
+                  distance: 112.0,
+                  children: [
+                    OptionButton(
+                      onPressed: () => _toMenuScreen(context),
+                      icon: const Icon(
+                        Icons.home,
+                        color: buttonContentColor,
+                      ),
+                    ),
+                    StopwatchButton(
+                      onPressed: () => Provider.of<StopwatchController>(context,
+                              listen: false)
+                          .changeVisible(),
+                      onIcon: const Icon(
+                        Icons.timer,
+                        color: buttonContentColor,
+                      ),
+                      offIcon: const Icon(
+                        Icons.timer_off,
+                        color: buttonContentColor,
+                      ),
+                    ),
+                    OptionButton(
+                      onPressed: () => _showHint(fieldNotifier.field),
+                      icon: const Icon(
+                        OptionsIcons.lamp,
+                        color: buttonContentColor,
+                      ),
+                    ),
+                    OptionButton(
+                      onPressed: () => _showAnswer(fieldNotifier.field),
+                      icon: const Icon(
+                        OptionsIcons.award,
+                        color: buttonContentColor,
+                      ),
+                    ),
+                  ],
                 ),
               ),
             ],
@@ -130,5 +212,32 @@ class GameScreen extends StatelessWidget {
   /// Disable android back button.
   Future<bool> _onWillPop() async {
     return false;
+  }
+
+  showAlertDialog(BuildContext context, RichText text) {
+    // set up the button
+    Widget okButton = TextButton(
+      child: const Text("OK"),
+      onPressed: () {
+        Navigator.of(context).pop(); // dismiss dialog
+      },
+    );
+
+    // set up the AlertDialog
+    AlertDialog alert = AlertDialog(
+      title: const Text("Result"),
+      content: text,
+      actions: [
+        okButton,
+      ],
+    );
+
+    // show the dialog
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return alert;
+      },
+    );
   }
 }

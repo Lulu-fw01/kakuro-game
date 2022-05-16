@@ -9,6 +9,14 @@
 /* Begin PBXBuildFile section */
 		1498D2341E8E89220040F4C2 /* GeneratedPluginRegistrant.m in Sources */ = {isa = PBXBuildFile; fileRef = 1498D2331E8E89220040F4C2 /* GeneratedPluginRegistrant.m */; };
 		3B3967161E833CAA004F5970 /* AppFrameworkInfo.plist in Resources */ = {isa = PBXBuildFile; fileRef = 3B3967151E833CAA004F5970 /* AppFrameworkInfo.plist */; };
+		6816E9CE2831DFFC00A8FC8A /* InfoCell.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6816E9C42831DFFC00A8FC8A /* InfoCell.cpp */; };
+		6816E9CF2831DFFC00A8FC8A /* InputCell.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6816E9C52831DFFC00A8FC8A /* InputCell.cpp */; };
+		6816E9D02831DFFC00A8FC8A /* Block.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6816E9C72831DFFC00A8FC8A /* Block.cpp */; };
+		6816E9D12831DFFC00A8FC8A /* Generator.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6816E9C82831DFFC00A8FC8A /* Generator.cpp */; };
+		6816E9D22831DFFC00A8FC8A /* EmptyCell.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6816E9C92831DFFC00A8FC8A /* EmptyCell.cpp */; };
+		6816E9D32831DFFC00A8FC8A /* CMakeLists.txt in Resources */ = {isa = PBXBuildFile; fileRef = 6816E9CB2831DFFC00A8FC8A /* CMakeLists.txt */; };
+		6816E9D42831DFFC00A8FC8A /* Board.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6816E9CC2831DFFC00A8FC8A /* Board.cpp */; };
+		6828C67B2831DC3A000EB552 /* kakuroApi.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6828C67A2831DC3A000EB552 /* kakuroApi.cpp */; };
 		74858FAF1ED2DC5600515810 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74858FAE1ED2DC5600515810 /* AppDelegate.swift */; };
 		97C146FC1CF9000F007C117D /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 97C146FA1CF9000F007C117D /* Main.storyboard */; };
 		97C146FE1CF9000F007C117D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 97C146FD1CF9000F007C117D /* Assets.xcassets */; };
@@ -32,6 +40,20 @@
 		1498D2321E8E86230040F4C2 /* GeneratedPluginRegistrant.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GeneratedPluginRegistrant.h; sourceTree = "<group>"; };
 		1498D2331E8E89220040F4C2 /* GeneratedPluginRegistrant.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GeneratedPluginRegistrant.m; sourceTree = "<group>"; };
 		3B3967151E833CAA004F5970 /* AppFrameworkInfo.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = AppFrameworkInfo.plist; path = Flutter/AppFrameworkInfo.plist; sourceTree = "<group>"; };
+		6816E9C12831DFFB00A8FC8A /* InputCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = InputCell.h; path = ../libs/InputCell.h; sourceTree = "<group>"; };
+		6816E9C22831DFFB00A8FC8A /* InfoCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = InfoCell.h; path = ../libs/InfoCell.h; sourceTree = "<group>"; };
+		6816E9C32831DFFC00A8FC8A /* Board.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Board.h; path = ../libs/Board.h; sourceTree = "<group>"; };
+		6816E9C42831DFFC00A8FC8A /* InfoCell.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = InfoCell.cpp; path = ../libs/InfoCell.cpp; sourceTree = "<group>"; };
+		6816E9C52831DFFC00A8FC8A /* InputCell.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = InputCell.cpp; path = ../libs/InputCell.cpp; sourceTree = "<group>"; };
+		6816E9C62831DFFC00A8FC8A /* Block.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Block.h; path = ../libs/Block.h; sourceTree = "<group>"; };
+		6816E9C72831DFFC00A8FC8A /* Block.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Block.cpp; path = ../libs/Block.cpp; sourceTree = "<group>"; };
+		6816E9C82831DFFC00A8FC8A /* Generator.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Generator.cpp; path = ../libs/Generator.cpp; sourceTree = "<group>"; };
+		6816E9C92831DFFC00A8FC8A /* EmptyCell.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = EmptyCell.cpp; path = ../libs/EmptyCell.cpp; sourceTree = "<group>"; };
+		6816E9CA2831DFFC00A8FC8A /* Generator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Generator.h; path = ../libs/Generator.h; sourceTree = "<group>"; };
+		6816E9CB2831DFFC00A8FC8A /* CMakeLists.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = CMakeLists.txt; path = ../libs/CMakeLists.txt; sourceTree = "<group>"; };
+		6816E9CC2831DFFC00A8FC8A /* Board.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Board.cpp; path = ../libs/Board.cpp; sourceTree = "<group>"; };
+		6816E9CD2831DFFC00A8FC8A /* EmptyCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = EmptyCell.h; path = ../libs/EmptyCell.h; sourceTree = "<group>"; };
+		6828C67A2831DC3A000EB552 /* kakuroApi.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = kakuroApi.cpp; path = ../libs/kakuroApi.cpp; sourceTree = "<group>"; };
 		74858FAD1ED2DC5600515810 /* Runner-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Runner-Bridging-Header.h"; sourceTree = "<group>"; };
 		74858FAE1ED2DC5600515810 /* AppDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		7AFA3C8E1D35360C0083082E /* Release.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; name = Release.xcconfig; path = Flutter/Release.xcconfig; sourceTree = "<group>"; };
@@ -55,6 +77,27 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		6828C6792831DB92000EB552 /* libs */ = {
+			isa = PBXGroup;
+			children = (
+				6816E9C72831DFFC00A8FC8A /* Block.cpp */,
+				6816E9C62831DFFC00A8FC8A /* Block.h */,
+				6816E9CC2831DFFC00A8FC8A /* Board.cpp */,
+				6816E9C32831DFFC00A8FC8A /* Board.h */,
+				6816E9CB2831DFFC00A8FC8A /* CMakeLists.txt */,
+				6816E9C92831DFFC00A8FC8A /* EmptyCell.cpp */,
+				6816E9CD2831DFFC00A8FC8A /* EmptyCell.h */,
+				6816E9C82831DFFC00A8FC8A /* Generator.cpp */,
+				6816E9CA2831DFFC00A8FC8A /* Generator.h */,
+				6816E9C42831DFFC00A8FC8A /* InfoCell.cpp */,
+				6816E9C22831DFFB00A8FC8A /* InfoCell.h */,
+				6816E9C52831DFFC00A8FC8A /* InputCell.cpp */,
+				6816E9C12831DFFB00A8FC8A /* InputCell.h */,
+				6828C67A2831DC3A000EB552 /* kakuroApi.cpp */,
+			);
+			name = libs;
+			sourceTree = "<group>";
+		};
 		9740EEB11CF90186004384FC /* Flutter */ = {
 			isa = PBXGroup;
 			children = (
@@ -69,6 +112,7 @@
 		97C146E51CF9000F007C117D = {
 			isa = PBXGroup;
 			children = (
+				6828C6792831DB92000EB552 /* libs */,
 				9740EEB11CF90186004384FC /* Flutter */,
 				97C146F01CF9000F007C117D /* Runner */,
 				97C146EF1CF9000F007C117D /* Products */,
@@ -163,6 +207,7 @@
 				3B3967161E833CAA004F5970 /* AppFrameworkInfo.plist in Resources */,
 				97C146FE1CF9000F007C117D /* Assets.xcassets in Resources */,
 				97C146FC1CF9000F007C117D /* Main.storyboard in Resources */,
+				6816E9D32831DFFC00A8FC8A /* CMakeLists.txt in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -204,6 +249,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6816E9D42831DFFC00A8FC8A /* Board.cpp in Sources */,
+				6828C67B2831DC3A000EB552 /* kakuroApi.cpp in Sources */,
+				6816E9CE2831DFFC00A8FC8A /* InfoCell.cpp in Sources */,
+				6816E9CF2831DFFC00A8FC8A /* InputCell.cpp in Sources */,
+				6816E9D02831DFFC00A8FC8A /* Block.cpp in Sources */,
+				6816E9D12831DFFC00A8FC8A /* Generator.cpp in Sources */,
+				6816E9D22831DFFC00A8FC8A /* EmptyCell.cpp in Sources */,
 				74858FAF1ED2DC5600515810 /* AppDelegate.swift in Sources */,
 				1498D2341E8E89220040F4C2 /* GeneratedPluginRegistrant.m in Sources */,
 			);
