@@ -81,17 +81,12 @@ class Field {
 
   /// This method check if current cells values form a solution.
   bool checkSolution() {
-    // TODO есть проблема. иногда решение получается не уникальное. Тогда просто пройтсь циклом не поможет.
-    for (int i = 0; i < _height; ++i) {
-      for (int j = 0; j < _width; ++j) {
-        if (_cells[i][j] is InputCell &&
-            ((_cells[i][j] as InputCell).actualValue !=
-                (_cells[i][j] as InputCell).answerValue)) {
-          return false;
-        }
-      }
-    }
-    return true;
+    var strBoard = toNativeFormat();
+    debugPrint("Converted field to native format.");
+    debugPrint("Calling native function");
+    var result = _checkSolution(height, width, strBoard.toNativeUtf8());
+    debugPrint("Got result from native function");
+    return result;
   }
 
   /// Convert string to native format.
