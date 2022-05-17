@@ -6,6 +6,8 @@
 #include <ctype.h>
 
 #include "Generator.h"
+#include "Board.h"
+#include "Solution.h"
 
 EXPORT
 char* generateBoard(int height, int width, int difficulty) {
@@ -19,6 +21,8 @@ char* generateBoard(int height, int width, int difficulty) {
 }
 
 EXPORT
-bool checkSolution(int, int, char* board) {
-    return true;
+bool checkSolution(int height, int width, char* board) {
+    std::string str(board);
+    Board brd = Board::boardFromNativeFormat(height, width, str);
+    return solution::checkSolution(brd);
 }
