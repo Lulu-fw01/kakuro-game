@@ -142,8 +142,6 @@ class GameScreen extends StatelessWidget {
             ],
           ),
           floatingActionButton: Stack(
-            // TODO левая кнопка не ровно стоит на андроиде. мб Padding использовать или еще что-то.
-            // мб в один Row поместить эти кнопки и по разным концам расскидать.
             children: <Widget>[
               Padding(
                 padding: const EdgeInsets.only(left: 32),
