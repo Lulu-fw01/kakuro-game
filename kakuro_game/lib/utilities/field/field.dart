@@ -37,6 +37,8 @@ class Field {
 
   List<List<EmptyCell>> get cells => _cells;
 
+  int usedHints = 0;
+
   /// Make every [InputCell]'s actual value equal to answer.
   void showAnswer() {
     for (var row in _cells) {
@@ -65,6 +67,7 @@ class Field {
 
   /// This method set in random [InputCell] with incorrect answer correct answer.
   void showHint() {
+    usedHints++;
     var wrongAnswers = findWrongAnswers();
 
     if (wrongAnswers.isEmpty) {
@@ -78,7 +81,17 @@ class Field {
 
   /// This method check if current cells values form a solution.
   bool checkSolution() {
-    return false;
+    // TODO есть проблема. иногда решение получается не уникальное. Тогда просто пройтсь циклом не поможет.
+    for (int i = 0; i < _height; ++i) {
+      for (int j = 0; j < _width; ++j) {
+        if (_cells[i][j] is InputCell &&
+            ((_cells[i][j] as InputCell).actualValue !=
+                (_cells[i][j] as InputCell).answerValue)) {
+          return false;
+        }
+      }
+    }
+    return true;
   }
 
   String toNativeFormat() {

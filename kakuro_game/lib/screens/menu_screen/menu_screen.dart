@@ -7,7 +7,6 @@ import 'package:provider/provider.dart';
 
 import '../../utilities/field/field.dart';
 
-
 /// Main menu screen of kakuro-game.
 class MenuScreen extends StatelessWidget {
   const MenuScreen({Key? key}) : super(key: key);
@@ -18,11 +17,16 @@ class MenuScreen extends StatelessWidget {
   static const _sizes = ['5', '6', '7', '8', '9', '10', '11', '12', '13', '14'];
   static const _difficulties = ['Beginner', 'Easy', 'Medium', 'Hard'];
 
-  void _onButtonPlayClicked(BuildContext context, FieldController notifier, final int _height, final int _width, final int _difficulty) {
-  
-    debugPrint('Play button was clicked, create new game with parameters: height: $_height, width: $_width and difficulty: $_difficulty');
+  void _onButtonPlayClicked(BuildContext context, FieldController notifier,
+      final int _height, final int _width, final int _difficulty) {
+    debugPrint(
+        'Play button was clicked, create new game with parameters: height: $_height, width: $_width and difficulty: $_difficulty');
     notifier.field = Field.getRandomField(_height, _width, _difficulty);
     Navigator.pushNamed(context, GameScreen.routeName);
+  }
+
+  void _showRules(BuildContext context) {
+    showAlertDialog(context);
   }
 
   @override
@@ -46,8 +50,8 @@ class MenuScreen extends StatelessWidget {
             children: <Widget>[
               _menuScreenButton(
                   text: 'Play',
-                  onClick: () => _onButtonPlayClicked(context, fieldNotifier, _heightIndex + 5,
-                      _widthIndex + 5, 4 - _difficultyIndex)),
+                  onClick: () => _onButtonPlayClicked(context, fieldNotifier,
+                      _heightIndex + 5, _widthIndex + 5, 4 - _difficultyIndex)),
 
               // TODO make more beautiful part with lists.
               Padding(
@@ -78,7 +82,8 @@ class MenuScreen extends StatelessWidget {
                     label: 'difficulty'),
               ),
 
-              _menuScreenButton(text: "Rules", onClick: () => {})
+              _menuScreenButton(
+                  text: "Rules", onClick: () => _showRules(context))
             ],
           ),
         ));
@@ -138,7 +143,6 @@ class MenuScreen extends StatelessWidget {
             style: const TextStyle(color: buttonContentColor, fontSize: 14),
           ))));
 
-
   /// Button for menu screen.
   Widget _menuScreenButton(
           {String text = "", required void Function()? onClick}) =>
@@ -159,4 +163,66 @@ class MenuScreen extends StatelessWidget {
             ),
             onPressed: onClick,
           ));
+
+  TextSpan _someTextGreen(String text) => TextSpan(
+      text: text,
+      style: const TextStyle(
+          fontWeight: FontWeight.bold,
+          color: Color.fromARGB(255, 49, 122, 100)));
+
+  TextSpan _someTextBold(String text) =>
+      TextSpan(text: text, style: const TextStyle(fontWeight: FontWeight.bold));
+
+  showAlertDialog(BuildContext context) {
+    var text = RichText(
+      text: TextSpan(
+        style: const TextStyle(
+          fontSize: 16.0,
+          color: Colors.black,
+        ),
+        children: <TextSpan>[
+          _someTextBold('Rules:\n'),
+          const TextSpan(
+              text:
+                  '1) Place one digit from 1 to 9 in each empty box so that the sum of the digits in each set of consecutive empty boxes(horizontal or vertical) is the number appearing to the left of a set or above the set.\n2) No number may appear more than once in any consecutive boxes.\n\n'),
+          _someTextBold('Buttons:\n'),
+          _someTextGreen('Checkmark '),
+          const TextSpan(text: '- check your solution\n'),
+          _someTextGreen('Trophy '),
+          const TextSpan(text: '- see the right solution\n'),
+          _someTextGreen('Lamp '),
+          const TextSpan(text: '- get a hint\n'),
+          _someTextGreen('Timer '),
+          const TextSpan(text: '- show or close a timer\n'),
+          _someTextGreen('Home '),
+          const TextSpan(text: '- go to start page'),
+        ],
+      ),
+    );
+
+    // Set up the button.
+    Widget okButton = TextButton(
+      child: const Text("OK"),
+      onPressed: () {
+        Navigator.of(context).pop(); // dismiss dialog
+      },
+    );
+
+    // Set up the AlertDialog.
+    AlertDialog alert = AlertDialog(
+      title: const Text("Guide"),
+      content: text,
+      actions: [
+        okButton,
+      ],
+    );
+
+    // Show the dialog.
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return alert;
+      },
+    );
+  }
 }
