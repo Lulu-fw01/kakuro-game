@@ -11,5 +11,8 @@ class EmptyCell {
   }
 
   /// Convert cell into native format [String].
+  ///   - [EmptyCell] into 'emp'.
+  ///   - [InfoCell] into 'inf#verticalValue\horizontalValue' (example: inf#12\45).
+  ///   - [InputCell] into 'inp#answerValue\actualValue' (example: inp#4\7)
   String get nativeString => 'emp';
 }

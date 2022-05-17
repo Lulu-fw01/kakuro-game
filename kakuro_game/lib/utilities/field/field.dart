@@ -94,6 +94,8 @@ class Field {
     return true;
   }
 
+  /// Convert string to native format.
+  /// Calls before checking solution.
   String toNativeFormat() {
     String board = "";
     for (var row in _cells) {
