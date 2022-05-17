@@ -168,7 +168,7 @@ class MenuScreen extends StatelessWidget {
       text: text,
       style: const TextStyle(
           fontWeight: FontWeight.bold,
-          color: Color.fromARGB(255, 49, 122, 100)));
+          color: Color(0xFF317A64)));
 
   TextSpan _someTextBold(String text) =>
       TextSpan(text: text, style: const TextStyle(fontWeight: FontWeight.bold));

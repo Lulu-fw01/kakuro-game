@@ -43,11 +43,10 @@ class GameScreen extends StatelessWidget {
           const TextSpan(
               text: 'Congrats!\n',
               style: TextStyle(
-                  fontWeight: FontWeight.bold,
-                  color: Color.fromARGB(255, 36, 131, 31))),
+                  fontWeight: FontWeight.bold, color: Color(0xFF24831F))),
           const TextSpan(
               text: 'Correct answer\n',
-              style: TextStyle(color: Color.fromARGB(255, 36, 131, 31))),
+              style: TextStyle(color: Color(0xFF24831F))),
           TextSpan(
             text: 'Used hints: $usedHints',
           )
@@ -68,11 +67,9 @@ class GameScreen extends StatelessWidget {
           TextSpan(
               text: 'Try again!\n',
               style: TextStyle(
-                  fontWeight: FontWeight.bold,
-                  color: Color.fromARGB(255, 167, 60, 38))),
+                  fontWeight: FontWeight.bold, color: Color(0xFFA73C26))),
           TextSpan(
-              text: 'Wrong answer',
-              style: TextStyle(color: Color.fromARGB(255, 167, 60, 38))),
+              text: 'Wrong answer', style: TextStyle(color: Color(0xFFA73C26))),
         ],
       ),
     );
@@ -90,7 +87,6 @@ class GameScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final fieldNotifier = Provider.of<FieldController>(context);
-
 
     return WillPopScope(
         onWillPop: _onWillPop,
