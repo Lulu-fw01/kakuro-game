@@ -37,12 +37,12 @@ extension on AnimationController {
 class _InputCellState extends State<InputCellWidget>
     with TickerProviderStateMixin {
   late AnimationController _hintAnimationController;
-  late bool showingHint;
+  late bool _showingHint;
 
   @override
   void initState() {
     super.initState();
-    showingHint = false;
+    _showingHint = false;
     // Create animation controller.
     // Set our extension: repeat 5 times and as onCompeted method set new state for our widget.
     _hintAnimationController = AnimationController(
@@ -50,13 +50,14 @@ class _InputCellState extends State<InputCellWidget>
       ..repeatEx(
           times: 5,
           onCompleted: () => setState(() {
-                showingHint = false;
+                _showingHint = false;
               }));
 
     widget.cell.showHintAnimation = () {
       setState(() {
+        _hintAnimationController.reset();
         _hintAnimationController.forward();
-        showingHint = true;
+        _showingHint = true;
       });
     };
 
@@ -139,7 +140,7 @@ class _InputCellState extends State<InputCellWidget>
 
   /// Widget that describes test of cell:
   /// If user asked about hint he will see text with animation.
-  Widget _cellText() => showingHint
+  Widget _cellText() => _showingHint
       ? FadeTransition(
           opacity: _hintAnimationController,
           child: Text(
