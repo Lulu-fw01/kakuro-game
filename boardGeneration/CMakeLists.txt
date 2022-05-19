@@ -16,6 +16,8 @@ add_executable(boardGeneration
         EmptyCell.cpp
         Generator.h
         Generator.cpp
+        Solution.h
+        Solution.cpp
         InfoCell.h
         InfoCell.cpp
         InputCell.h

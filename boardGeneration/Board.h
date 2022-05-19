@@ -32,6 +32,8 @@ public:
 
     void setCell(int row, int column, EmptyCell::Type type);
 
+    void setCell(int row, int column, std::shared_ptr<EmptyCell> cell);
+
     static void print(const Board &board);
 
     EmptyCell::Type getCellType(int row, int column) const;
@@ -39,6 +41,8 @@ public:
     void setIndexes();
 
     std::string toNativeFormat() const;
+
+    static Board boardFromNativeFormat(int height, int width, const std::string &boardString);
 
 private:
     std::vector<std::vector<std::shared_ptr<EmptyCell>>> m_cells;

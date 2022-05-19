@@ -15,4 +15,6 @@ add_library(kakuro_native_api
         InputCell.h
         InputCell.cpp
         Block.h
-        Block.cpp)
+        Block.cpp
+        Solution.h
+        Solution.cpp)

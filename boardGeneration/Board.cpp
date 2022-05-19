@@ -1,4 +1,6 @@
 #include <iostream>
+#include <sstream>
+#include <utility>
 #include "Board.h"
 #include "InfoCell.h"
 #include "InputCell.h"
@@ -264,4 +266,53 @@ std::string Board::cellToNativeFormat(int row, int column) const {
         default:
             return "";
     }
+}
+
+std::shared_ptr<EmptyCell> cellFromNativeFormat(const std::string &cell) {
+    std::shared_ptr<EmptyCell> ptr;
+
+    std::stringstream stream(cell);
+    std::string type;
+    std::string content;
+    std::getline(stream, type, '#');
+    std::getline(stream, content, '#');
+
+    std::string val1, val2;
+    std::stringstream  contentStream(content);
+    std::getline(contentStream, val1, '\\');
+    std::getline(contentStream, val2, '\\');
+
+    if (type == "inf") {
+        ptr = std::make_shared<InfoCell>();
+        auto inf = std::static_pointer_cast<InfoCell>(ptr);
+        inf->m_verticalSum = std::stoi(val1);
+        inf->m_horizontalSum = std::stoi(val2);
+    } else if (type == "inp") {
+        ptr = std::make_shared<InputCell>();
+        auto inp = std::static_pointer_cast<InputCell>(ptr);
+        inp->m_value = std::stoi(val1);
+        inp->m_actualValue = std::stoi(val2);
+    }
+
+    return ptr;
+}
+
+Board Board::boardFromNativeFormat(int height, int width, const std::string &boardString) {
+    Board board = Board(height, width);
+    std::stringstream stream(boardString);
+
+    std::string next;
+    for (int i = 0; i < height; ++i) {
+        for (int j = 0; j < width; ++j) {
+            stream >> next;
+            if (next != "emp") {
+                board.setCell(i, j, cellFromNativeFormat(next));
+            }
+        }
+    }
+    return board;
+}
+
+void Board::setCell(int row, int column, std::shared_ptr<EmptyCell> cell) {
+    m_cells[row][column] = std::move(cell);
 }

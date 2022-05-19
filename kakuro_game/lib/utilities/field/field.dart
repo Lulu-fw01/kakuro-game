@@ -37,6 +37,8 @@ class Field {
 
   List<List<EmptyCell>> get cells => _cells;
 
+  int usedHints = 0;
+
   /// Make every [InputCell]'s actual value equal to answer.
   void showAnswer() {
     for (var row in _cells) {
@@ -65,6 +67,7 @@ class Field {
 
   /// This method set in random [InputCell] with incorrect answer correct answer.
   void showHint() {
+    usedHints++;
     var wrongAnswers = findWrongAnswers();
 
     if (wrongAnswers.isEmpty) {
@@ -78,7 +81,25 @@ class Field {
 
   /// This method check if current cells values form a solution.
   bool checkSolution() {
-    return false;
+    var strBoard = toNativeFormat();
+    debugPrint("Converted field to native format.");
+    debugPrint("Calling native function");
+    var result = _checkSolution(height, width, strBoard.toNativeUtf8());
+    debugPrint("Got result from native function");
+    return result;
+  }
+
+  /// Convert string to native format.
+  /// Calls before checking solution.
+  String toNativeFormat() {
+    String board = "";
+    for (var row in _cells) {
+      for (var cell in row) {
+        board += cell.nativeString + ' ';
+      }
+    }
+
+    return board.substring(0, board.length - 1);
   }
 
   /// This method returns field as list of widgets.
@@ -163,6 +184,13 @@ class Field {
       _generateBoard = _nativeApiLib
           .lookup<NativeFunction<Pointer<Utf8> Function(Int32, Int32, Int32)>>(
               'generateBoard')
+          .asFunction();
+
+  /// Native function for checking solution.
+  static final bool Function(int height, int width, Pointer<Utf8> board)
+      _checkSolution = _nativeApiLib
+          .lookup<NativeFunction<Bool Function(Int32, Int32, Pointer<Utf8>)>>(
+              'checkSolution')
           .asFunction();
 
   /// This function calls function from native C++ library.
