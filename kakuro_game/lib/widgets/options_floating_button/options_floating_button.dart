@@ -1,4 +1,3 @@
-/// TODO think about it.
 /// Idea of this button was taken from https://docs.flutter.dev/cookbook/effects/expandable-fab
 
 import 'package:flutter/material.dart';

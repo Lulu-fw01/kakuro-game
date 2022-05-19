@@ -52,11 +52,10 @@ class MenuScreen extends StatelessWidget {
                   text: 'Play',
                   onClick: () => _onButtonPlayClicked(context, fieldNotifier,
                       _heightIndex + 5, _widthIndex + 5, 4 - _difficultyIndex)),
-
-              // TODO make more beautiful part with lists.
               Padding(
                   padding: const EdgeInsets.only(top: 25),
                   child: Row(
+                    // Row which contains lists for selecting field sizes.
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       _parameterList(
@@ -72,16 +71,15 @@ class MenuScreen extends StatelessWidget {
                           label: "width"),
                     ],
                   )),
-
               Padding(
                 padding: const EdgeInsets.only(top: 25),
+                // List for selecting difficulty.
                 child: _parameterList(
                     values: _difficulties,
                     onSelectedItemChanged: (int index) =>
                         {_difficultyIndex = index},
                     label: 'difficulty'),
               ),
-
               _menuScreenButton(
                   text: "Rules", onClick: () => _showRules(context))
             ],
@@ -167,8 +165,7 @@ class MenuScreen extends StatelessWidget {
   TextSpan _someTextGreen(String text) => TextSpan(
       text: text,
       style: const TextStyle(
-          fontWeight: FontWeight.bold,
-          color: Color(0xFF317A64)));
+          fontWeight: FontWeight.bold, color: Color(0xFF317A64)));
 
   TextSpan _someTextBold(String text) =>
       TextSpan(text: text, style: const TextStyle(fontWeight: FontWeight.bold));
