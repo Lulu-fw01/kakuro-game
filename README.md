@@ -1,7 +1,7 @@
 # kakuro-game
 ![kakuro-game-logo](https://github.com/Lulu-fw01/kakuro-game/blob/master/kakuro_game/assets/icon/icon.jpg)
 
-**This app was written jointly with @barbararr as part of a second-year course project at the Higher School of Economics**
+**This app was written jointly with [Varvara](https://github.com/barbararr) as part of a second-year course project at the Higher School of Economics**.
 
 ### We use
 - Flutter version 2.10.5
