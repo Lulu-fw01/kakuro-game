@@ -2,6 +2,10 @@
 
 Our flutter and C++ project.
 
+### We use
+- Flutter version 2.10.5
+- Dart version 2.16.2
+
 ## Run processs
 ```bash
 flutter run
