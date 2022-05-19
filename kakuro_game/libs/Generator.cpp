@@ -29,7 +29,19 @@ int getRandomNum(int min, int max) {
 }
 
 int getNext(generation::Difficulty difficulty) {
-    return getRandomNum(difficulty, 9);
+    int mini = 1;
+    switch (difficulty) {
+        case generation::DIFFICULTY_MEDIUM:
+            mini = 4;
+            break;
+        case generation::DIFFICULTY_EASY:
+            mini = 5;
+            break;
+        case generation::DIFFICULTY_BEGINNER:
+            mini = 7;
+            break;
+    }
+    return getRandomNum(mini, 9);
 }
 
 /**
