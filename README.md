@@ -12,10 +12,10 @@ Game rules:<p>
   - Every puzzle has t least one solution.
   
  Example of solution:
-  
- ![](https://www.kakuro-online.com/images/unsolved.png) 
- ![](https://www.kakuro-online.com/images/solved.png)
-  
+ <p align="center">
+    <img src="https://www.kakuro-online.com/images/unsolved.png">
+    <img src="https://www.kakuro-online.com/images/solved.png">
+ </p>
 ____  
 ## kakuro game
   ### Menu
@@ -25,7 +25,9 @@ ____
     - easy;
     - medium;
     - hard.
-<img src="https://github.com/Lulu-fw01/kakuro-game/blob/master/screenshots/flutter_10.png" height = 500 width = 275>
+<p align="center">
+  <img src="https://github.com/Lulu-fw01/kakuro-game/blob/master/screenshots/flutter_10.png" height = 500 width = 275>
+</p>
   
   ### Game process
   
