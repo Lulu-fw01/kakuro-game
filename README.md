@@ -9,7 +9,7 @@ Game rules:<p>
   - Input cells filled with numbers from 1 to 9;
   - Amount of all numbers in row or column should be equal to corresponding number in cell with information;
   - In one block all numers should be different (block is input cells between two cells with information or between cell with information and end of field);
-  - Every puzzle has t least one solution.
+  - Every puzzle has at least one solution.
   
  Example of solution:
  <p align="center">
