@@ -18,7 +18,18 @@ Game rules:<p>
   
 ____  
 ## kakuro game
+  ### Menu
+  - In our game you can choose board size (height and width, from 5 x 5 to 14 x 14);
+  - Moreover, you can choose game difficulty:
+    - beginner;
+    - easy;
+    - medium;
+    - hard.
+<img src="https://github.com/Lulu-fw01/kakuro-game/blob/master/screenshots/flutter_10.png" height = 500 width = 275>
+  
+  ### Game process
+  
   
 ____
-### Run and build process
+## Run and build process
 Run and build process you can find [here](kakuro_game/README.md).
