@@ -16,6 +16,7 @@ Game rules:<p>
     <img src="https://www.kakuro-online.com/images/unsolved.png">
     <img src="https://www.kakuro-online.com/images/solved.png">
  </p>
+ 
 ____  
 ## kakuro game
   ### Menu
