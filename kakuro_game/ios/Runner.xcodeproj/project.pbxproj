@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		1498D2341E8E89220040F4C2 /* GeneratedPluginRegistrant.m in Sources */ = {isa = PBXBuildFile; fileRef = 1498D2331E8E89220040F4C2 /* GeneratedPluginRegistrant.m */; };
 		3B3967161E833CAA004F5970 /* AppFrameworkInfo.plist in Resources */ = {isa = PBXBuildFile; fileRef = 3B3967151E833CAA004F5970 /* AppFrameworkInfo.plist */; };
+		680C7986283A704A004F2A97 /* Solution.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 680C7984283A704A004F2A97 /* Solution.cpp */; };
 		6816E9CE2831DFFC00A8FC8A /* InfoCell.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6816E9C42831DFFC00A8FC8A /* InfoCell.cpp */; };
 		6816E9CF2831DFFC00A8FC8A /* InputCell.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6816E9C52831DFFC00A8FC8A /* InputCell.cpp */; };
 		6816E9D02831DFFC00A8FC8A /* Block.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6816E9C72831DFFC00A8FC8A /* Block.cpp */; };
@@ -40,6 +41,8 @@
 		1498D2321E8E86230040F4C2 /* GeneratedPluginRegistrant.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GeneratedPluginRegistrant.h; sourceTree = "<group>"; };
 		1498D2331E8E89220040F4C2 /* GeneratedPluginRegistrant.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GeneratedPluginRegistrant.m; sourceTree = "<group>"; };
 		3B3967151E833CAA004F5970 /* AppFrameworkInfo.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = AppFrameworkInfo.plist; path = Flutter/AppFrameworkInfo.plist; sourceTree = "<group>"; };
+		680C7984283A704A004F2A97 /* Solution.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Solution.cpp; path = ../libs/Solution.cpp; sourceTree = "<group>"; };
+		680C7985283A704A004F2A97 /* Solution.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Solution.h; path = ../libs/Solution.h; sourceTree = "<group>"; };
 		6816E9C12831DFFB00A8FC8A /* InputCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = InputCell.h; path = ../libs/InputCell.h; sourceTree = "<group>"; };
 		6816E9C22831DFFB00A8FC8A /* InfoCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = InfoCell.h; path = ../libs/InfoCell.h; sourceTree = "<group>"; };
 		6816E9C32831DFFC00A8FC8A /* Board.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Board.h; path = ../libs/Board.h; sourceTree = "<group>"; };
@@ -80,6 +83,8 @@
 		6828C6792831DB92000EB552 /* libs */ = {
 			isa = PBXGroup;
 			children = (
+				680C7984283A704A004F2A97 /* Solution.cpp */,
+				680C7985283A704A004F2A97 /* Solution.h */,
 				6816E9C72831DFFC00A8FC8A /* Block.cpp */,
 				6816E9C62831DFFC00A8FC8A /* Block.h */,
 				6816E9CC2831DFFC00A8FC8A /* Board.cpp */,
@@ -257,6 +262,7 @@
 				6816E9D12831DFFC00A8FC8A /* Generator.cpp in Sources */,
 				6816E9D22831DFFC00A8FC8A /* EmptyCell.cpp in Sources */,
 				74858FAF1ED2DC5600515810 /* AppDelegate.swift in Sources */,
+				680C7986283A704A004F2A97 /* Solution.cpp in Sources */,
 				1498D2341E8E89220040F4C2 /* GeneratedPluginRegistrant.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
