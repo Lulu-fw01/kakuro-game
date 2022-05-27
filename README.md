@@ -31,7 +31,19 @@ ____
 </p>
   
   ### Game process
-  
+<p align="center">
+  <img src="https://github.com/Lulu-fw01/kakuro-game/blob/master/screenshots/flutter_10.png" height = 500 width = 275>
+</p>
+This is game screen of our app.<p> 
+
+   - Here you can see kakuro field with different cells. If you click on input cell you will see dialog where you can select value for the cell; 
+  <p align="center">
+    <img src="https://github.com/Lulu-fw01/kakuro-game/blob/master/screenshots/flutter_09.png" height = 500 width = 275>
+  </p>
+
+   - You can open options buttons if you click on pink button in right bottom;
+   
+
   
 ____
 ## Run and build process
