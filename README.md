@@ -41,9 +41,27 @@ This is game screen of our app.<p>
     <img src="https://github.com/Lulu-fw01/kakuro-game/blob/master/screenshots/flutter_09.png" height = 500 width = 275>
   </p>
 
-   - You can open options buttons if you click on pink button in right bottom;
-   
+   - You can open options buttons if you click on pink button in right bottom:
+   <p align="center">
+    <img src="https://github.com/Lulu-fw01/kakuro-game/blob/saveSettings/screenshots/flutter_02.png" height = 500 width = 275>
+    <img src="https://github.com/Lulu-fw01/kakuro-game/blob/saveSettings/screenshots/flutter_04.png" height = 500 width = 275>
+  </p>
+  
+   - You can ask for a prompt by clicking option button with lamp icon. The cell with the corrected answer will flash yellow:
+   <p align="center">
+    <img src="https://github.com/Lulu-fw01/kakuro-game/blob/master/screenshots/flutter_06.png" height = 500 width = 275>
+  </p>
 
+   - If you click button with reward icon game will show you correct answer:
+   <p align="center">
+    <img src="https://github.com/Lulu-fw01/kakuro-game/blob/master/screenshots/flutter_07.png" height = 500 width = 275>
+  </p>
+  
+   - If you think that you solved the game you can check your answer by clicking green button in left bottom:
+   <p align="center">
+    <img src="https://github.com/Lulu-fw01/kakuro-game/blob/saveSettings/screenshots/flutter_03.png" height = 500 width = 275>
+    <img src="https://github.com/Lulu-fw01/kakuro-game/blob/saveSettings/screenshots/flutter_08.png" height = 500 width = 275>
+  </p>
   
 ____
 ## Run and build process
